@@ -25,13 +25,16 @@ public class Demo {
 
   private static void demo(ChunkServer server) {
     server.send(readErasuredChunk()
-        .chunkId(502)
+        .chunkId(0xC1)
         .chunkVersion(1)
         .chunkType((short) 0)
         .offset(0)
         .size(mebibytes(64)));
 
-    var response = (ReadStatus) server.receive();
+    Response response;
+    while ((response = server.receive()) instanceof ReadData readData) {
+      System.out.println(readData);
+    }
     System.out.println(response);
   }
 }

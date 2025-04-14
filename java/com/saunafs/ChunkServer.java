@@ -1,6 +1,7 @@
 package com.saunafs;
 
 import static com.saunafs.Common.socket;
+import static com.saunafs.ReadData.readData;
 import static com.saunafs.ReadStatus.readStatus;
 
 import java.io.DataInputStream;
@@ -55,6 +56,7 @@ public class ChunkServer {
       var length = input.readInt();
       return switch (messageType) {
         case ReadStatus.messageType -> readStatus(input);
+        case ReadData.messageType -> readData(input);
         default -> throw new RuntimeException(
             "unknown message type %d and length %d"
                 .formatted(messageType, length));

@@ -52,11 +52,12 @@ public class ChunkServer {
   public Response receive() {
     try {
       var messageType = input.readInt();
-      @SuppressWarnings("unused")
       var length = input.readInt();
       return switch (messageType) {
         case ReadStatus.messageType -> readStatus(input);
-        default -> throw new RuntimeException("unknown message type %s".formatted(messageType));
+        default -> throw new RuntimeException(
+            "unknown message type %d and length %d"
+                .formatted(messageType, length));
       };
     } catch (IOException e) {
       throw new UncheckedIOException(e);

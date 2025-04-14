@@ -5,6 +5,13 @@ import static com.saunafs.Common.socketAddress;
 import static com.saunafs.ReadErasuredChunk.readErasuredChunk;
 import static com.saunafs.Size.mebibytes;
 
+/**
+ * saunfs protocol constants
+ * https://github.com/leil-io/saunafs/blob/dev/src/protocol/SFSCommunication.h
+ *
+ * other benchmark constants
+ * https://github.com/leil-io/saunafs-sandbox/blob/dev/chunk-benchmark/src/protocol_consts.h
+ */
 public class Demo {
   public static void main(String... args) {
     var address = socketAddress(address("192.168.168.96"), 9422);

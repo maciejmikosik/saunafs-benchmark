@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 
 public class ReadStatus implements Response {
-  public static final String messageName = "LIZ_CSTOCL_READ_STATUS";
+  public static final String messageName = "SAU_CSTOCL_READ_STATUS";
   public static final int messageType = 1201;
 
   public int version;

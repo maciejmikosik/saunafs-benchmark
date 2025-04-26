@@ -57,28 +57,23 @@ public class ChunkServer {
 
   public Response receive() {
     try {
-      var messageType = input.readInt();
+      var code = input.readInt();
       var length = input.readInt();
       var version = input.readInt();
-      return switch (messageType) {
-        case ReadStatus.messageType -> switch (version) {
-          case 0 -> readStatus(input);
-          default -> fail(messageType, length, version);
-        };
-        case ReadData.messageType -> switch (version) {
-          case 0 -> readData(input);
-          default -> fail(messageType, length, version);
-        };
-        default -> fail(messageType, length, version);
-      };
+
+      // TODO implement lookup table
+      if (code == ReadStatus.description.code
+          && version == ReadStatus.description.version) {
+        return readStatus(input);
+      } else if (code == ReadData.description.code
+          && version == ReadData.description.version) {
+        return readData(input);
+      }
+      throw new RuntimeException(
+          "unknown message type(%d) length(%d) version(%d)"
+              .formatted(code, length, version));
     } catch (IOException e) {
       throw new UncheckedIOException(e);
     }
-  }
-
-  private static Response fail(int messageType, int length, int version) {
-    throw new RuntimeException(
-        "unknown message type(%d) length(%d) version(%d)"
-            .formatted(messageType, length, version));
   }
 }

@@ -1,4 +1,4 @@
-package com.saunafs;
+package com.saunafs.common;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;

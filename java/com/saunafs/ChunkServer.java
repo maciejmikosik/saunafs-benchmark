@@ -1,8 +1,8 @@
 package com.saunafs;
 
-import static com.saunafs.Common.socket;
-import static com.saunafs.ReadData.readData;
-import static com.saunafs.ReadStatus.readStatus;
+import static com.saunafs.common.Common.socket;
+import static com.saunafs.proto.msg.ReadData.readData;
+import static com.saunafs.proto.msg.ReadStatus.readStatus;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -10,6 +10,11 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+
+import com.saunafs.proto.Request;
+import com.saunafs.proto.Response;
+import com.saunafs.proto.msg.ReadData;
+import com.saunafs.proto.msg.ReadStatus;
 
 public class ChunkServer {
   private final InetSocketAddress socketAddress;

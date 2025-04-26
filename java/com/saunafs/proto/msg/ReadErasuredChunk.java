@@ -1,8 +1,11 @@
-package com.saunafs;
+package com.saunafs.proto.msg;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
+
+import com.saunafs.common.Size;
+import com.saunafs.proto.Request;
 
 public class ReadErasuredChunk implements Request {
   public static final String messageName = "SAU_CLTOCS_READ";

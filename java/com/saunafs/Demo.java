@@ -1,9 +1,12 @@
 package com.saunafs;
 
-import static com.saunafs.Common.address;
-import static com.saunafs.Common.socketAddress;
-import static com.saunafs.ReadErasuredChunk.readErasuredChunk;
-import static com.saunafs.Size.mebibytes;
+import static com.saunafs.common.Common.address;
+import static com.saunafs.common.Common.socketAddress;
+import static com.saunafs.common.Size.mebibytes;
+import static com.saunafs.proto.msg.ReadErasuredChunk.readErasuredChunk;
+
+import com.saunafs.proto.Response;
+import com.saunafs.proto.msg.ReadData;
 
 /**
  * saunfs protocol constants

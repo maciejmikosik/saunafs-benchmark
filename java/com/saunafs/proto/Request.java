@@ -1,4 +1,4 @@
-package com.saunafs;
+package com.saunafs.proto;
 
 import java.io.DataOutputStream;
 

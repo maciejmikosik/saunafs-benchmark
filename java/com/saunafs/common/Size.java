@@ -1,4 +1,4 @@
-package com.saunafs;
+package com.saunafs.common;
 
 public class Size {
   private final int bytes;

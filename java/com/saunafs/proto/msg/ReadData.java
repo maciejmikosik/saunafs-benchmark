@@ -1,8 +1,10 @@
-package com.saunafs;
+package com.saunafs.proto.msg;
 
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
+
+import com.saunafs.proto.Response;
 
 public class ReadData implements Response {
   public static final String messageName = "SAU_CSTOCL_READ_DATA";

@@ -1,8 +1,6 @@
 package com.saunafs;
 
 import static com.saunafs.common.Common.socket;
-import static com.saunafs.proto.msg.ReadData.readData;
-import static com.saunafs.proto.msg.ReadStatus.readStatus;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -64,10 +62,10 @@ public class ChunkServer {
       // TODO implement lookup table
       if (code == ReadStatus.description.code
           && version == ReadStatus.description.version) {
-        return readStatus(input);
+        return ReadStatus.description.decoder.apply(input);
       } else if (code == ReadData.description.code
           && version == ReadData.description.version) {
-        return readData(input);
+        return ReadData.description.decoder.apply(input);
       }
       throw new RuntimeException(
           "unknown message type(%d) length(%d) version(%d)"

@@ -13,7 +13,8 @@ public class ReadStatus implements Response {
   public static final Description description = description()
       .identifier("SAU_CSTOCL_READ_STATUS")
       .code(1201)
-      .version(0);
+      .version(0)
+      .decoder(ReadStatus::readStatus);
 
   public long chunkId;
   public byte status;

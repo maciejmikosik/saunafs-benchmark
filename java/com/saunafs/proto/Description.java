@@ -1,9 +1,15 @@
 package com.saunafs.proto;
 
+import java.io.DataInputStream;
+import java.util.function.Function;
+
 public class Description {
   public String identifier;
   public int code;
   public int version;
+  public Function<DataInputStream, Response> decoder = input -> {
+    throw new UnsupportedOperationException();
+  };
 
   private Description() {}
 
@@ -23,6 +29,11 @@ public class Description {
 
   public Description version(int version) {
     this.version = version;
+    return this;
+  }
+
+  public Description decoder(Function<DataInputStream, Response> decoder) {
+    this.decoder = decoder;
     return this;
   }
 }

@@ -13,7 +13,8 @@ public class ReadData implements Response {
   public static final Description description = description()
       .identifier("SAU_CSTOCL_READ_DATA")
       .code(1202)
-      .version(0);
+      .version(0)
+      .decoder(ReadData::readData);
 
   public long chunkId;
   public int offset;

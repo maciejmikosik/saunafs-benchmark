@@ -1,5 +1,5 @@
 package com.saunafs.proto;
 
-public interface Response {
+public interface Response extends Message {
 
 }

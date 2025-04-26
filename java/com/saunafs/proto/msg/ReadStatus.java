@@ -6,11 +6,16 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 
+import com.saunafs.proto.Description;
 import com.saunafs.proto.Response;
 
 public class ReadStatus implements Response {
   public long chunkId;
   public byte status;
+
+  public Description description() {
+    return SAU_CSTOCL_READ_STATUS;
+  }
 
   public static ReadStatus readStatus(DataInputStream input) {
     try {
@@ -25,8 +30,8 @@ public class ReadStatus implements Response {
 
   public String toString() {
     return "%s.version(%d).chunkId(%d).status(%d)".formatted(
-        SAU_CSTOCL_READ_STATUS.identifier,
-        SAU_CSTOCL_READ_STATUS.version,
+        description().identifier,
+        description().version,
         chunkId,
         status);
   }

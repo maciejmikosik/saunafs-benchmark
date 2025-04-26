@@ -6,6 +6,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 
+import com.saunafs.proto.Description;
 import com.saunafs.proto.Response;
 
 public class ReadData implements Response {
@@ -14,6 +15,10 @@ public class ReadData implements Response {
   public int size;
   public int crc;
   public byte[] data;
+
+  public Description description() {
+    return SAU_CSTOCL_READ_DATA;
+  }
 
   public static ReadData readData(DataInputStream input) {
     try {
@@ -32,8 +37,8 @@ public class ReadData implements Response {
   public String toString() {
     return "%s.version(%d).chunkId(%d).offset(%d).size(%d).crc(%d)"
         .formatted(
-            SAU_CSTOCL_READ_DATA.identifier,
-            SAU_CSTOCL_READ_DATA.version,
+            description().identifier,
+            description().version,
             chunkId,
             offset,
             size,

@@ -11,8 +11,8 @@ public class Size {
     return new Size(bytes);
   }
 
-  public static Size kilobytes(int kilobytes) {
-    return bytes(kilobytes << 10);
+  public static Size kibibytes(int kibibytes) {
+    return bytes(kibibytes << 10);
   }
 
   public static Size mebibytes(int mebibytes) {

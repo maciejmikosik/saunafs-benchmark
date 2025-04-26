@@ -1,8 +1,6 @@
 package com.saunafs;
 
 import static com.saunafs.common.Common.socket;
-import static com.saunafs.proto.msg.ReadData.readData;
-import static com.saunafs.proto.msg.ReadStatus.readStatus;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -11,10 +9,8 @@ import java.io.UncheckedIOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
-import com.saunafs.proto.Request;
-import com.saunafs.proto.Response;
-import com.saunafs.proto.msg.ReadData;
-import com.saunafs.proto.msg.ReadStatus;
+import com.saunafs.proto.Message;
+import com.saunafs.proto.Protocol;
 
 public class ChunkServer {
   private final InetSocketAddress socketAddress;
@@ -46,39 +42,31 @@ public class ChunkServer {
     }
   }
 
-  public void send(Request request) {
+  public void send(Message message) {
     try {
-      request.writeTo(output);
+      message.writeTo(output);
       output.flush();
     } catch (IOException e) {
       throw new UncheckedIOException(e);
     }
   }
 
-  public Response receive() {
+  public Message receive() {
     try {
-      var messageType = input.readInt();
+      var code = input.readInt();
       var length = input.readInt();
       var version = input.readInt();
-      return switch (messageType) {
-        case ReadStatus.messageType -> switch (version) {
-          case 0 -> readStatus(input);
-          default -> fail(messageType, length, version);
-        };
-        case ReadData.messageType -> switch (version) {
-          case 0 -> readData(input);
-          default -> fail(messageType, length, version);
-        };
-        default -> fail(messageType, length, version);
-      };
+
+      // TODO implement lookup table
+      return Protocol.PROTOCOL.stream()
+          .filter(definition -> code == definition.code && version == definition.version)
+          .map(definition -> definition.decoder.apply(input))
+          .findFirst()
+          .orElseThrow(() -> new RuntimeException(
+              "unknown message type(%d) length(%d) version(%d)"
+                  .formatted(code, length, version)));
     } catch (IOException e) {
       throw new UncheckedIOException(e);
     }
-  }
-
-  private static Response fail(int messageType, int length, int version) {
-    throw new RuntimeException(
-        "unknown message type(%d) length(%d) version(%d)"
-            .formatted(messageType, length, version));
   }
 }

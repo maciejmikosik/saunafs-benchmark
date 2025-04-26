@@ -5,7 +5,7 @@ import static com.saunafs.common.Common.socketAddress;
 import static com.saunafs.common.Size.mebibytes;
 import static com.saunafs.proto.msg.ReadErasuredChunk.readErasuredChunk;
 
-import com.saunafs.proto.Response;
+import com.saunafs.proto.Message;
 import com.saunafs.proto.msg.ReadData;
 
 /**
@@ -34,10 +34,10 @@ public class Demo {
         .offset(0)
         .size(mebibytes(64)));
 
-    Response response;
-    while ((response = server.receive()) instanceof ReadData readData) {
+    Message message;
+    while ((message = server.receive()) instanceof ReadData readData) {
       System.out.println(readData);
     }
-    System.out.println(response);
+    System.out.println(message);
   }
 }

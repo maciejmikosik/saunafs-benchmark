@@ -1,24 +1,25 @@
 package com.saunafs.proto.msg;
 
+import static com.saunafs.proto.Protocol.SAU_CLTOCS_READ;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 
 import com.saunafs.common.Size;
-import com.saunafs.proto.Request;
+import com.saunafs.proto.Description;
+import com.saunafs.proto.Message;
 
-public class ReadErasuredChunk implements Request {
-  public static final String messageName = "SAU_CLTOCS_READ";
-  public static final int messageType = 1200;
-  public static final int packetLength = 26;
-  /** Erasure Coding 2 */
-  public static final int packetVersion = 1;
-
+public class ReadErasuredChunk implements Message {
   public long chunkId;
   public int chunkVersion;
   public short chunkType;
   public int offset;
   public Size requestedSize;
+
+  public Description description() {
+    return SAU_CLTOCS_READ;
+  }
 
   public static ReadErasuredChunk readErasuredChunk() {
     return new ReadErasuredChunk();
@@ -52,9 +53,11 @@ public class ReadErasuredChunk implements Request {
 
   public void writeTo(DataOutputStream output) {
     try {
-      output.writeInt(messageType);
+      // TODO calculate packet length using message description
+      var packetLength = 26;
+      output.writeInt(description().code);
       output.writeInt(packetLength);
-      output.writeInt(packetVersion);
+      output.writeInt(description().version);
       output.writeLong(chunkId);
       output.writeInt(chunkVersion);
       output.writeShort(chunkType);

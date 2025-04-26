@@ -20,7 +20,6 @@ public class ReadErasuredChunk implements Request {
       .field(short.class, "chunkType")
       .field(int.class, "offset")
       .field(Size.class, "requestedSize");
-  public static final int packetLength = 26;
 
   public long chunkId;
   public int chunkVersion;
@@ -60,6 +59,8 @@ public class ReadErasuredChunk implements Request {
 
   public void writeTo(DataOutputStream output) {
     try {
+      // TODO calculate packet length using message description
+      var packetLength = 26;
       output.writeInt(description.code);
       output.writeInt(packetLength);
       output.writeInt(description.version);

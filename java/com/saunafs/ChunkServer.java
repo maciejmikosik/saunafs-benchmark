@@ -54,15 +54,26 @@ public class ChunkServer {
     try {
       var messageType = input.readInt();
       var length = input.readInt();
+      var version = input.readInt();
       return switch (messageType) {
-        case ReadStatus.messageType -> readStatus(input);
-        case ReadData.messageType -> readData(input);
-        default -> throw new RuntimeException(
-            "unknown message type %d and length %d"
-                .formatted(messageType, length));
+        case ReadStatus.messageType -> switch (version) {
+          case 0 -> readStatus(input);
+          default -> fail(messageType, length, version);
+        };
+        case ReadData.messageType -> switch (version) {
+          case 0 -> readData(input);
+          default -> fail(messageType, length, version);
+        };
+        default -> fail(messageType, length, version);
       };
     } catch (IOException e) {
       throw new UncheckedIOException(e);
     }
+  }
+
+  private static Response fail(int messageType, int length, int version) {
+    throw new RuntimeException(
+        "unknown message type(%d) length(%d) version(%d)"
+            .formatted(messageType, length, version));
   }
 }

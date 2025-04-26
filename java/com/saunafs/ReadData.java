@@ -7,8 +7,8 @@ import java.io.UncheckedIOException;
 public class ReadData implements Response {
   public static final String messageName = "SAU_CSTOCL_READ_DATA";
   public static final int messageType = 1202;
+  public static final int version = 0;
 
-  public int version;
   public long chunkId;
   public int offset;
   public int size;
@@ -18,7 +18,6 @@ public class ReadData implements Response {
   public static ReadData readData(DataInputStream input) {
     try {
       var response = new ReadData();
-      response.version = input.readInt();
       response.chunkId = input.readLong();
       response.offset = input.readInt();
       response.size = input.readInt();

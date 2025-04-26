@@ -1,23 +1,14 @@
 package com.saunafs.proto.msg;
 
-import static com.saunafs.proto.Description.description;
+import static com.saunafs.proto.Protocol.SAU_CSTOCL_READ_STATUS;
 
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 
-import com.saunafs.proto.Description;
 import com.saunafs.proto.Response;
 
 public class ReadStatus implements Response {
-  public static final Description description = description()
-      .identifier("SAU_CSTOCL_READ_STATUS")
-      .code(1201)
-      .version(0)
-      .field(long.class, "chunkId")
-      .field(byte.class, "status")
-      .decoder(ReadStatus::readStatus);
-
   public long chunkId;
   public byte status;
 
@@ -34,8 +25,8 @@ public class ReadStatus implements Response {
 
   public String toString() {
     return "%s.version(%d).chunkId(%d).status(%d)".formatted(
-        description.identifier,
-        description.version,
+        SAU_CSTOCL_READ_STATUS.identifier,
+        SAU_CSTOCL_READ_STATUS.version,
         chunkId,
         status);
   }

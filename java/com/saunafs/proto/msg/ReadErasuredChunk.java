@@ -1,26 +1,15 @@
 package com.saunafs.proto.msg;
 
-import static com.saunafs.proto.Description.description;
+import static com.saunafs.proto.Protocol.SAU_CLTOCS_READ;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 
 import com.saunafs.common.Size;
-import com.saunafs.proto.Description;
 import com.saunafs.proto.Request;
 
 public class ReadErasuredChunk implements Request {
-  public static final Description description = description()
-      .identifier("SAU_CLTOCS_READ")
-      .code(1200)
-      .version(1)
-      .field(long.class, "chunkId")
-      .field(int.class, "chunkVersion")
-      .field(short.class, "chunkType")
-      .field(int.class, "offset")
-      .field(Size.class, "requestedSize");
-
   public long chunkId;
   public int chunkVersion;
   public short chunkType;
@@ -61,9 +50,9 @@ public class ReadErasuredChunk implements Request {
     try {
       // TODO calculate packet length using message description
       var packetLength = 26;
-      output.writeInt(description.code);
+      output.writeInt(SAU_CLTOCS_READ.code);
       output.writeInt(packetLength);
-      output.writeInt(description.version);
+      output.writeInt(SAU_CLTOCS_READ.version);
       output.writeLong(chunkId);
       output.writeInt(chunkVersion);
       output.writeShort(chunkType);

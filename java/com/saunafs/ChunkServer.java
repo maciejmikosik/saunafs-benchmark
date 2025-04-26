@@ -9,10 +9,9 @@ import java.io.UncheckedIOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+import com.saunafs.proto.Protocol;
 import com.saunafs.proto.Request;
 import com.saunafs.proto.Response;
-import com.saunafs.proto.msg.ReadData;
-import com.saunafs.proto.msg.ReadStatus;
 
 public class ChunkServer {
   private final InetSocketAddress socketAddress;
@@ -60,16 +59,13 @@ public class ChunkServer {
       var version = input.readInt();
 
       // TODO implement lookup table
-      if (code == ReadStatus.description.code
-          && version == ReadStatus.description.version) {
-        return ReadStatus.description.decoder.apply(input);
-      } else if (code == ReadData.description.code
-          && version == ReadData.description.version) {
-        return ReadData.description.decoder.apply(input);
-      }
-      throw new RuntimeException(
-          "unknown message type(%d) length(%d) version(%d)"
-              .formatted(code, length, version));
+      return Protocol.PROTOCOL.stream()
+          .filter(definition -> code == definition.code && version == definition.version)
+          .map(definition -> definition.decoder.apply(input))
+          .findFirst()
+          .orElseThrow(() -> new RuntimeException(
+              "unknown message type(%d) length(%d) version(%d)"
+                  .formatted(code, length, version)));
     } catch (IOException e) {
       throw new UncheckedIOException(e);
     }

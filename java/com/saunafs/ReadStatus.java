@@ -26,6 +26,6 @@ public class ReadStatus implements Response {
 
   public String toString() {
     return "readStatus.version(%d).chunkId(%d).status(%d)".formatted(
-        chunkId, version, status);
+        version, chunkId, status);
   }
 }

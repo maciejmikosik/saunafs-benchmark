@@ -14,7 +14,12 @@ public class ReadErasuredChunk implements Request {
   public static final Description description = description()
       .identifier("SAU_CLTOCS_READ")
       .code(1200)
-      .version(1);
+      .version(1)
+      .field(long.class, "chunkId")
+      .field(int.class, "chunkVersion")
+      .field(short.class, "chunkType")
+      .field(int.class, "offset")
+      .field(Size.class, "requestedSize");
   public static final int packetLength = 26;
 
   public long chunkId;

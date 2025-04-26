@@ -14,6 +14,8 @@ public class ReadStatus implements Response {
       .identifier("SAU_CSTOCL_READ_STATUS")
       .code(1201)
       .version(0)
+      .field(long.class, "chunkId")
+      .field(byte.class, "status")
       .decoder(ReadStatus::readStatus);
 
   public long chunkId;

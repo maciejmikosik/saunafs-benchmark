@@ -14,6 +14,11 @@ public class ReadData implements Response {
       .identifier("SAU_CSTOCL_READ_DATA")
       .code(1202)
       .version(0)
+      .field(long.class, "chunkId")
+      .field(int.class, "offset")
+      .field(int.class, "size")
+      .field(int.class, "crc")
+      .field(byte[].class, "data")
       .decoder(ReadData::readData);
 
   public long chunkId;

@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 
 import com.saunafs.proto.Description;
-import com.saunafs.proto.Response;
+import com.saunafs.proto.Message;
 
-public class ReadData implements Response {
+public class ReadData implements Message {
   public long chunkId;
   public int offset;
   public int size;

@@ -8,9 +8,9 @@ import java.io.UncheckedIOException;
 
 import com.saunafs.common.Size;
 import com.saunafs.proto.Description;
-import com.saunafs.proto.Request;
+import com.saunafs.proto.Message;
 
-public class ReadErasuredChunk implements Request {
+public class ReadErasuredChunk implements Message {
   public long chunkId;
   public int chunkVersion;
   public short chunkType;

@@ -11,7 +11,7 @@ public class Description {
   public int version;
   public List<Field> fields = new ArrayList<>();
 
-  public Function<DataInputStream, Response> decoder = input -> {
+  public Function<DataInputStream, Message> decoder = input -> {
     throw new UnsupportedOperationException();
   };
 
@@ -45,7 +45,7 @@ public class Description {
     return field(Field.field(type, name));
   }
 
-  public Description decoder(Function<DataInputStream, Response> decoder) {
+  public Description decoder(Function<DataInputStream, Message> decoder) {
     this.decoder = decoder;
     return this;
   }

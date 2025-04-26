@@ -9,9 +9,8 @@ import java.io.UncheckedIOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+import com.saunafs.proto.Message;
 import com.saunafs.proto.Protocol;
-import com.saunafs.proto.Request;
-import com.saunafs.proto.Response;
 
 public class ChunkServer {
   private final InetSocketAddress socketAddress;
@@ -43,16 +42,16 @@ public class ChunkServer {
     }
   }
 
-  public void send(Request request) {
+  public void send(Message message) {
     try {
-      request.writeTo(output);
+      message.writeTo(output);
       output.flush();
     } catch (IOException e) {
       throw new UncheckedIOException(e);
     }
   }
 
-  public Response receive() {
+  public Message receive() {
     try {
       var code = input.readInt();
       var length = input.readInt();

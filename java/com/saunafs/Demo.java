@@ -1,7 +1,6 @@
 package com.saunafs;
 
-import static com.saunafs.common.Common.address;
-import static com.saunafs.common.Common.socketAddress;
+import static com.saunafs.Configuration.aNeutrinoGlobal;
 import static com.saunafs.common.Size.mebibytes;
 import static com.saunafs.proto.msg.ReadErasuredChunk.readErasuredChunk;
 import static com.saunafs.server.InetServer.server;
@@ -20,8 +19,7 @@ import com.saunafs.server.Messenger;
  */
 public class Demo {
   public static void main(String... args) {
-    var address = socketAddress(address("192.168.168.160"), 9422);
-    var server = server(address);
+    var server = server(aNeutrinoGlobal);
     server.connect();
     try {
       demo(messenger(server));

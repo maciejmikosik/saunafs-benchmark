@@ -1,12 +1,14 @@
 package com.saunafs;
 
-import static com.saunafs.common.Common.address;
-import static com.saunafs.common.Common.socketAddress;
+import static com.saunafs.Configuration.aNeutrinoGlobal;
 import static com.saunafs.common.Size.mebibytes;
 import static com.saunafs.proto.msg.ReadErasuredChunk.readErasuredChunk;
+import static com.saunafs.server.InetServer.server;
+import static com.saunafs.server.LoggingMessenger.logging;
+import static com.saunafs.server.StreamingMessenger.streamingMessenger;
 
-import com.saunafs.proto.Message;
 import com.saunafs.proto.msg.ReadData;
+import com.saunafs.server.Messenger;
 
 /**
  * saunfs protocol constants
@@ -17,27 +19,23 @@ import com.saunafs.proto.msg.ReadData;
  */
 public class Demo {
   public static void main(String... args) {
-    var address = socketAddress(address("192.168.168.160"), 9422);
-    var server = new ChunkServer(address).connect();
+    var server = server(aNeutrinoGlobal);
+    server.connect();
     try {
-      demo(server);
+      demo(logging(streamingMessenger(server)));
     } finally {
       server.disconnect();
     }
   }
 
-  private static void demo(ChunkServer server) {
-    server.send(readErasuredChunk()
+  private static void demo(Messenger messenger) {
+    messenger.send(readErasuredChunk()
         .chunkId(0xC1)
         .chunkVersion(1)
         .chunkType((short) 0)
         .offset(0)
         .size(mebibytes(64)));
 
-    Message message;
-    while ((message = server.receive()) instanceof ReadData readData) {
-      System.out.println(readData);
-    }
-    System.out.println(message);
+    while (messenger.receive() instanceof ReadData) {}
   }
 }

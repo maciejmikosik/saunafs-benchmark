@@ -1,45 +1,26 @@
-package com.saunafs;
-
-import static com.saunafs.common.Common.socket;
+package com.saunafs.server;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
-import java.net.InetSocketAddress;
-import java.net.Socket;
 
 import com.saunafs.proto.Message;
 import com.saunafs.proto.Protocol;
 
-public class ChunkServer {
-  private final InetSocketAddress socketAddress;
-  private Socket socket;
-  public DataInputStream input;
-  private DataOutputStream output;
+public class StreamingMessenger implements Messenger {
+  private final DataOutputStream output;
+  private final DataInputStream input;
 
-  public ChunkServer(InetSocketAddress socketAddress) {
-    this.socketAddress = socketAddress;
+  private StreamingMessenger(DataOutputStream output, DataInputStream input) {
+    this.output = output;
+    this.input = input;
   }
 
-  public ChunkServer connect() {
-    try {
-      socket = socket(socketAddress);
-      socket.setTcpNoDelay(true);
-      input = new DataInputStream(socket.getInputStream());
-      output = new DataOutputStream(socket.getOutputStream());
-    } catch (IOException e) {
-      throw new UncheckedIOException(e);
-    }
-    return this;
-  }
-
-  public void disconnect() {
-    try {
-      socket.close();
-    } catch (IOException e) {
-      throw new UncheckedIOException(e);
-    }
+  public static Messenger streamingMessenger(Server server) {
+    return new StreamingMessenger(
+        new DataOutputStream(server.output()),
+        new DataInputStream(server.input()));
   }
 
   public void send(Message message) {

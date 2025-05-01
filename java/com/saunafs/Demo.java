@@ -4,7 +4,7 @@ import static com.saunafs.Configuration.aNeutrinoGlobal;
 import static com.saunafs.common.Size.mebibytes;
 import static com.saunafs.proto.msg.ReadErasuredChunk.readErasuredChunk;
 import static com.saunafs.server.InetServer.server;
-import static com.saunafs.server.Messenger.messenger;
+import static com.saunafs.server.StreamingMessenger.streamingMessenger;
 
 import com.saunafs.proto.Message;
 import com.saunafs.proto.msg.ReadData;
@@ -22,7 +22,7 @@ public class Demo {
     var server = server(aNeutrinoGlobal);
     server.connect();
     try {
-      demo(messenger(server));
+      demo(streamingMessenger(server));
     } finally {
       server.disconnect();
     }

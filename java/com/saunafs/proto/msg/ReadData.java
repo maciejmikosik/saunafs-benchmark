@@ -10,15 +10,12 @@ import com.saunafs.proto.Message;
 
 @Identifier(code = 1202, version = 0)
 public class ReadData implements Message {
-  public int packetLength;
-
   public long chunkId;
   public int offset;
   public Blob blob;
 
   public static ReadData readData(DataInputStream input) {
     try {
-      // TODO initialize packetLength
       var response = new ReadData();
       response.chunkId = input.readLong();
       response.offset = input.readInt();

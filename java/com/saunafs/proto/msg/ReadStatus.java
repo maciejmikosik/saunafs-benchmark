@@ -9,8 +9,6 @@ import com.saunafs.proto.Message;
 
 @Identifier(code = 1201, version = 0)
 public class ReadStatus implements Message {
-  public static final int packetLength = 13;
-
   public long chunkId;
   public byte status;
 

@@ -10,8 +10,6 @@ import com.saunafs.proto.Message;
 
 @Identifier(code = 1200, version = 1)
 public class ReadErasuredChunk implements Message {
-  public static final int packetLength = 26;
-
   public long chunkId;
   public int chunkVersion;
   public short chunkType;
@@ -50,9 +48,6 @@ public class ReadErasuredChunk implements Message {
 
   public void writeTo(DataOutputStream output) {
     try {
-      output.writeInt(1200);
-      output.writeInt(packetLength);
-      output.writeInt(1);
       output.writeLong(chunkId);
       output.writeInt(chunkVersion);
       output.writeShort(chunkType);

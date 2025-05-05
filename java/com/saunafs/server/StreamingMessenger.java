@@ -1,12 +1,15 @@
 package com.saunafs.server;
 
+import static com.saunafs.proto.Protocol.decoder;
+import static com.saunafs.proto.Protocol.messageClass;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.lang.reflect.Method;
 
 import com.saunafs.proto.Message;
-import com.saunafs.proto.Protocol;
 
 public class StreamingMessenger implements Messenger {
   private final DataOutputStream output;
@@ -35,19 +38,17 @@ public class StreamingMessenger implements Messenger {
   public Message receive() {
     try {
       var code = input.readInt();
+      @SuppressWarnings("unused")
       var length = input.readInt();
       var version = input.readInt();
 
       // TODO implement lookup table
-      return Protocol.PROTOCOL.stream()
-          .filter(definition -> code == definition.code && version == definition.version)
-          .map(definition -> definition.decoder.apply(input))
-          .findFirst()
-          .orElseThrow(() -> new RuntimeException(
-              "unknown message type(%d) length(%d) version(%d)"
-                  .formatted(code, length, version)));
+      Method decoder = decoder(messageClass(code, version));
+      return (Message) decoder.invoke(null, input);
     } catch (IOException e) {
       throw new UncheckedIOException(e);
+    } catch (ReflectiveOperationException e) {
+      throw new RuntimeException(e);
     }
   }
 }

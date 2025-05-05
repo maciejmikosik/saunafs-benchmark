@@ -1,58 +1,47 @@
 package com.saunafs.proto;
 
-import static com.saunafs.proto.Description.description;
-import static java.lang.reflect.Modifier.isFinal;
+import static com.saunafs.common.Common.readStatic;
 import static java.lang.reflect.Modifier.isPublic;
 import static java.lang.reflect.Modifier.isStatic;
+import static java.util.Arrays.asList;
 import static java.util.Arrays.stream;
 
+import java.io.DataInputStream;
+import java.lang.reflect.Method;
 import java.util.List;
 
-import com.saunafs.common.Common;
-import com.saunafs.common.Size;
 import com.saunafs.proto.msg.ReadData;
+import com.saunafs.proto.msg.ReadErasuredChunk;
 import com.saunafs.proto.msg.ReadStatus;
 
 public class Protocol {
-  public static final Description SAU_CLTOCS_READ = description()
-      .identifier("SAU_CLTOCS_READ")
-      .code(1200)
-      .version(1)
-      .field(long.class, "chunkId")
-      .field(int.class, "chunkVersion")
-      .field(short.class, "chunkType")
-      .field(int.class, "offset")
-      .field(Size.class, "requestedSize");
-
-  public static final Description SAU_CSTOCL_READ_STATUS = description()
-      .identifier("SAU_CSTOCL_READ_STATUS")
-      .code(1201)
-      .version(0)
-      .field(long.class, "chunkId")
-      .field(byte.class, "status")
-      .decoder(ReadStatus::readStatus);
-
-  public static final Description SAU_CSTOCL_READ_DATA = description()
-      .identifier("SAU_CSTOCL_READ_DATA")
-      .code(1202)
-      .version(0)
-      .field(long.class, "chunkId")
-      .field(int.class, "offset")
-      .field(int.class, "size")
-      .field(int.class, "crc")
-      .field(byte[].class, "data")
-      .decoder(ReadData::readData);
-
-  public static final List<Description> PROTOCOL = findDescriptions();
-
-  private static List<Description> findDescriptions() {
-    return stream(Protocol.class.getDeclaredFields())
-        .filter(field -> isPublic(field.getModifiers()))
-        .filter(field -> isStatic(field.getModifiers()))
-        .filter(field -> isFinal(field.getModifiers()))
-        .filter(field -> field.getType() == Description.class)
-        .map(Common::readStatic)
-        .map(Description.class::cast)
-        .toList();
+  public static Method decoder(Class<? extends Message> messageClass) {
+    return stream(messageClass.getDeclaredMethods())
+        .filter(method -> isPublic(method.getModifiers()))
+        .filter(method -> isStatic(method.getModifiers()))
+        .filter(method -> method.getReturnType() == messageClass)
+        .filter(method -> method.getParameterCount() == 1)
+        .filter(method -> method.getParameters()[0].getType() == DataInputStream.class)
+        .findFirst()
+        .orElseThrow(() -> new RuntimeException("no decoder for " + messageClass));
   }
+
+  public static Class<? extends Message> messageClass(int code, int version) {
+    return messageClasses.stream()
+        .filter(messageClass -> {
+          try {
+            return code == (int) readStatic(messageClass.getDeclaredField("code"))
+                && version == (int) readStatic(messageClass.getDeclaredField("version"));
+          } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
+          }
+        }).findFirst()
+        .orElseThrow(() -> new RuntimeException("unknown code %d version %d"
+            .formatted(code, version)));
+  }
+
+  private static final List<Class<? extends Message>> messageClasses = asList(
+      ReadErasuredChunk.class,
+      ReadData.class,
+      ReadStatus.class);
 }

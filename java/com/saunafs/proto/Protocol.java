@@ -1,6 +1,5 @@
 package com.saunafs.proto;
 
-import static com.saunafs.common.Common.readStatic;
 import static java.lang.reflect.Modifier.isPublic;
 import static java.lang.reflect.Modifier.isStatic;
 import static java.util.Arrays.asList;
@@ -29,12 +28,9 @@ public class Protocol {
   public static Class<? extends Message> messageClass(int code, int version) {
     return messageClasses.stream()
         .filter(messageClass -> {
-          try {
-            return code == (int) readStatic(messageClass.getDeclaredField("code"))
-                && version == (int) readStatic(messageClass.getDeclaredField("version"));
-          } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
-          }
+          var identifier = messageClass.getDeclaredAnnotation(Identifier.class);
+          return code == identifier.code()
+              && version == identifier.version();
         }).findFirst()
         .orElseThrow(() -> new RuntimeException("unknown code %d version %d"
             .formatted(code, version)));

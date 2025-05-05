@@ -5,12 +5,12 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 
 import com.saunafs.common.Size;
+import com.saunafs.proto.Identifier;
 import com.saunafs.proto.Message;
 
+@Identifier(code = 1200, version = 1)
 public class ReadErasuredChunk implements Message {
-  public static final int code = 1200;
   public static final int packetLength = 26;
-  public static final int version = 1;
 
   public long chunkId;
   public int chunkVersion;
@@ -50,9 +50,9 @@ public class ReadErasuredChunk implements Message {
 
   public void writeTo(DataOutputStream output) {
     try {
-      output.writeInt(code);
+      output.writeInt(1200);
       output.writeInt(packetLength);
-      output.writeInt(version);
+      output.writeInt(1);
       output.writeLong(chunkId);
       output.writeInt(chunkVersion);
       output.writeShort(chunkType);

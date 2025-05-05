@@ -4,12 +4,12 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 
+import com.saunafs.proto.Identifier;
 import com.saunafs.proto.Message;
 
+@Identifier(code = 1202, version = 0)
 public class ReadData implements Message {
-  public static final int code = 1202;
   public int packetLength;
-  public static final int version = 0;
 
   public long chunkId;
   public int offset;

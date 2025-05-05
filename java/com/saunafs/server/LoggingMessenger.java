@@ -6,6 +6,8 @@ import static java.util.stream.Collectors.joining;
 import java.io.PrintStream;
 import java.lang.reflect.Field;
 
+import com.saunafs.common.Blob;
+import com.saunafs.common.Size;
 import com.saunafs.proto.Message;
 
 public class LoggingMessenger implements Messenger {
@@ -36,19 +38,31 @@ public class LoggingMessenger implements Messenger {
   }
 
   private static String format(Message message) {
-    var messageClass = message.getClass();
-    return stream(message.getClass().getDeclaredFields())
-        .map(field -> format(field, message))
-        .collect(joining("", messageClass.getSimpleName(), ""));
+    return message.getClass().getSimpleName() + formatFieldsOf(message);
   }
 
-  private static String format(Field field, Message message) {
+  private static String formatFieldsOf(Object object) {
+    return stream(object.getClass().getDeclaredFields())
+        .map(field -> format(field, object))
+        .collect(joining(""));
+  }
+
+  private static String format(Field field, Object object) {
     try {
-      return ".%s(%s)".formatted(
-          field.getName(),
-          field.get(message));
+      var name = field.getName();
+      var value = field.get(object);
+      return switch (value) {
+        case Size size -> ".%s(%d)".formatted(name, size.inBytes());
+        case Blob blob -> format(blob);
+        default -> ".%s(%s)".formatted(name, value);
+      };
     } catch (ReflectiveOperationException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  private static String format(Blob blob) {
+    return ".size(%d).crc(%d)"
+        .formatted(blob.data.length, blob.crc);
   }
 }

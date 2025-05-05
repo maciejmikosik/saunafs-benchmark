@@ -4,13 +4,11 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 
+import com.saunafs.proto.Identifier;
 import com.saunafs.proto.Message;
 
+@Identifier(code = 1201, version = 0)
 public class ReadStatus implements Message {
-  public static final int code = 1201;
-  public static final int packetLength = 13;
-  public static final int version = 0;
-
   public long chunkId;
   public byte status;
 

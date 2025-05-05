@@ -2,6 +2,7 @@ package com.saunafs.server;
 
 import static com.saunafs.proto.Protocol.decoder;
 import static com.saunafs.proto.Protocol.messageClass;
+import static com.saunafs.proto.Protocol.packetLengthFor;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -9,6 +10,7 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.lang.reflect.Method;
 
+import com.saunafs.proto.Identifier;
 import com.saunafs.proto.Message;
 
 public class StreamingMessenger implements Messenger {
@@ -28,6 +30,10 @@ public class StreamingMessenger implements Messenger {
 
   public void send(Message message) {
     try {
+      var identifier = message.getClass().getAnnotation(Identifier.class);
+      output.writeInt(identifier.code());
+      output.writeInt(packetLengthFor(message));
+      output.writeInt(identifier.version());
       message.writeTo(output);
       output.flush();
     } catch (IOException e) {

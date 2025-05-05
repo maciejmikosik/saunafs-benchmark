@@ -24,11 +24,4 @@ public class ReadStatus implements Message {
       throw new UncheckedIOException(e);
     }
   }
-
-  public String toString() {
-    return "SAU_CSTOCL_READ_STATUS.version(%d).chunkId(%d).status(%d)".formatted(
-        version,
-        chunkId,
-        status);
-  }
 }

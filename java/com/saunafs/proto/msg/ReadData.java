@@ -31,14 +31,4 @@ public class ReadData implements Message {
       throw new UncheckedIOException(e);
     }
   }
-
-  public String toString() {
-    return "SAU_CSTOCL_READ_DATA.version(%d).chunkId(%d).offset(%d).size(%d).crc(%d)"
-        .formatted(
-            version,
-            chunkId,
-            offset,
-            size,
-            crc);
-  }
 }

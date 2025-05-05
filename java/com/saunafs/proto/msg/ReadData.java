@@ -1,27 +1,25 @@
 package com.saunafs.proto.msg;
 
-import static com.saunafs.proto.Protocol.SAU_CSTOCL_READ_DATA;
-
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 
-import com.saunafs.proto.Description;
 import com.saunafs.proto.Message;
 
 public class ReadData implements Message {
+  public static final int code = 1202;
+  public int packetLength;
+  public static final int version = 0;
+
   public long chunkId;
   public int offset;
   public int size;
   public int crc;
   public byte[] data;
 
-  public Description description() {
-    return SAU_CSTOCL_READ_DATA;
-  }
-
   public static ReadData readData(DataInputStream input) {
     try {
+      // TODO initialize packetLength
       var response = new ReadData();
       response.chunkId = input.readLong();
       response.offset = input.readInt();
@@ -35,10 +33,9 @@ public class ReadData implements Message {
   }
 
   public String toString() {
-    return "%s.version(%d).chunkId(%d).offset(%d).size(%d).crc(%d)"
+    return "SAU_CSTOCL_READ_DATA.version(%d).chunkId(%d).offset(%d).size(%d).crc(%d)"
         .formatted(
-            description().identifier,
-            description().version,
+            version,
             chunkId,
             offset,
             size,

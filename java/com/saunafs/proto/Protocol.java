@@ -11,13 +11,14 @@ import java.util.List;
 import com.saunafs.common.Common;
 import com.saunafs.common.Size;
 import com.saunafs.proto.msg.ReadData;
+import com.saunafs.proto.msg.ReadErasuredChunk;
 import com.saunafs.proto.msg.ReadStatus;
 
 public class Protocol {
   public static final Description SAU_CLTOCS_READ = description()
       .identifier("SAU_CLTOCS_READ")
-      .code(1200)
-      .version(1)
+      .code(ReadErasuredChunk.code)
+      .version(ReadErasuredChunk.version)
       .field(long.class, "chunkId")
       .field(int.class, "chunkVersion")
       .field(short.class, "chunkType")
@@ -26,16 +27,16 @@ public class Protocol {
 
   public static final Description SAU_CSTOCL_READ_STATUS = description()
       .identifier("SAU_CSTOCL_READ_STATUS")
-      .code(1201)
-      .version(0)
+      .code(ReadStatus.code)
+      .version(ReadStatus.version)
       .field(long.class, "chunkId")
       .field(byte.class, "status")
       .decoder(ReadStatus::readStatus);
 
   public static final Description SAU_CSTOCL_READ_DATA = description()
       .identifier("SAU_CSTOCL_READ_DATA")
-      .code(1202)
-      .version(0)
+      .code(ReadData.code)
+      .version(ReadData.version)
       .field(long.class, "chunkId")
       .field(int.class, "offset")
       .field(int.class, "size")

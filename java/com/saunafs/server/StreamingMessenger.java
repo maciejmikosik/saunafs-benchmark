@@ -1,9 +1,9 @@
 package com.saunafs.server;
 
 import static com.saunafs.common.Common.set;
-import static com.saunafs.common.Size.bytes;
 import static com.saunafs.proto.Protocol.messageClass;
 import static com.saunafs.proto.Protocol.packetLengthFor;
+import static com.saunafs.proto.data.Size.bytes;
 import static java.lang.reflect.Modifier.isStatic;
 import static java.util.Arrays.stream;
 
@@ -12,11 +12,11 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 
-import com.saunafs.common.Blob;
 import com.saunafs.common.Common;
-import com.saunafs.common.Size;
 import com.saunafs.proto.Identifier;
 import com.saunafs.proto.Message;
+import com.saunafs.proto.data.Blob;
+import com.saunafs.proto.data.Size;
 
 public class StreamingMessenger implements Messenger {
   private final DataOutputStream output;

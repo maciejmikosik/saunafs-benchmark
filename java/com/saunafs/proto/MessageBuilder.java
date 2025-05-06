@@ -1,6 +1,6 @@
 package com.saunafs.proto;
 
-import com.saunafs.common.Size;
+import com.saunafs.proto.data.Size;
 
 public class MessageBuilder {
   private final Message message;

@@ -1,8 +1,8 @@
 package com.saunafs;
 
 import static com.saunafs.Configuration.aNeutrinoGlobal;
-import static com.saunafs.common.Size.mebibytes;
 import static com.saunafs.proto.MessageBuilder.message;
+import static com.saunafs.proto.data.Size.mebibytes;
 import static com.saunafs.server.InetServer.server;
 import static com.saunafs.server.LoggingMessenger.logging;
 import static com.saunafs.server.StreamingMessenger.streamingMessenger;

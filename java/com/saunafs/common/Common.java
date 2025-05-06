@@ -41,4 +41,15 @@ public class Common {
       throw new RuntimeException();
     }
   }
+
+  public static void set(Field field, Object instance, Object value) {
+    if (isStatic(field.getModifiers())) {
+      throw new IllegalArgumentException();
+    }
+    try {
+      field.set(instance, value);
+    } catch (IllegalAccessException e) {
+      throw new RuntimeException();
+    }
+  }
 }

@@ -1,4 +1,4 @@
-package com.saunafs.proto;
+package com.saunafs.proto.anno;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 

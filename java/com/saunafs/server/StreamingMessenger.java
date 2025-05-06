@@ -13,8 +13,8 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 
 import com.saunafs.common.Common;
-import com.saunafs.proto.Identifier;
 import com.saunafs.proto.Message;
+import com.saunafs.proto.anno.Identifier;
 import com.saunafs.proto.data.Blob;
 import com.saunafs.proto.data.Size;
 

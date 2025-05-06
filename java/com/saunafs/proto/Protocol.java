@@ -1,12 +1,8 @@
 package com.saunafs.proto;
 
-import static java.lang.reflect.Modifier.isPublic;
-import static java.lang.reflect.Modifier.isStatic;
 import static java.util.Arrays.asList;
 import static java.util.Arrays.stream;
 
-import java.io.DataInputStream;
-import java.lang.reflect.Method;
 import java.util.List;
 
 import com.saunafs.common.Blob;
@@ -16,17 +12,7 @@ import com.saunafs.proto.msg.ReadErasuredChunk;
 import com.saunafs.proto.msg.ReadStatus;
 
 public class Protocol {
-  public static Method decoder(Class<? extends Message> messageClass) {
-    return stream(messageClass.getDeclaredMethods())
-        .filter(method -> isPublic(method.getModifiers()))
-        .filter(method -> isStatic(method.getModifiers()))
-        .filter(method -> method.getReturnType() == messageClass)
-        .filter(method -> method.getParameterCount() == 1)
-        .filter(method -> method.getParameters()[0].getType() == DataInputStream.class)
-        .findFirst()
-        .orElseThrow(() -> new RuntimeException("no decoder for " + messageClass));
-  }
-
+  // TODO implement lookup table
   public static Class<? extends Message> messageClass(int code, int version) {
     return messageClasses.stream()
         .filter(messageClass -> {

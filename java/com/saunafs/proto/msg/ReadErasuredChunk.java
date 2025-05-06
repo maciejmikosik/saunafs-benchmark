@@ -1,9 +1,5 @@
 package com.saunafs.proto.msg;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.UncheckedIOException;
-
 import com.saunafs.common.Size;
 import com.saunafs.proto.Identifier;
 import com.saunafs.proto.Message;
@@ -44,17 +40,5 @@ public class ReadErasuredChunk implements Message {
   public ReadErasuredChunk size(Size requestedSize) {
     this.requestedSize = requestedSize;
     return this;
-  }
-
-  public void writeTo(DataOutputStream output) {
-    try {
-      output.writeLong(chunkId);
-      output.writeInt(chunkVersion);
-      output.writeShort(chunkType);
-      output.writeInt(offset);
-      output.writeInt(requestedSize.inBytes());
-    } catch (IOException e) {
-      throw new UncheckedIOException(e);
-    }
   }
 }

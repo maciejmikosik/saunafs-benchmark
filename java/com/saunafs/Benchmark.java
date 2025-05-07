@@ -24,9 +24,9 @@ public class Benchmark {
     var server = server(aNeutrinoGlobal);
     var events = new ArrayList<Event>();
     var sniffer = sniffer(events::add, systemUTC());
+    var messenger = sniffer.sniff(streamingMessenger(server));
     try {
       server.connect();
-      var messenger = sniffer.sniff(streamingMessenger(server));
       runSingleRead(messenger);
     } finally {
       server.disconnect();

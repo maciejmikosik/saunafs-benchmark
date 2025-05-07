@@ -7,6 +7,7 @@ import static com.saunafs.proto.data.Size.bytes;
 import static java.lang.reflect.Modifier.isStatic;
 import static java.util.Arrays.stream;
 
+import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -19,22 +20,21 @@ import com.saunafs.proto.data.Blob;
 import com.saunafs.proto.data.Size;
 
 public class StreamingMessenger implements Messenger {
-  private final DataOutputStream output;
-  private final DataInputStream input;
+  private final Server server;
+  private DataOutputStream output;
+  private DataInputStream input;
 
-  private StreamingMessenger(DataOutputStream output, DataInputStream input) {
-    this.output = output;
-    this.input = input;
+  private StreamingMessenger(Server server) {
+    this.server = server;
   }
 
   public static Messenger streamingMessenger(Server server) {
-    return new StreamingMessenger(
-        new DataOutputStream(server.output()),
-        new DataInputStream(server.input()));
+    return new StreamingMessenger(server);
   }
 
   public void send(Message message) {
     try {
+      output = new DataOutputStream(new BufferedOutputStream(server.output()));
       var identifier = message.getClass().getAnnotation(Identifier.class);
       write(identifier.code());
       write(packetLengthFor(message));
@@ -66,6 +66,7 @@ public class StreamingMessenger implements Messenger {
 
   public Message receive() {
     try {
+      input = new DataInputStream(server.input());
       var code = input.readInt();
       @SuppressWarnings("unused")
       var length = input.readInt();
@@ -92,11 +93,7 @@ public class StreamingMessenger implements Messenger {
         var blob = new Blob();
         var size = input.readInt();
         blob.crc = input.readInt();
-        blob.data = new byte[size];
-        var count = 0;
-        while (count < size) {
-          count += input.read(blob.data, count, size - count);
-        }
+        blob.data = input.readNBytes(size);
         return blob;
       } else if (Message.class.isAssignableFrom(type)) {
         var message = type.getDeclaredConstructor().newInstance();

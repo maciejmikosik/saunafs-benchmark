@@ -92,11 +92,7 @@ public class StreamingMessenger implements Messenger {
         var blob = new Blob();
         var size = input.readInt();
         blob.crc = input.readInt();
-        blob.data = new byte[size];
-        var count = 0;
-        while (count < size) {
-          count += input.read(blob.data, count, size - count);
-        }
+        blob.data = input.readNBytes(size);
         return blob;
       } else if (Message.class.isAssignableFrom(type)) {
         var message = type.getDeclaredConstructor().newInstance();

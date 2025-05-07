@@ -12,8 +12,6 @@ import java.net.Socket;
 public class InetServer implements Server {
   private final InetSocketAddress socketAddress;
   private Socket socket;
-  private OutputStream output;
-  private InputStream input;
 
   private InetServer(InetSocketAddress socketAddress) {
     this.socketAddress = socketAddress;
@@ -27,8 +25,6 @@ public class InetServer implements Server {
     try {
       socket = socket(socketAddress);
       socket.setTcpNoDelay(true);
-      output = socket.getOutputStream();
-      input = socket.getInputStream();
     } catch (IOException e) {
       throw new UncheckedIOException(e);
     }
@@ -43,10 +39,18 @@ public class InetServer implements Server {
   }
 
   public OutputStream output() {
-    return output;
+    try {
+      return socket.getOutputStream();
+    } catch (IOException e) {
+      throw new UncheckedIOException(e);
+    }
   }
 
   public InputStream input() {
-    return input;
+    try {
+      return socket.getInputStream();
+    } catch (IOException e) {
+      throw new UncheckedIOException(e);
+    }
   }
 }

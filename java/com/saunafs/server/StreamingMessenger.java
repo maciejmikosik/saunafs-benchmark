@@ -1,5 +1,6 @@
 package com.saunafs.server;
 
+import static com.saunafs.common.Common.unchecked;
 import static com.saunafs.proto.Protocol.messageClass;
 import static com.saunafs.proto.Protocol.packetLengthFor;
 import static com.saunafs.proto.data.Size.bytes;
@@ -9,7 +10,6 @@ import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.lang.reflect.Field;
 
 import com.saunafs.proto.Message;
@@ -40,7 +40,7 @@ public class StreamingMessenger implements Messenger {
       write(message);
       output.flush();
     } catch (IOException e) {
-      throw new UncheckedIOException(e);
+      throw unchecked(e);
     }
   }
 
@@ -77,7 +77,7 @@ public class StreamingMessenger implements Messenger {
       var version = input.readInt();
       return (Message) read(messageClass(code, version));
     } catch (IOException e) {
-      throw new UncheckedIOException(e);
+      throw unchecked(e);
     }
   }
 

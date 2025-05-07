@@ -8,11 +8,15 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class Common {
+  public static UncheckedIOException unchecked(IOException exception) {
+    return new UncheckedIOException(exception);
+  }
+
   public static InetAddress address(String string) {
     try {
       return InetAddress.getByName(string);
     } catch (UnknownHostException e) {
-      throw new UncheckedIOException(e);
+      throw unchecked(e);
     }
   }
 
@@ -24,7 +28,7 @@ public class Common {
     try {
       return new Socket(socketAddress.getAddress(), socketAddress.getPort());
     } catch (IOException e) {
-      throw new UncheckedIOException(e);
+      throw unchecked(e);
     }
   }
 }

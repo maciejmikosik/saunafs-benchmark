@@ -1,13 +1,13 @@
 package com.saunafs.server;
 
+import static com.saunafs.common.Common.buffered;
+import static com.saunafs.common.Common.data;
 import static com.saunafs.common.Common.unchecked;
 import static com.saunafs.proto.Protocol.messageClass;
 import static com.saunafs.proto.Protocol.packetLengthFor;
 import static com.saunafs.proto.data.Size.bytes;
 import static java.lang.reflect.Modifier.isStatic;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -31,8 +31,8 @@ public class StreamingMessenger implements Messenger {
 
   public static Messenger streamingMessenger(Server server) {
     return new StreamingMessenger(
-        new DataOutputStream(new BufferedOutputStream(server.output())),
-        new DataInputStream(new BufferedInputStream(server.input())));
+        data(buffered(server.output())),
+        data(buffered(server.input())));
   }
 
   public void send(Message message) {

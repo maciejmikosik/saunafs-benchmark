@@ -30,9 +30,9 @@ public class Demo {
     var server = server(aNeutrinoGlobal);
     var events = new ArrayList<Event>();
     var sniffer = sniffer(events::add, systemUTC());
+    var messenger = logging(sniffer.sniff(streamingMessenger(server)));
     try {
       server.connect();
-      var messenger = logging(sniffer.sniff(streamingMessenger(server)));
       demo(messenger);
     } finally {
       server.disconnect();

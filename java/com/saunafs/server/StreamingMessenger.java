@@ -19,22 +19,21 @@ import com.saunafs.proto.data.Blob;
 import com.saunafs.proto.data.Size;
 
 public class StreamingMessenger implements Messenger {
-  private final DataOutputStream output;
-  private final DataInputStream input;
+  private final Server server;
+  private DataOutputStream output;
+  private DataInputStream input;
 
-  private StreamingMessenger(DataOutputStream output, DataInputStream input) {
-    this.output = output;
-    this.input = input;
+  private StreamingMessenger(Server server) {
+    this.server = server;
   }
 
   public static Messenger streamingMessenger(Server server) {
-    return new StreamingMessenger(
-        new DataOutputStream(server.output()),
-        new DataInputStream(server.input()));
+    return new StreamingMessenger(server);
   }
 
   public void send(Message message) {
     try {
+      output = new DataOutputStream(server.output());
       var identifier = message.getClass().getAnnotation(Identifier.class);
       write(identifier.code());
       write(packetLengthFor(message));
@@ -66,6 +65,7 @@ public class StreamingMessenger implements Messenger {
 
   public Message receive() {
     try {
+      input = new DataInputStream(server.input());
       var code = input.readInt();
       @SuppressWarnings("unused")
       var length = input.readInt();

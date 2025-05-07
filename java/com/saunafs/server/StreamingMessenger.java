@@ -7,6 +7,7 @@ import static com.saunafs.proto.data.Size.bytes;
 import static java.lang.reflect.Modifier.isStatic;
 import static java.util.Arrays.stream;
 
+import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -33,7 +34,7 @@ public class StreamingMessenger implements Messenger {
 
   public void send(Message message) {
     try {
-      output = new DataOutputStream(server.output());
+      output = new DataOutputStream(new BufferedOutputStream(server.output()));
       var identifier = message.getClass().getAnnotation(Identifier.class);
       write(identifier.code());
       write(packetLengthFor(message));

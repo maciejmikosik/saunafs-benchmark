@@ -1,10 +1,7 @@
 package com.saunafs.common;
 
-import static java.lang.reflect.Modifier.isStatic;
-
 import java.io.IOException;
 import java.io.UncheckedIOException;
-import java.lang.reflect.Field;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -28,28 +25,6 @@ public class Common {
       return new Socket(socketAddress.getAddress(), socketAddress.getPort());
     } catch (IOException e) {
       throw new UncheckedIOException(e);
-    }
-  }
-
-  public static Object read(Field field, Object instance) {
-    if (isStatic(field.getModifiers())) {
-      throw new IllegalArgumentException();
-    }
-    try {
-      return field.get(instance);
-    } catch (IllegalAccessException e) {
-      throw new RuntimeException();
-    }
-  }
-
-  public static void set(Field field, Object instance, Object value) {
-    if (isStatic(field.getModifiers())) {
-      throw new IllegalArgumentException();
-    }
-    try {
-      field.set(instance, value);
-    } catch (IllegalAccessException e) {
-      throw new RuntimeException();
     }
   }
 }

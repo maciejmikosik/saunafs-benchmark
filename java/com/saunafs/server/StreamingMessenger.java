@@ -1,19 +1,17 @@
 package com.saunafs.server;
 
-import static com.saunafs.common.Common.set;
+import static com.saunafs.common.Common.unchecked;
 import static com.saunafs.proto.Protocol.messageClass;
 import static com.saunafs.proto.Protocol.packetLengthFor;
 import static com.saunafs.proto.data.Size.bytes;
 import static java.lang.reflect.Modifier.isStatic;
-import static java.util.Arrays.stream;
 
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.UncheckedIOException;
+import java.lang.reflect.Field;
 
-import com.saunafs.common.Common;
 import com.saunafs.proto.Message;
 import com.saunafs.proto.anno.Identifier;
 import com.saunafs.proto.data.Blob;
@@ -42,25 +40,31 @@ public class StreamingMessenger implements Messenger {
       write(message);
       output.flush();
     } catch (IOException e) {
-      throw new UncheckedIOException(e);
+      throw unchecked(e);
     }
   }
 
-  private void write(Object object) {
+  private void write(Object object) throws IOException {
+    switch (object) {
+      case Byte number -> output.writeByte(number);
+      case Short number -> output.writeShort(number);
+      case Integer number -> output.writeInt(number);
+      case Long number -> output.writeLong(number);
+      case Size size -> output.writeInt(size.inBytes());
+      case Message message -> writeReflectively(message);
+      default -> throw new RuntimeException("cannot serialize: " + object);
+    }
+  }
+
+  private void writeReflectively(Object instance) throws IOException {
     try {
-      switch (object) {
-        case Byte number -> output.writeByte(number);
-        case Short number -> output.writeShort(number);
-        case Integer number -> output.writeInt(number);
-        case Long number -> output.writeLong(number);
-        case Size size -> output.writeInt(size.inBytes());
-        case Message message -> stream(message.getClass().getDeclaredFields())
-            .filter(field -> !isStatic(field.getModifiers()))
-            .forEach(field -> write(Common.read(field, object)));
-        default -> throw new RuntimeException("cannot serialize: " + object);
+      for (Field field : instance.getClass().getDeclaredFields()) {
+        if (!isStatic(field.getModifiers())) {
+          write(field.get(instance));
+        }
       }
-    } catch (IOException e) {
-      throw new UncheckedIOException(e);
+    } catch (IllegalAccessException e) {
+      throw new RuntimeException(e);
     }
   }
 
@@ -73,39 +77,43 @@ public class StreamingMessenger implements Messenger {
       var version = input.readInt();
       return (Message) read(messageClass(code, version));
     } catch (IOException e) {
-      throw new UncheckedIOException(e);
+      throw unchecked(e);
     }
   }
 
-  private Object read(Class<?> type) {
+  private Object read(Class<?> type) throws IOException {
+    if (type == byte.class) {
+      return input.readByte();
+    } else if (type == short.class) {
+      return input.readShort();
+    } else if (type == int.class) {
+      return input.readInt();
+    } else if (type == long.class) {
+      return input.readLong();
+    } else if (type == Size.class) {
+      return bytes(input.readInt());
+    } else if (type == Blob.class) {
+      var blob = new Blob();
+      var size = input.readInt();
+      blob.crc = input.readInt();
+      blob.data = input.readNBytes(size);
+      return blob;
+    } else if (Message.class.isAssignableFrom(type)) {
+      return readReflectively(type);
+    } else {
+      throw new RuntimeException("cannot deserialize " + type);
+    }
+  }
+
+  private Object readReflectively(Class<?> type) throws IOException {
     try {
-      if (type == byte.class) {
-        return input.readByte();
-      } else if (type == short.class) {
-        return input.readShort();
-      } else if (type == int.class) {
-        return input.readInt();
-      } else if (type == long.class) {
-        return input.readLong();
-      } else if (type == Size.class) {
-        return bytes(input.readInt());
-      } else if (type == Blob.class) {
-        var blob = new Blob();
-        var size = input.readInt();
-        blob.crc = input.readInt();
-        blob.data = input.readNBytes(size);
-        return blob;
-      } else if (Message.class.isAssignableFrom(type)) {
-        var message = type.getDeclaredConstructor().newInstance();
-        stream(type.getDeclaredFields())
-            .filter(field -> !isStatic(field.getModifiers()))
-            .forEach(field -> set(field, message, read(field.getType())));
-        return message;
-      } else {
-        throw new RuntimeException("cannot deserialize " + type);
+      var instance = type.getDeclaredConstructor().newInstance();
+      for (Field field : type.getDeclaredFields()) {
+        if (!isStatic(field.getModifiers())) {
+          field.set(instance, read(field.getType()));
+        }
       }
-    } catch (IOException e) {
-      throw new UncheckedIOException(e);
+      return instance;
     } catch (ReflectiveOperationException e) {
       throw new RuntimeException(e);
     }

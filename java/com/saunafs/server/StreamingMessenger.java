@@ -1,12 +1,13 @@
 package com.saunafs.server;
 
+import static com.saunafs.common.Common.buffered;
+import static com.saunafs.common.Common.data;
 import static com.saunafs.common.Common.unchecked;
 import static com.saunafs.proto.Protocol.messageClass;
 import static com.saunafs.proto.Protocol.packetLengthFor;
 import static com.saunafs.proto.data.Size.bytes;
 import static java.lang.reflect.Modifier.isStatic;
 
-import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -18,21 +19,24 @@ import com.saunafs.proto.data.Blob;
 import com.saunafs.proto.data.Size;
 
 public class StreamingMessenger implements Messenger {
-  private final Server server;
-  private DataOutputStream output;
-  private DataInputStream input;
+  private final DataOutputStream output;
+  private final DataInputStream input;
 
-  private StreamingMessenger(Server server) {
-    this.server = server;
+  private StreamingMessenger(
+      DataOutputStream output,
+      DataInputStream input) {
+    this.output = output;
+    this.input = input;
   }
 
   public static Messenger streamingMessenger(Server server) {
-    return new StreamingMessenger(server);
+    return new StreamingMessenger(
+        data(buffered(server.output())),
+        data(buffered(server.input())));
   }
 
   public void send(Message message) {
     try {
-      output = new DataOutputStream(new BufferedOutputStream(server.output()));
       var identifier = message.getClass().getAnnotation(Identifier.class);
       write(identifier.code());
       write(packetLengthFor(message));
@@ -70,7 +74,6 @@ public class StreamingMessenger implements Messenger {
 
   public Message receive() {
     try {
-      input = new DataInputStream(server.input());
       var code = input.readInt();
       @SuppressWarnings("unused")
       var length = input.readInt();

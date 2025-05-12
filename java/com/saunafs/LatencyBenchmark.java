@@ -1,21 +1,17 @@
 package com.saunafs;
 
+import static com.saunafs.bm.model.Cluster.gson;
 import static com.saunafs.bm.model.Cluster.parseCluster;
-import static com.saunafs.common.Collections.toMapFromEntries;
 import static com.saunafs.proto.MessageBuilder.message;
 import static com.saunafs.proto.data.Size.bytes;
 import static com.saunafs.server.InetServer.server;
 import static com.saunafs.server.StreamingMessenger.streamingMessenger;
 import static java.time.Duration.between;
-import static java.util.Map.entry;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.time.Duration;
 import java.time.Instant;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import com.saunafs.bm.model.Chunk;
 import com.saunafs.bm.model.ChunkServer;
@@ -28,48 +24,26 @@ import com.saunafs.server.Messenger;
 public class LatencyBenchmark {
   public static void main(String... args) throws IOException {
     var cluster = parseCluster(new InputStreamReader(System.in));
-    var analytics = cluster.stream()
-        .map(chunkServer -> Map.entry(chunkServer, benchmark(chunkServer)))
-        .collect(toMapFromEntries());
 
     for (ChunkServer chunkServer : cluster) {
-      println(chunkServer.address);
-      for (Disk disk : chunkServer.disks) {
-        print("  " + disk.location);
-        var durations = analytics.get(chunkServer).get(disk);
-        println("  %s %s %s".formatted(
-            format(durations.getFirst()),
-            format(durations.get(durations.size() / 2)),
-            format(durations.getLast())));
+      var server = server(chunkServer.address);
+      var messenger = streamingMessenger(server);
+      try {
+        server.connect();
+        for (Disk disk : chunkServer.disks) {
+          for (Chunk chunk : disk.chunks) {
+            benchmark(chunk, messenger);
+          }
+        }
+      } finally {
+        server.disconnect();
       }
     }
+
+    System.out.println(gson.toJson(cluster));
   }
 
-  private static Map<Disk, List<Duration>> benchmark(ChunkServer chunkServer) {
-    println(chunkServer.address);
-    var server = server(chunkServer.address);
-    var messenger = streamingMessenger(server);
-    try {
-      server.connect();
-      return chunkServer.disks.stream()
-          .map(disk -> entry(disk, benchmark(disk, messenger)))
-          .collect(toMapFromEntries());
-    } finally {
-      server.disconnect();
-    }
-  }
-
-  private static List<Duration> benchmark(Disk disk, Messenger messenger) {
-    println("  " + disk.location);
-    return disk.chunks.stream()
-        .map(chunk -> benchmark(chunk, messenger))
-        .flatMap(Optional::stream)
-        .sorted()
-        .toList();
-  }
-
-  private static Optional<Duration> benchmark(Chunk chunk, Messenger messenger) {
-    print("    " + chunk.id + "  ");
+  private static void benchmark(Chunk chunk, Messenger messenger) {
     var message = message(ReadErasuredChunk.class)
         .chunkId(chunk.id)
         .chunkVersion(1)
@@ -86,28 +60,11 @@ public class LatencyBenchmark {
       while (message instanceof ReadData) {
         message = messenger.receive();
       }
-      var duration = between(start, stop);
-      println(format(duration));
-      return Optional.of(duration);
+      chunk.attachment = Map.of("latency", between(start, stop));
     } else if (message instanceof ReadStatus readStatus) {
-      println("status=" + readStatus.status);
+      chunk.attachment = Map.of("status", readStatus.status);
     } else {
-      println("unexpected message " + message);
+      chunk.attachment = Map.of("error", "unknown message " + message.getClass().getSimpleName());
     }
-    return Optional.empty();
-  }
-
-  private static String format(Duration duration) {
-    return "%3d.%09ds".formatted(
-        duration.getSeconds(),
-        duration.getNano());
-  }
-
-  private static void print(Object object) {
-    System.out.print(object);
-  }
-
-  private static void println(Object object) {
-    System.out.println(object);
   }
 }

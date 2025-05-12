@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import com.saunafs.bm.model.Chunk;
 import com.saunafs.bm.model.ChunkServer;
 import com.saunafs.bm.model.Disk;
 import com.saunafs.proto.msg.ReadData;
@@ -61,16 +62,16 @@ public class LatencyBenchmark {
   private static List<Duration> benchmark(Disk disk, Messenger messenger) {
     println("  " + disk.location);
     return disk.chunks.stream()
-        .map(chunkId -> benchmark(chunkId, messenger))
+        .map(chunk -> benchmark(chunk, messenger))
         .flatMap(Optional::stream)
         .sorted()
         .toList();
   }
 
-  private static Optional<Duration> benchmark(Long chunkId, Messenger messenger) {
-    print("    " + chunkId + "  ");
+  private static Optional<Duration> benchmark(Chunk chunk, Messenger messenger) {
+    print("    " + chunk.id + "  ");
     var message = message(ReadErasuredChunk.class)
-        .chunkId(chunkId)
+        .chunkId(chunk.id)
         .chunkVersion(1)
         .chunkType((short) 0)
         .size(bytes(1))

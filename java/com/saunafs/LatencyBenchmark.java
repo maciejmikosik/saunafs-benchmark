@@ -57,8 +57,8 @@ public class LatencyBenchmark {
   private static void benchmark(Chunk chunk, Messenger messenger) {
     var message = message(ReadErasuredChunk.class)
         .chunkId(chunk.id)
-        .chunkVersion(1)
-        .chunkType((short) 0)
+        .chunkVersion(chunk.version)
+        .chunkType(chunk.type)
         .size(bytes(1))
         .offset(0)
         .build();

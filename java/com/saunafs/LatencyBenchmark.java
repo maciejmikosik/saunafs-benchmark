@@ -2,6 +2,7 @@ package com.saunafs;
 
 import static com.saunafs.bm.model.Cluster.gson;
 import static com.saunafs.bm.model.Cluster.parseCluster;
+import static com.saunafs.common.ProgressBar.progressBar;
 import static com.saunafs.proto.MessageBuilder.message;
 import static com.saunafs.proto.data.Size.bytes;
 import static com.saunafs.server.InetServer.server;
@@ -16,14 +17,23 @@ import java.util.Map;
 import com.saunafs.bm.model.Chunk;
 import com.saunafs.bm.model.ChunkServer;
 import com.saunafs.bm.model.Disk;
+import com.saunafs.common.ProgressBar;
 import com.saunafs.proto.msg.ReadData;
 import com.saunafs.proto.msg.ReadErasuredChunk;
 import com.saunafs.proto.msg.ReadStatus;
 import com.saunafs.server.Messenger;
 
 public class LatencyBenchmark {
+  private static final ProgressBar progressBar = progressBar();
+
   public static void main(String... args) throws IOException {
     var cluster = parseCluster(new InputStreamReader(System.in));
+
+    var nChunks = cluster.stream()
+        .flatMap(chunkServer -> chunkServer.disks.stream())
+        .flatMap(disk -> disk.chunks.stream())
+        .count();
+    var nChunksChecked = 0;
 
     for (ChunkServer chunkServer : cluster) {
       var server = server(chunkServer.address);
@@ -33,6 +43,7 @@ public class LatencyBenchmark {
         for (Disk disk : chunkServer.disks) {
           for (Chunk chunk : disk.chunks) {
             benchmark(chunk, messenger);
+            progressBar.update(1f * (++nChunksChecked) / nChunks);
           }
         }
       } finally {

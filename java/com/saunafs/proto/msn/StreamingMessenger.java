@@ -1,8 +1,8 @@
-package com.saunafs.server;
+package com.saunafs.proto.msn;
 
-import static com.saunafs.common.Common.buffered;
-import static com.saunafs.common.Common.data;
-import static com.saunafs.common.Common.unchecked;
+import static com.saunafs.common.io.IoFactories.buffered;
+import static com.saunafs.common.io.IoFactories.data;
+import static com.saunafs.common.io.IoFactories.unchecked;
 import static com.saunafs.proto.Protocol.messageClass;
 import static com.saunafs.proto.Protocol.packetLengthFor;
 import static com.saunafs.proto.data.Size.bytes;
@@ -13,7 +13,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
 
+import com.saunafs.common.io.Server;
 import com.saunafs.proto.Message;
+import com.saunafs.proto.Messenger;
 import com.saunafs.proto.anno.Identifier;
 import com.saunafs.proto.data.Blob;
 import com.saunafs.proto.data.Size;

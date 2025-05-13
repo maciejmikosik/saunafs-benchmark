@@ -1,31 +1,33 @@
 package com.saunafs;
 
-import static com.saunafs.Configuration.aNeutrinoGlobal;
-import static com.saunafs.bm.Sniffer.sniffer;
-import static com.saunafs.proto.MessageBuilder.message;
+import static com.saunafs.common.io.InetServer.server;
+import static com.saunafs.common.io.IoFactories.address;
+import static com.saunafs.common.io.IoFactories.socketAddress;
 import static com.saunafs.proto.data.Size.mebibytes;
-import static com.saunafs.server.InetServer.server;
-import static com.saunafs.server.LoggingMessenger.logging;
-import static com.saunafs.server.StreamingMessenger.streamingMessenger;
+import static com.saunafs.proto.msg.MessageBuilder.message;
+import static com.saunafs.proto.msn.LoggingMessenger.logging;
+import static com.saunafs.proto.msn.StreamingMessenger.streamingMessenger;
+import static com.saunafs.proto.msn.sniff.Sniffer.sniffer;
 import static java.time.Clock.systemUTC;
 
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 
-import com.saunafs.bm.Event;
-import com.saunafs.bm.Received;
-import com.saunafs.bm.Sent;
+import com.saunafs.proto.Messenger;
 import com.saunafs.proto.msg.ReadData;
 import com.saunafs.proto.msg.ReadErasuredChunk;
-import com.saunafs.server.Messenger;
+import com.saunafs.proto.msn.sniff.Event;
+import com.saunafs.proto.msn.sniff.Received;
+import com.saunafs.proto.msn.sniff.Sent;
 
-/**
- * saunfs protocol constants
- * https://github.com/leil-io/saunafs/blob/dev/src/protocol/SFSCommunication.h
- *
- * other benchmark constants
- * https://github.com/leil-io/saunafs-sandbox/blob/dev/chunk-benchmark/src/protocol_consts.h
- */
 public class Demo {
+  public static final InetSocketAddress aNeutrinoLocalWifi = socketAddress(
+      address("192.168.168.160"), 9422);
+  public static final InetSocketAddress aNeutrinoLocalLan = socketAddress(
+      address("192.168.168.96"), 9422);
+  public static final InetSocketAddress aNeutrinoGlobal = socketAddress(
+      address("cajar.ddnnss.eu"), 9422);
+
   public static void main(String... args) {
     var server = server(aNeutrinoGlobal);
     var events = new ArrayList<Event>();

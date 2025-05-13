@@ -1,4 +1,4 @@
-package com.saunafs.common;
+package com.saunafs.common.io;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -12,7 +12,7 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 
-public class Common {
+public class IoFactories {
   public static UncheckedIOException unchecked(IOException exception) {
     return new UncheckedIOException(exception);
   }

@@ -1,4 +1,4 @@
-package com.saunafs.server;
+package com.saunafs.proto.msn;
 
 import static com.saunafs.common.io.IoFactories.buffered;
 import static com.saunafs.common.io.IoFactories.data;
@@ -15,6 +15,7 @@ import java.lang.reflect.Field;
 
 import com.saunafs.common.io.Server;
 import com.saunafs.proto.Message;
+import com.saunafs.proto.Messenger;
 import com.saunafs.proto.anno.Identifier;
 import com.saunafs.proto.data.Blob;
 import com.saunafs.proto.data.Size;

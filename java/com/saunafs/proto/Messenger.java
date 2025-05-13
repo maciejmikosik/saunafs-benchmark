@@ -1,6 +1,4 @@
-package com.saunafs.server;
-
-import com.saunafs.proto.Message;
+package com.saunafs.proto;
 
 public interface Messenger {
   void send(Message message);

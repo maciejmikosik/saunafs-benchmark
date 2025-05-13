@@ -1,22 +1,22 @@
 package com.saunafs;
 
 import static com.saunafs.Configuration.aNeutrinoGlobal;
-import static com.saunafs.bm.Sniffer.sniffer;
 import static com.saunafs.common.io.InetServer.server;
-import static com.saunafs.proto.MessageBuilder.message;
 import static com.saunafs.proto.data.Size.mebibytes;
-import static com.saunafs.server.LoggingMessenger.logging;
-import static com.saunafs.server.StreamingMessenger.streamingMessenger;
+import static com.saunafs.proto.msg.MessageBuilder.message;
+import static com.saunafs.proto.msn.LoggingMessenger.logging;
+import static com.saunafs.proto.msn.StreamingMessenger.streamingMessenger;
+import static com.saunafs.proto.msn.sniff.Sniffer.sniffer;
 import static java.time.Clock.systemUTC;
 
 import java.util.ArrayList;
 
-import com.saunafs.bm.Event;
-import com.saunafs.bm.Received;
-import com.saunafs.bm.Sent;
+import com.saunafs.proto.Messenger;
 import com.saunafs.proto.msg.ReadData;
 import com.saunafs.proto.msg.ReadErasuredChunk;
-import com.saunafs.server.Messenger;
+import com.saunafs.proto.msn.sniff.Event;
+import com.saunafs.proto.msn.sniff.Received;
+import com.saunafs.proto.msn.sniff.Sent;
 
 /**
  * saunfs protocol constants

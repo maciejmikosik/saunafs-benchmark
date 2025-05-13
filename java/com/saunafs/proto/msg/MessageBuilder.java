@@ -1,5 +1,6 @@
-package com.saunafs.proto;
+package com.saunafs.proto.msg;
 
+import com.saunafs.proto.Message;
 import com.saunafs.proto.data.Size;
 
 public class MessageBuilder {

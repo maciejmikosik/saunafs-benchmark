@@ -4,9 +4,9 @@ import static com.saunafs.bm.model.Cluster.gson;
 import static com.saunafs.bm.model.Cluster.parseCluster;
 import static com.saunafs.common.ProgressBar.progressBar;
 import static com.saunafs.common.io.InetServer.server;
-import static com.saunafs.proto.MessageBuilder.message;
 import static com.saunafs.proto.data.Size.bytes;
-import static com.saunafs.server.StreamingMessenger.streamingMessenger;
+import static com.saunafs.proto.msg.MessageBuilder.message;
+import static com.saunafs.proto.msn.StreamingMessenger.streamingMessenger;
 import static java.time.Duration.between;
 
 import java.io.IOException;
@@ -18,10 +18,10 @@ import com.saunafs.bm.model.Chunk;
 import com.saunafs.bm.model.ChunkServer;
 import com.saunafs.bm.model.Disk;
 import com.saunafs.common.ProgressBar;
+import com.saunafs.proto.Messenger;
 import com.saunafs.proto.msg.ReadData;
 import com.saunafs.proto.msg.ReadErasuredChunk;
 import com.saunafs.proto.msg.ReadStatus;
-import com.saunafs.server.Messenger;
 
 public class LatencyBenchmark {
   private static final ProgressBar progressBar = progressBar();

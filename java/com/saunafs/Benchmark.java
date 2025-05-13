@@ -1,11 +1,11 @@
 package com.saunafs;
 
 import static com.saunafs.Configuration.aNeutrinoGlobal;
-import static com.saunafs.bm.Sniffer.sniffer;
 import static com.saunafs.common.io.InetServer.server;
-import static com.saunafs.proto.MessageBuilder.message;
 import static com.saunafs.proto.data.Size.mebibytes;
-import static com.saunafs.server.StreamingMessenger.streamingMessenger;
+import static com.saunafs.proto.msg.MessageBuilder.message;
+import static com.saunafs.proto.msn.StreamingMessenger.streamingMessenger;
+import static com.saunafs.proto.msn.sniff.Sniffer.sniffer;
 import static java.time.Clock.systemUTC;
 import static java.time.Duration.between;
 
@@ -13,11 +13,11 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.saunafs.bm.Event;
 import com.saunafs.proto.Message;
+import com.saunafs.proto.Messenger;
 import com.saunafs.proto.msg.ReadData;
 import com.saunafs.proto.msg.ReadErasuredChunk;
-import com.saunafs.server.Messenger;
+import com.saunafs.proto.msn.sniff.Event;
 
 public class Benchmark {
   public static void main(String... args) {

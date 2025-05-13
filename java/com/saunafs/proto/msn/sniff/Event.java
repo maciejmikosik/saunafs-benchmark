@@ -1,4 +1,4 @@
-package com.saunafs.bm;
+package com.saunafs.proto.msn.sniff;
 
 import java.time.Instant;
 

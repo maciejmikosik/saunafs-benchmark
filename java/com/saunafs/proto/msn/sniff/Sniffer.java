@@ -1,13 +1,13 @@
-package com.saunafs.bm;
+package com.saunafs.proto.msn.sniff;
 
-import static com.saunafs.bm.Received.received;
-import static com.saunafs.bm.Sent.sent;
+import static com.saunafs.proto.msn.sniff.Received.received;
+import static com.saunafs.proto.msn.sniff.Sent.sent;
 
 import java.time.InstantSource;
 import java.util.function.Consumer;
 
 import com.saunafs.proto.Message;
-import com.saunafs.server.Messenger;
+import com.saunafs.proto.Messenger;
 
 public class Sniffer {
   private final Consumer<Event> log;

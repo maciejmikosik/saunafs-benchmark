@@ -1,7 +1,7 @@
 package com.saunafs;
 
-import static com.saunafs.common.Common.address;
-import static com.saunafs.common.Common.socketAddress;
+import static com.saunafs.common.io.IoFactories.address;
+import static com.saunafs.common.io.IoFactories.socketAddress;
 
 import java.net.InetSocketAddress;
 

@@ -1,4 +1,4 @@
-package com.saunafs.server;
+package com.saunafs.common.io;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,9 +6,6 @@ import java.io.OutputStream;
 import java.io.UncheckedIOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-
-import com.saunafs.common.DelegatingInputStream;
-import com.saunafs.common.DelegatingOutputStream;
 
 public class InetServer implements Server {
   private final InetSocketAddress socketAddress;

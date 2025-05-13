@@ -2,9 +2,9 @@ package com.saunafs;
 
 import static com.saunafs.Configuration.aNeutrinoGlobal;
 import static com.saunafs.bm.Sniffer.sniffer;
+import static com.saunafs.common.io.InetServer.server;
 import static com.saunafs.proto.MessageBuilder.message;
 import static com.saunafs.proto.data.Size.mebibytes;
-import static com.saunafs.server.InetServer.server;
 import static com.saunafs.server.StreamingMessenger.streamingMessenger;
 import static java.time.Clock.systemUTC;
 import static java.time.Duration.between;

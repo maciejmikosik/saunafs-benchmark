@@ -1,4 +1,4 @@
-package com.saunafs.common;
+package com.saunafs.common.io;
 
 import java.io.FilterInputStream;
 import java.io.InputStream;

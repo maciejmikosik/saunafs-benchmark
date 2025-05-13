@@ -3,9 +3,9 @@ package com.saunafs;
 import static com.saunafs.bm.model.Cluster.gson;
 import static com.saunafs.bm.model.Cluster.parseCluster;
 import static com.saunafs.common.ProgressBar.progressBar;
+import static com.saunafs.common.io.InetServer.server;
 import static com.saunafs.proto.MessageBuilder.message;
 import static com.saunafs.proto.data.Size.bytes;
-import static com.saunafs.server.InetServer.server;
 import static com.saunafs.server.StreamingMessenger.streamingMessenger;
 import static java.time.Duration.between;
 

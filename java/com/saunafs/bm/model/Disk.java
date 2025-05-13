@@ -2,8 +2,8 @@ package com.saunafs.bm.model;
 
 import java.util.List;
 
-public class Disk {
+public class Disk extends Model {
   public String name;
   public String location;
-  public List<Long> chunks;
+  public List<Chunk> chunks;
 }

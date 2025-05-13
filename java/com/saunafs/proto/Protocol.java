@@ -12,6 +12,13 @@ import com.saunafs.proto.msg.ReadData;
 import com.saunafs.proto.msg.ReadErasuredChunk;
 import com.saunafs.proto.msg.ReadStatus;
 
+/**
+ * saunfs protocol constants
+ * https://github.com/leil-io/saunafs/blob/dev/src/protocol/SFSCommunication.h
+ *
+ * other benchmark constants
+ * https://github.com/leil-io/saunafs-sandbox/blob/dev/chunk-benchmark/src/protocol_consts.h
+ */
 public class Protocol {
   // TODO implement lookup table
   public static Class<? extends Message> messageClass(int code, int version) {

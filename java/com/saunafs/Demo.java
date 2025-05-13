@@ -20,13 +20,6 @@ import com.saunafs.proto.msn.sniff.Event;
 import com.saunafs.proto.msn.sniff.Received;
 import com.saunafs.proto.msn.sniff.Sent;
 
-/**
- * saunfs protocol constants
- * https://github.com/leil-io/saunafs/blob/dev/src/protocol/SFSCommunication.h
- *
- * other benchmark constants
- * https://github.com/leil-io/saunafs-sandbox/blob/dev/chunk-benchmark/src/protocol_consts.h
- */
 public class Demo {
   public static final InetSocketAddress aNeutrinoLocalWifi = socketAddress(
       address("192.168.168.160"), 9422);

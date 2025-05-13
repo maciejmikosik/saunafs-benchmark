@@ -1,4 +1,4 @@
-package com.saunafs;
+package com.saunafs.bm;
 
 import static com.saunafs.bm.model.Cluster.gson;
 import static com.saunafs.bm.model.Cluster.parseCluster;
@@ -9,7 +9,6 @@ import static com.saunafs.proto.msg.MessageBuilder.message;
 import static com.saunafs.proto.msn.StreamingMessenger.streamingMessenger;
 import static java.time.Duration.between;
 
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.Instant;
 import java.util.Map;
@@ -26,7 +25,7 @@ import com.saunafs.proto.msg.ReadStatus;
 public class LatencyBenchmark {
   private static final ProgressBar progressBar = progressBar();
 
-  public static void main(String... args) throws IOException {
+  public static void main(String... args) {
     var cluster = parseCluster(new InputStreamReader(System.in));
 
     var nChunks = cluster.stream()

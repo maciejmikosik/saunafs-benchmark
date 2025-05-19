@@ -56,7 +56,7 @@ public class LatencyBenchmark {
       while (message instanceof ReadData) {
         message = messenger.receive();
       }
-      chunk.attachment = Map.of("latency", time);
+      chunk.attachment = Map.of("time", time);
     } else if (message instanceof ReadStatus readStatus) {
       chunk.attachment = Map.of("status", readStatus.status);
     } else {

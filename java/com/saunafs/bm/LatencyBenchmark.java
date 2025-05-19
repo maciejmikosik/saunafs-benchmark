@@ -1,59 +1,46 @@
 package com.saunafs.bm;
 
-import static com.saunafs.bm.model.Cluster.gson;
-import static com.saunafs.bm.model.Cluster.parseCluster;
+import static com.saunafs.bm.model.Helpers.countChunks;
 import static com.saunafs.common.ProgressBar.progressBar;
+import static com.saunafs.common.Timer.timer;
 import static com.saunafs.common.io.InetServer.server;
 import static com.saunafs.proto.data.Size.bytes;
 import static com.saunafs.proto.msg.MessageBuilder.message;
 import static com.saunafs.proto.msn.StreamingMessenger.streamingMessenger;
-import static java.time.Duration.between;
+import static java.time.InstantSource.system;
 
-import java.io.InputStreamReader;
-import java.time.Instant;
+import java.util.List;
 import java.util.Map;
 
 import com.saunafs.bm.model.Chunk;
 import com.saunafs.bm.model.ChunkServer;
-import com.saunafs.bm.model.Disk;
-import com.saunafs.common.ProgressBar;
 import com.saunafs.proto.Messenger;
 import com.saunafs.proto.msg.ReadData;
 import com.saunafs.proto.msg.ReadErasuredChunk;
 import com.saunafs.proto.msg.ReadStatus;
 
 public class LatencyBenchmark {
-  private static final ProgressBar progressBar = progressBar();
+  public void run(List<ChunkServer> cluster) {
+    var progressBar = progressBar().max(countChunks(cluster));
 
-  public static void main(String... args) {
-    var cluster = parseCluster(new InputStreamReader(System.in));
-
-    var nChunks = cluster.stream()
-        .flatMap(chunkServer -> chunkServer.disks.stream())
-        .flatMap(disk -> disk.chunks.stream())
-        .count();
-    var nChunksChecked = 0;
-
-    for (ChunkServer chunkServer : cluster) {
+    for (var chunkServer : cluster) {
       var server = server(chunkServer.address);
       var messenger = streamingMessenger(server);
       try {
         server.connect();
-        for (Disk disk : chunkServer.disks) {
-          for (Chunk chunk : disk.chunks) {
+        for (var disk : chunkServer.disks) {
+          for (var chunk : disk.chunks) {
             benchmark(chunk, messenger);
-            progressBar.update(1f * (++nChunksChecked) / nChunks);
+            progressBar.increment();
           }
         }
       } finally {
         server.disconnect();
       }
     }
-
-    System.out.println(gson.toJson(cluster));
   }
 
-  private static void benchmark(Chunk chunk, Messenger messenger) {
+  private void benchmark(Chunk chunk, Messenger messenger) {
     var message = message(ReadErasuredChunk.class)
         .chunkId(chunk.id)
         .chunkVersion(chunk.version)
@@ -63,14 +50,14 @@ public class LatencyBenchmark {
         .build();
     messenger.send(message);
 
-    var start = Instant.now();
+    var timer = timer(system()).start();
     message = messenger.receive();
     if (message instanceof ReadData) {
-      var stop = Instant.now();
+      var time = timer.stop();
       while (message instanceof ReadData) {
         message = messenger.receive();
       }
-      chunk.attachment = Map.of("latency", between(start, stop));
+      chunk.attachment = Map.of("latency", time);
     } else if (message instanceof ReadStatus readStatus) {
       chunk.attachment = Map.of("status", readStatus.status);
     } else {

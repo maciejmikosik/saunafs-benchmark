@@ -15,8 +15,6 @@ import java.time.Instant;
 import java.util.Map;
 
 import com.saunafs.bm.model.Chunk;
-import com.saunafs.bm.model.ChunkServer;
-import com.saunafs.bm.model.Disk;
 import com.saunafs.proto.Messenger;
 import com.saunafs.proto.msg.ReadData;
 import com.saunafs.proto.msg.ReadErasuredChunk;
@@ -28,13 +26,13 @@ public class LatencyBenchmark {
     var cluster = parseCluster(new InputStreamReader(System.in));
     var progressBar = progressBar().max(countChunks(cluster));
 
-    for (ChunkServer chunkServer : cluster) {
+    for (var chunkServer : cluster) {
       var server = server(chunkServer.address);
       var messenger = streamingMessenger(server);
       try {
         server.connect();
-        for (Disk disk : chunkServer.disks) {
-          for (Chunk chunk : disk.chunks) {
+        for (var disk : chunkServer.disks) {
+          for (var chunk : disk.chunks) {
             benchmark(chunk, messenger);
             progressBar.increment();
           }

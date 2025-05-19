@@ -1,7 +1,5 @@
 package com.saunafs.bm;
 
-import static com.saunafs.bm.model.Cluster.gson;
-import static com.saunafs.bm.model.Cluster.parseCluster;
 import static com.saunafs.bm.model.Helpers.countChunks;
 import static com.saunafs.common.ProgressBar.progressBar;
 import static com.saunafs.common.Timer.timer;
@@ -11,19 +9,18 @@ import static com.saunafs.proto.msg.MessageBuilder.message;
 import static com.saunafs.proto.msn.StreamingMessenger.streamingMessenger;
 import static java.time.InstantSource.system;
 
-import java.io.InputStreamReader;
+import java.util.List;
 import java.util.Map;
 
 import com.saunafs.bm.model.Chunk;
+import com.saunafs.bm.model.ChunkServer;
 import com.saunafs.proto.Messenger;
 import com.saunafs.proto.msg.ReadData;
 import com.saunafs.proto.msg.ReadErasuredChunk;
 import com.saunafs.proto.msg.ReadStatus;
 
 public class LatencyBenchmark {
-
-  public static void main(String... args) {
-    var cluster = parseCluster(new InputStreamReader(System.in));
+  public void run(List<ChunkServer> cluster) {
     var progressBar = progressBar().max(countChunks(cluster));
 
     for (var chunkServer : cluster) {
@@ -41,11 +38,9 @@ public class LatencyBenchmark {
         server.disconnect();
       }
     }
-
-    System.out.println(gson.toJson(cluster));
   }
 
-  private static void benchmark(Chunk chunk, Messenger messenger) {
+  private void benchmark(Chunk chunk, Messenger messenger) {
     var message = message(ReadErasuredChunk.class)
         .chunkId(chunk.id)
         .chunkVersion(chunk.version)

@@ -9,6 +9,7 @@ public class Main {
 
     switch (description.benchmark) {
       case "latency" -> new LatencyBenchmark().run(description);
+      case "download" -> new DownloadBenchmark().run(description);
       default -> throw new IllegalArgumentException(
           "unknown benchmark: " + description.benchmark);
     }

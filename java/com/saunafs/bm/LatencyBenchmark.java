@@ -4,14 +4,14 @@ import static com.saunafs.bm.model.Cluster.gson;
 import static com.saunafs.bm.model.Cluster.parseCluster;
 import static com.saunafs.bm.model.Helpers.countChunks;
 import static com.saunafs.common.ProgressBar.progressBar;
+import static com.saunafs.common.Timer.timer;
 import static com.saunafs.common.io.InetServer.server;
 import static com.saunafs.proto.data.Size.bytes;
 import static com.saunafs.proto.msg.MessageBuilder.message;
 import static com.saunafs.proto.msn.StreamingMessenger.streamingMessenger;
-import static java.time.Duration.between;
+import static java.time.InstantSource.system;
 
 import java.io.InputStreamReader;
-import java.time.Instant;
 import java.util.Map;
 
 import com.saunafs.bm.model.Chunk;
@@ -55,14 +55,14 @@ public class LatencyBenchmark {
         .build();
     messenger.send(message);
 
-    var start = Instant.now();
+    var timer = timer(system()).start();
     message = messenger.receive();
     if (message instanceof ReadData) {
-      var stop = Instant.now();
+      var time = timer.stop();
       while (message instanceof ReadData) {
         message = messenger.receive();
       }
-      chunk.attachment = Map.of("latency", between(start, stop));
+      chunk.attachment = Map.of("latency", time);
     } else if (message instanceof ReadStatus readStatus) {
       chunk.attachment = Map.of("status", readStatus.status);
     } else {

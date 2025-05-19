@@ -2,6 +2,7 @@ package com.saunafs.bm;
 
 import static com.saunafs.bm.model.Cluster.gson;
 import static com.saunafs.bm.model.Cluster.parseCluster;
+import static com.saunafs.bm.model.Helpers.countChunks;
 import static com.saunafs.common.ProgressBar.progressBar;
 import static com.saunafs.common.io.InetServer.server;
 import static com.saunafs.proto.data.Size.bytes;
@@ -25,12 +26,7 @@ public class LatencyBenchmark {
 
   public static void main(String... args) {
     var cluster = parseCluster(new InputStreamReader(System.in));
-
-    var nChunks = cluster.stream()
-        .flatMap(chunkServer -> chunkServer.disks.stream())
-        .flatMap(disk -> disk.chunks.stream())
-        .count();
-    var progressBar = progressBar().max(nChunks);
+    var progressBar = progressBar().max(countChunks(cluster));
 
     for (ChunkServer chunkServer : cluster) {
       var server = server(chunkServer.address);

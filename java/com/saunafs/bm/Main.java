@@ -1,14 +1,12 @@
 package com.saunafs.bm;
 
-import static com.saunafs.bm.model.Cluster.formatCluster;
-import static com.saunafs.bm.model.Cluster.parseCluster;
-
-import java.io.InputStreamReader;
+import com.saunafs.bm.model.Json;
 
 public class Main {
   public static void main(String... args) {
-    var cluster = parseCluster(new InputStreamReader(System.in));
+    var json = new Json();
+    var cluster = json.parse(System.in);
     new LatencyBenchmark().run(cluster);
-    System.out.println(formatCluster(cluster));
+    System.out.println(json.format(cluster));
   }
 }

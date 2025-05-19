@@ -16,14 +16,12 @@ import java.util.Map;
 import com.saunafs.bm.model.Chunk;
 import com.saunafs.bm.model.ChunkServer;
 import com.saunafs.bm.model.Disk;
-import com.saunafs.common.ProgressBar;
 import com.saunafs.proto.Messenger;
 import com.saunafs.proto.msg.ReadData;
 import com.saunafs.proto.msg.ReadErasuredChunk;
 import com.saunafs.proto.msg.ReadStatus;
 
 public class LatencyBenchmark {
-  private static final ProgressBar progressBar = progressBar();
 
   public static void main(String... args) {
     var cluster = parseCluster(new InputStreamReader(System.in));
@@ -32,7 +30,7 @@ public class LatencyBenchmark {
         .flatMap(chunkServer -> chunkServer.disks.stream())
         .flatMap(disk -> disk.chunks.stream())
         .count();
-    var nChunksChecked = 0;
+    var progressBar = progressBar().max(nChunks);
 
     for (ChunkServer chunkServer : cluster) {
       var server = server(chunkServer.address);
@@ -42,7 +40,7 @@ public class LatencyBenchmark {
         for (Disk disk : chunkServer.disks) {
           for (Chunk chunk : disk.chunks) {
             benchmark(chunk, messenger);
-            progressBar.update(1f * (++nChunksChecked) / nChunks);
+            progressBar.increment();
           }
         }
       } finally {

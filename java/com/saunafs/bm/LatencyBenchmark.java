@@ -9,21 +9,20 @@ import static com.saunafs.proto.msg.MessageBuilder.message;
 import static com.saunafs.proto.msn.StreamingMessenger.streamingMessenger;
 import static java.time.InstantSource.system;
 
-import java.util.List;
 import java.util.Map;
 
 import com.saunafs.bm.model.Chunk;
-import com.saunafs.bm.model.ChunkServer;
+import com.saunafs.bm.model.Description;
 import com.saunafs.proto.Messenger;
 import com.saunafs.proto.msg.ReadData;
 import com.saunafs.proto.msg.ReadErasuredChunk;
 import com.saunafs.proto.msg.ReadStatus;
 
 public class LatencyBenchmark {
-  public void run(List<ChunkServer> cluster) {
-    var progressBar = progressBar().max(countChunks(cluster));
+  public void run(Description description) {
+    var progressBar = progressBar().max(countChunks(description.cluster));
 
-    for (var chunkServer : cluster) {
+    for (var chunkServer : description.cluster) {
       var server = server(chunkServer.address);
       var messenger = streamingMessenger(server);
       try {

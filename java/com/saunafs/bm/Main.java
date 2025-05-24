@@ -1,14 +1,18 @@
 package com.saunafs.bm;
 
-import static com.saunafs.bm.model.Cluster.formatCluster;
-import static com.saunafs.bm.model.Cluster.parseCluster;
-
-import java.io.InputStreamReader;
+import com.saunafs.bm.model.Json;
 
 public class Main {
   public static void main(String... args) {
-    var cluster = parseCluster(new InputStreamReader(System.in));
-    new LatencyBenchmark().run(cluster);
-    System.out.println(formatCluster(cluster));
+    var json = new Json();
+    var description = json.parse(System.in);
+
+    switch (description.benchmark) {
+      case "latency" -> new LatencyBenchmark().run(description);
+      case "download" -> new DownloadBenchmark().run(description);
+      default -> throw new IllegalArgumentException(
+          "unknown benchmark: " + description.benchmark);
+    }
+    System.out.println(json.format(description));
   }
 }

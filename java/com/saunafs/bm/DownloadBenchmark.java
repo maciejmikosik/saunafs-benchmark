@@ -4,7 +4,7 @@ import static com.saunafs.bm.model.Helpers.countChunks;
 import static com.saunafs.common.ProgressBar.progressBar;
 import static com.saunafs.common.Timer.timer;
 import static com.saunafs.common.io.InetServer.server;
-import static com.saunafs.proto.data.Size.bytes;
+import static com.saunafs.proto.data.Size.mebibytes;
 import static com.saunafs.proto.msg.MessageBuilder.message;
 import static com.saunafs.proto.msn.StreamingMessenger.streamingMessenger;
 import static java.time.InstantSource.system;
@@ -18,7 +18,7 @@ import com.saunafs.proto.msg.ReadData;
 import com.saunafs.proto.msg.ReadErasuredChunk;
 import com.saunafs.proto.msg.ReadStatus;
 
-public class LatencyBenchmark {
+public class DownloadBenchmark {
   public void run(Description description) {
     var progressBar = progressBar().max(countChunks(description.cluster));
 
@@ -44,7 +44,7 @@ public class LatencyBenchmark {
         .chunkId(chunk.id)
         .chunkVersion(chunk.version)
         .chunkType(chunk.type)
-        .size(bytes(1))
+        .size(mebibytes(64))
         .offset(0)
         .build();
     messenger.send(message);
@@ -52,10 +52,10 @@ public class LatencyBenchmark {
     var timer = timer(system()).start();
     message = messenger.receive();
     if (message instanceof ReadData) {
-      var time = timer.stop();
       while (message instanceof ReadData) {
         message = messenger.receive();
       }
+      var time = timer.stop();
       chunk.attachment = Map.of("time", time);
     } else if (message instanceof ReadStatus readStatus) {
       chunk.attachment = Map.of("status", readStatus.status);

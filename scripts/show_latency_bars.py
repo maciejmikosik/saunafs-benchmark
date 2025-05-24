@@ -130,9 +130,10 @@ def display(data, trim_fraction, sort_outliers, graph_width, debug):
 			if debug:
 				print(f"[DEBUG] {drive} -> {len(latencies)} latencies after global trim", file=sys.stderr)
 			top, bottom = render_double_line_vertical_bar(latencies, max_latency, graph_width, debug)
-			label = f"{drive:<28.28}"
+			max_label_len = max(len(label.strip()) for server_disks in data.values() for label in server_disks)
+			label = f"{drive:<{max_label_len}}"
 			print(f"{label}│{top}")
-			print(f"{' ' * 28}│{bottom}")
+			print(f"{' ' * (max_label_len + 2)}│{bottom}")
 
 def parse_args():
 	parser = argparse.ArgumentParser(description="Latency Ascii Graph Visualizer")
@@ -144,12 +145,13 @@ def parse_args():
 
 if __name__ == '__main__':
 	args = parse_args()
+	data = parse_input()
+	max_label_len = max(len(label.strip()) for server_disks in data.values() for label in server_disks)
 	if args.width is None:
 		try:
 			total_columns = shutil.get_terminal_size((100, 20)).columns
-			args.width = max(1, total_columns - 30)
+			args.width = max(1, total_columns - max_label_len - 2)
 		except:
 			args.width = 50
-	data = parse_input()
 	display(data, args.trim, args.sort, args.width, args.debug)
 

@@ -5,13 +5,18 @@
 # and extracts their ID, version, size, and type. Output is formatted as JSON.
 
 # Configuration: Admin IP and port to get disk listing
-ADMIN_IP="192.168.50.199"
+SAUNAFS_CLUSTER_IP="$1"
+if [[ -z "${SAUNAFS_CLUSTER_IP}" ]]; then
+  echo "Usage: $0 <SAUNAFS_CLUSTER_IP> [--chunks_per_disk=N] [--output=FILE]" >&2
+  exit 1
+fi
 ADMIN_PORT="9421"
 SAUNAFS_ADMIN="saunafs-admin"
 
 # Parse arguments
 CHUNKS_PER_DISK="ALL"
 OUTPUT_FILE="-"
+shift
 for arg in "$@"; do
 	case $arg in
 		--chunks_per_disk=*)
@@ -21,7 +26,7 @@ for arg in "$@"; do
 		--output=*)
 			OUTPUT_FILE="${arg#*=}"
 			shift
-				;;
+			;;
 	esac
 
 done
@@ -35,7 +40,7 @@ mkdir -p "${RESULTS_DIR}"
 
 # Function to parse list-disks output
 parse_disk_list() {
-	${SAUNAFS_ADMIN} list-disks ${ADMIN_IP} ${ADMIN_PORT} \
+	${SAUNAFS_ADMIN} list-disks ${SAUNAFS_CLUSTER_IP} ${ADMIN_PORT} \
 		| grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+:[0-9]+:/' \
 		> "${DISK_LIST}"
 }
@@ -49,46 +54,36 @@ scan_disk() {
 	LABEL=$(echo "${SERVER}_${PORT}_$(basename "${DISK_PATH}")" | tr '/' '_')
 	OUTFILE="${RESULTS_DIR}/${LABEL}"
 
-	# The remote script finds 64M *.dat files, extracts ID, and version.
-	# Size is fixed at 64MiB. Type is fixed at 0.
-	# Outputs: 0x<ID_HEX>,0x<VERSION_HEX>,<SIZE_BYTES>,<TYPE>
-	ssh "${SERVER}" 'bash -s' -- "${DISK_PATH}" "${CHUNKS_PER_DISK}" 2>/dev/null <<'EOF' | {
-DISK_TO_SCAN="$1"
-LIMIT="$2"
+	ssh "${SERVER}" 'bash -s' -- "${DISK_PATH}" "${CHUNKS_PER_DISK}" 2>/dev/null <<EOF | {
+DISK_TO_SCAN="\$1"
+LIMIT="\$2"
 CURRENT_COUNT=0
 FIXED_SIZE_BYTES=67108864 # 64MiB
 
-sudo find "$DISK_TO_SCAN" -type f -name '*.dat' -size 64M -print0 2>/dev/null | while IFS= read -r -d $'\0' filepath; do
-  if [[ "$LIMIT" != "ALL" && "$LIMIT" != "" && "$CURRENT_COUNT" -ge "$LIMIT" ]]; then
+sudo find "\$DISK_TO_SCAN" -type f -name '*.dat' -size 64M -print0 2>/dev/null | while IFS= read -r -d \$'\0' filepath; do
+  if [[ "\$LIMIT" != "ALL" && "\$LIMIT" != "" && "\$CURRENT_COUNT" -ge "\$LIMIT" ]]; then
     break
   fi
-  filename=$(basename "$filepath")
+  filename=\$(basename "\$filepath")
 
-  # Regex to match filenames like *_XXXXXXXXXXXXXXXX_YYYYYYYY.dat
-  if [[ "$filename" =~ ^.*_([A-F0-9]{16})_([A-F0-9]{8})\.dat$ ]]; then
-    id_hex="0x${BASH_REMATCH[1]}"
-    version_hex="0x${BASH_REMATCH[2]}"
-    type=0 # Default type
-
-    # This is the actual data output to be processed locally
-    echo "${id_hex},${version_hex},${FIXED_SIZE_BYTES},${type}"
-
-    if [[ "$LIMIT" != "ALL" && "$LIMIT" != "" ]]; then
+  if [[ "\$filename" =~ ^.*_([A-F0-9]{16})_([A-F0-9]{8})\.dat\$ ]]; then
+    id_hex="0x\${BASH_REMATCH[1]}"
+    version_hex="0x\${BASH_REMATCH[2]}"
+    type=0
+    echo "\${id_hex},\${version_hex},\${FIXED_SIZE_BYTES},\${type}"
+    if [[ "\$LIMIT" != "ALL" && "\$LIMIT" != "" ]]; then
       ((CURRENT_COUNT++))
     fi
   fi
+
 done
 EOF
 		# Local processing of the remote script's output
-		# Output format from remote: ID_HEX,VERSION_HEX,SIZE_BYTES,TYPE
-			# Converts hex to decimal and prepends SERVER,PORT,DISK_PATH
 		FINAL_COUNT=0
 		while IFS=',' read -r CHUNK_ID_HEX CHUNK_VERSION_HEX CHUNK_SIZE_BYTES CHUNK_TYPE; do
-			if [[ -n "${CHUNK_ID_HEX}" ]]; then # Ensure line is not empty
-				# Convert hex to decimal using bash arithmetic expansion
+			if [[ -n "${CHUNK_ID_HEX}" ]]; then
 				chunk_id_dec=$((${CHUNK_ID_HEX}))
 				chunk_version_dec=$((${CHUNK_VERSION_HEX}))
-
 				echo "${SERVER},${PORT},${DISK_PATH},${chunk_id_dec},${chunk_version_dec},${CHUNK_SIZE_BYTES},${CHUNK_TYPE}"
 				((FINAL_COUNT++))
 			fi
@@ -107,25 +102,24 @@ done < "${DISK_LIST}"
 
 wait
 
-
 JSON_CONTENT=$(cat "${RESULTS_DIR}"/* | sort | jq -Rn '
-reduce inputs as $line ([]; if $line == "" then . else . + [$line | split(",")] end) # Filter out empty lines before split
-| group_by(.[0,1]) # Group by IP, Port (index 0, 1)
+reduce inputs as $line ([]; if $line == "" then . else . + [$line | split(",")] end)
+| group_by(.[0,1])
 | map({
     address: {
         ip: .[0][0],
         port: (.[0][1] | tonumber)
     },
     disks: (
-        group_by(.[2]) # Group by Disk Location (index 2)
+        group_by(.[2])
         | map({
             location: .[0][2],
             name: (.[0][2] | split("/") | last),
-            chunks: map({ # Chunk details (indices 3, 4, 5, 6)
-                id:      (.[3] | tonumber), # ID_DEC
-                version: (.[4] | tonumber), # VERSION_DEC
-                size:    (.[5] | tonumber), # SIZE_BYTES
-                type:    (.[6] | tonumber)  # TYPE
+            chunks: map({
+                id:      (.[3] | tonumber),
+                version: (.[4] | tonumber),
+                size:    (.[5] | tonumber),
+                type:    (.[6] | tonumber)
             })
         })
     )
@@ -182,3 +176,4 @@ fi
 	} '
 } >&2
 [[ ${OUTPUT_FILE} != "-" ]] && echo ${OUTPUT_FILE} generated >&2
+

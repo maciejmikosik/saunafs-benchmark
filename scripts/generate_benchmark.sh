@@ -5,9 +5,25 @@
 # retrieved from the get_cluster.sh script. Each output includes the benchmark
 # type and embedded cluster metadata.
 
+# Usage information
+usage() {
+	echo "Usage: $0 --cluster=IPv4 --benchmark=\"latency bandwidth ...\""
+	echo ""
+	echo "Options:"
+	echo "  --cluster=IPv4             IP address of the SaunaFS admin node"
+	echo "  --benchmark=\"...\"        Space-separated list of benchmarks (e.g., latency bandwidth)"
+	echo "  -h, --help                 Show this help message and exit"
+	exit 1
+}
+
 # Parse required arguments
 CLUSTER_IP=""
 BENCHMARKS=()
+
+# Check for --help/-h before parsing other args
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+	usage
+fi
 
 for arg in "$@"; do
 	case $arg in
@@ -26,8 +42,7 @@ done
 
 # Check for required arguments
 if [[ -z "${CLUSTER_IP}" || ${#BENCHMARKS[@]} -eq 0 ]]; then
-	echo "Usage: $0 --cluster=IPv4 --benchmark=\"latency bandwidth ...\"" >&2
-	exit 1
+	usage
 fi
 
 # Fetch cluster JSON from get_cluster.sh
@@ -43,4 +58,3 @@ for BENCH in "${BENCHMARKS[@]}"; do
 		'{benchmark: $bench, cluster: $cluster}' > "benchmark_${BENCH}.json"
 	echo "Generated benchmark_${BENCH}.json"
 done
-

@@ -7,7 +7,7 @@
 # Configuration: Admin IP and port to get disk listing
 SAUNAFS_CLUSTER_IP="$1"
 if [[ -z "${SAUNAFS_CLUSTER_IP}" ]]; then
-  echo "Usage: $0 <SAUNAFS_CLUSTER_IP> [--chunks_per_disk=N] [--output=FILE]" >&2
+  echo "Usage: $0 <SAUNAFS_CLUSTER_IP> [--chunks_per_disk=N] [--output=FILE] [--quiet]" >&2
   exit 1
 fi
 ADMIN_PORT="9421"
@@ -16,6 +16,7 @@ SAUNAFS_ADMIN="saunafs-admin"
 # Parse arguments
 CHUNKS_PER_DISK="ALL"
 OUTPUT_FILE="-"
+QUIET_MODE=0
 shift
 for arg in "$@"; do
 	case $arg in
@@ -25,6 +26,10 @@ for arg in "$@"; do
 			;;
 		--output=*)
 			OUTPUT_FILE="${arg#*=}"
+			shift
+			;;
+		--quiet)
+			QUIET_MODE=1
 			shift
 			;;
 	esac
@@ -92,17 +97,8 @@ EOF
 	} > "${OUTFILE}"
 }
 
-# Main
-parse_disk_list
-> "${SUMMARY_FILE}"
-
-while IFS= read -r ENTRY; do
-	scan_disk "${ENTRY}" &
-done < "${DISK_LIST}"
-
-wait
-
-JSON_CONTENT=$(cat "${RESULTS_DIR}"/* | sort | jq -Rn '
+generate_json_output() {
+	cat "${RESULTS_DIR}"/* | sort | jq -Rn '
 reduce inputs as $line ([]; if $line == "" then . else . + [$line | split(",")] end)
 | group_by(.[0,1])
 | map({
@@ -123,15 +119,10 @@ reduce inputs as $line ([]; if $line == "" then . else . + [$line | split(",")] 
             })
         })
     )
-})')
+})'
+}
 
-if [[ "${OUTPUT_FILE}" == "-" || -z "${OUTPUT_FILE}" ]]; then
-  echo "${JSON_CONTENT}"
-else
-  echo "${JSON_CONTENT}" > "${OUTPUT_FILE}"
-fi
-
-{
+print_summary_table() {
 	sort "${SUMMARY_FILE}" | awk -F',' -v limit="${CHUNKS_PER_DISK}" '
 	{
 		server = $1
@@ -174,6 +165,29 @@ fi
 			print "|"
 		}
 	} '
-} >&2
-[[ ${OUTPUT_FILE} != "-" ]] && echo ${OUTPUT_FILE} generated >&2
+}
+
+# Main
+parse_disk_list
+> "${SUMMARY_FILE}"
+
+while IFS= read -r ENTRY; do
+	scan_disk "${ENTRY}" &
+done < "${DISK_LIST}"
+
+wait
+
+JSON_CONTENT="$(generate_json_output)"
+
+if [[ "${OUTPUT_FILE}" == "-" || -z "${OUTPUT_FILE}" ]]; then
+  echo "${JSON_CONTENT}"
+else
+  echo "${JSON_CONTENT}" > "${OUTPUT_FILE}"
+fi
+
+# Only show summary if not in quiet mode
+if [[ "${QUIET_MODE}" != "1" ]]; then
+	print_summary_table >&2
+	[[ ${OUTPUT_FILE} != "-" ]] && echo ${OUTPUT_FILE} generated >&2
+fi
 

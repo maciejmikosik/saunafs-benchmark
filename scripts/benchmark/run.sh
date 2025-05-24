@@ -1,6 +1,7 @@
 #!/bin/bash -e
 
 HERE=`dirname ${0}`
+set -x
 cd "${HERE}/../.."
 
 java \

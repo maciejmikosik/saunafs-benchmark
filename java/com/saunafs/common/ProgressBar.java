@@ -24,6 +24,9 @@ public class ProgressBar {
   public void increment() {
     count++;
     draw();
+    if (count == max) {
+      System.err.println();
+    }
   }
 
   public void draw() {

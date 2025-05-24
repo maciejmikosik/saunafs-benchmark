@@ -8,11 +8,13 @@ import java.time.Duration;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.saunafs.proto.data.Size;
 
 public class Json {
   private final Gson gson = new GsonBuilder()
       .registerTypeAdapter(InetSocketAddress.class, new InetSocketAddressAdapter())
       .registerTypeAdapter(Duration.class, new DurationAdapter())
+      .registerTypeAdapter(Size.class, new SizeAdapter())
       .setPrettyPrinting()
       .create();
 

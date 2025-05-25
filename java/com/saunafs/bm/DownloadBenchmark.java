@@ -51,7 +51,7 @@ public class DownloadBenchmark {
       message = messenger.receive();
     } while (message instanceof ReadData);
     chunk.result = new Chunk.Result();
-    chunk.result.time = timer.stop().duration();
+    chunk.result.time = timer.stop();
     chunk.result.status = ((ReadStatus) message).status;
   }
 }

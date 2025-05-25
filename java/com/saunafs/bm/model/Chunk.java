@@ -1,7 +1,6 @@
 package com.saunafs.bm.model;
 
-import java.time.Duration;
-
+import com.saunafs.common.Interval;
 import com.saunafs.proto.data.Size;
 
 public class Chunk {
@@ -13,7 +12,7 @@ public class Chunk {
   public Result result;
 
   public static class Result {
-    public Duration time;
+    public Interval time;
     public byte status;
   }
 }

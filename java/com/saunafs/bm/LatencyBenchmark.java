@@ -50,7 +50,7 @@ public class LatencyBenchmark {
     var timer = timer(system()).start();
     message = messenger.receive();
     chunk.result = new Chunk.Result();
-    chunk.result.time = timer.stop();
+    chunk.result.time = timer.stop().duration();
     while (message instanceof ReadData) {
       message = messenger.receive();
     }

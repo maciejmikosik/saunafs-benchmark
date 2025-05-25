@@ -1,4 +1,4 @@
-package com.saunafs.bm.model;
+package com.saunafs.bm.model.gson;
 
 import java.lang.reflect.Type;
 import java.time.Duration;

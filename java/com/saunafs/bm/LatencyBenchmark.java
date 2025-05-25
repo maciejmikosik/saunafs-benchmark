@@ -9,8 +9,6 @@ import static com.saunafs.proto.msg.MessageBuilder.message;
 import static com.saunafs.proto.msn.StreamingMessenger.streamingMessenger;
 import static java.time.InstantSource.system;
 
-import java.util.Map;
-
 import com.saunafs.bm.model.Chunk;
 import com.saunafs.bm.model.Description;
 import com.saunafs.proto.Messenger;
@@ -51,16 +49,11 @@ public class LatencyBenchmark {
 
     var timer = timer(system()).start();
     message = messenger.receive();
-    if (message instanceof ReadData) {
-      var time = timer.stop();
-      while (message instanceof ReadData) {
-        message = messenger.receive();
-      }
-      chunk.attachment = Map.of("time", time);
-    } else if (message instanceof ReadStatus readStatus) {
-      chunk.attachment = Map.of("status", readStatus.status);
-    } else {
-      chunk.attachment = Map.of("error", "unknown message " + message.getClass().getSimpleName());
+    chunk.result = new Chunk.Result();
+    chunk.result.time = timer.stop();
+    while (message instanceof ReadData) {
+      message = messenger.receive();
     }
+    chunk.result.status = ((ReadStatus) message).status;
   }
 }

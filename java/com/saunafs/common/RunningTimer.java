@@ -1,8 +1,7 @@
 package com.saunafs.common;
 
-import static java.time.Duration.between;
+import static com.saunafs.common.Interval.interval;
 
-import java.time.Duration;
 import java.time.Instant;
 import java.time.InstantSource;
 
@@ -19,7 +18,7 @@ public class RunningTimer {
     return new RunningTimer(clock, clock.instant());
   }
 
-  public Duration stop() {
-    return between(started, clock.instant());
+  public Interval stop() {
+    return interval(started, clock.instant());
   }
 }

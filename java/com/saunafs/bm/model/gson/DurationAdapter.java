@@ -1,7 +1,7 @@
-package com.saunafs.bm.model;
+package com.saunafs.bm.model.gson;
 
 import java.lang.reflect.Type;
-import java.time.Instant;
+import java.time.Duration;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
@@ -11,21 +11,21 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-public class InstantAdapter implements
-    JsonSerializer<Instant>,
-    JsonDeserializer<Instant> {
+public class DurationAdapter implements
+    JsonSerializer<Duration>,
+    JsonDeserializer<Duration> {
   public JsonElement serialize(
-      Instant instant,
+      Duration duration,
       Type type,
       JsonSerializationContext context) {
-    return new JsonPrimitive(instant.toString());
+    return new JsonPrimitive(duration.toString());
   }
 
-  public Instant deserialize(
+  public Duration deserialize(
       JsonElement jsonElement,
       Type type,
       JsonDeserializationContext context)
       throws JsonParseException {
-    return Instant.parse(jsonElement.getAsString());
+    return Duration.parse(jsonElement.getAsString());
   }
 }

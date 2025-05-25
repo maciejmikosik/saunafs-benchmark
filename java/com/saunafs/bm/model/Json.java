@@ -9,6 +9,10 @@ import java.time.Instant;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.saunafs.bm.model.gson.DurationAdapter;
+import com.saunafs.bm.model.gson.InetSocketAddressAdapter;
+import com.saunafs.bm.model.gson.InstantAdapter;
+import com.saunafs.bm.model.gson.SizeAdapter;
 import com.saunafs.proto.data.Size;
 
 public class Json {

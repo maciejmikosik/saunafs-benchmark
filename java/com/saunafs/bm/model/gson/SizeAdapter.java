@@ -1,4 +1,4 @@
-package com.saunafs.bm.model;
+package com.saunafs.bm.model.gson;
 
 import static com.saunafs.proto.data.Size.bytes;
 

@@ -5,15 +5,29 @@
 # and extracts their ID, version, size, and type. Output is formatted as JSON.
 
 # Configuration: Admin IP and port to get disk listing
-SAUNAFS_CLUSTER_IP="$1"
-if [[ -z "${SAUNAFS_CLUSTER_IP}" ]]; then
-  echo "Usage: $0 <SAUNAFS_CLUSTER_IP> [--chunks_per_disk=N] [--output=FILE] [--quiet]" >&2
-  exit 1
-fi
 ADMIN_PORT="9421"
 SAUNAFS_ADMIN="saunafs-admin"
 
+
+usage() {
+  echo "Usage: $0 <SAUNAFS_CLUSTER_IP> [--chunks_per_disk=N] [--output=FILE] [--quiet]"
+  echo ""
+  echo "Options:"
+  echo "  --chunks_per_disk=N     Limit number of chunks to read per disk (default: ALL)"
+  echo "  --output=FILE           Output JSON file (default: stdout)"
+  echo "  --quiet                 Suppress summary output"
+  exit 1
+}
 # Parse arguments
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+  usage
+fi
+
+SAUNAFS_CLUSTER_IP="$1"
+if [[ -z "${SAUNAFS_CLUSTER_IP}" ]]; then
+  usage
+fi
+
 CHUNKS_PER_DISK="ALL"
 OUTPUT_FILE="-"
 QUIET_MODE=0

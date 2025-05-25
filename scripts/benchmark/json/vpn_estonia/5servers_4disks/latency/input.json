@@ -1,0 +1,2199 @@
+{
+  "benchmark": "latency",
+  "cluster": [
+    {
+      "address": {
+        "ip": "192.168.50.201",
+        "port": 9422
+      },
+      "disks": [
+        {
+          "location": "/mnt/local.chunkserver.hdd01/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 5923849,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923862,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923863,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923870,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923875,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923888,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923909,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923914,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923921,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923927,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923932,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923960,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923965,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923971,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923978,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923985,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923991,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923996,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924009,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924014,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/local.chunkserver.hdd02/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 5923847,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923855,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923866,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923869,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923874,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923887,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923892,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923901,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923907,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923919,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923931,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923936,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923941,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923945,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923951,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923959,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923970,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923983,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923990,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924019,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/local.chunkserver.hdd03/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 5923853,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923867,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923878,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923886,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923891,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923896,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923900,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923906,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923911,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923918,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923929,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923935,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923940,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923944,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923957,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923975,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923981,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924005,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924017,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924022,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/local.chunkserver.hdd04/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 5923850,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923854,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923858,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923865,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923871,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923880,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923884,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923916,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923922,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923928,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923933,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923943,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923966,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923973,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923980,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923987,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923992,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923998,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924003,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924016,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "address": {
+        "ip": "192.168.50.202",
+        "port": 9422
+      },
+      "disks": [
+        {
+          "location": "/mnt/local.chunkserver.hdd01/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 5923859,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923870,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923875,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923880,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923884,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923895,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923900,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923906,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923927,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923932,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923942,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923952,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923970,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923976,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923981,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923994,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923999,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924009,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924012,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924017,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/local.chunkserver.hdd02/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 5923853,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923858,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923869,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923888,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923894,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923904,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923908,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923910,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923913,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923921,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923951,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923968,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923972,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923975,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923980,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923987,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923998,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924007,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924008,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924016,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/local.chunkserver.hdd03/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 5923867,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923873,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923878,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923887,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923892,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923914,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923920,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923925,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923929,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923935,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923940,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923944,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923956,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923984,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923985,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923991,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923996,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924001,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924015,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924020,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/local.chunkserver.hdd04/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 5923855,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923861,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923866,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923881,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923886,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923889,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923912,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923918,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923923,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923933,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923943,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923955,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923960,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923965,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923977,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923995,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924005,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924010,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924014,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924019,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "address": {
+        "ip": "192.168.50.203",
+        "port": 9422
+      },
+      "disks": [
+        {
+          "location": "/mnt/local.chunkserver.hdd01/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 5923713,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923724,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923738,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923741,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923747,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923752,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923776,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923782,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923869,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923877,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923921,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923937,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923953,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923957,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923961,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923973,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924005,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924009,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924013,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924017,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/local.chunkserver.hdd02/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 5923723,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923736,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923773,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923801,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923811,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923829,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923830,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923872,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923876,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923880,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923892,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923920,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923928,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923948,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923968,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923976,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923980,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923988,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924016,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924020,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/local.chunkserver.hdd03/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 5923706,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923710,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923717,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923719,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923740,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923784,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923795,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923805,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923808,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923817,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923822,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923851,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923867,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923879,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923887,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923919,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923943,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923967,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923975,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924007,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/local.chunkserver.hdd04/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 5923721,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923726,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923728,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923739,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923754,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923775,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923804,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923816,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923819,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923858,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923870,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923886,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923894,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923922,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923930,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923986,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923990,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924002,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924006,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924010,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "address": {
+        "ip": "192.168.50.204",
+        "port": 9422
+      },
+      "disks": [
+        {
+          "location": "/mnt/local.chunkserver.hdd01/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 5923848,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923858,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923866,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923882,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923895,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923908,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923920,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923934,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923952,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923963,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923974,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923984,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923997,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924008,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/local.chunkserver.hdd02/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 5923854,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923864,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923876,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923893,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923905,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923917,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923930,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923949,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923958,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923972,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923982,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923993,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924006,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/local.chunkserver.hdd03/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 5923852,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923862,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923872,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923889,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923902,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923915,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923926,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923946,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923956,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923969,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923979,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923988,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924004,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924015,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/local.chunkserver.hdd04/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 5923850,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923860,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923868,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923885,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923898,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923913,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923924,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923938,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923954,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923967,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923976,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923986,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923999,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924013,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "address": {
+        "ip": "192.168.50.205",
+        "port": 9422
+      },
+      "disks": [
+        {
+          "location": "/mnt/local.chunkserver.hdd01/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 5923860,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923876,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923893,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923908,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923924,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923946,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923958,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923972,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923984,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923997,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924013,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/local.chunkserver.hdd02/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 5923856,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923872,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923889,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923905,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923920,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923938,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923954,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923969,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923982,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923993,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924008,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/local.chunkserver.hdd03/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 5923852,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923868,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923885,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923902,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923917,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923934,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923952,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923967,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923979,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923988,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924006,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/local.chunkserver.hdd04/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 5923848,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923864,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923882,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923898,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923913,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923930,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923949,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923963,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923974,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5923986,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            },
+            {
+              "id": 5924004,
+              "version": 1,
+              "size": 65536,
+              "type": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

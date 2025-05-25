@@ -1,0 +1,2289 @@
+{
+  "benchmark": "download",
+  "cluster": [
+    {
+      "address": {
+        "ip": "192.168.50.201",
+        "port": 9422
+      },
+      "disks": [
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG63P4D/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434923,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434966,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435003,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435034,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435082,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435123,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435157,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435200,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435232,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435279,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG63XAD/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434932,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434978,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435010,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435046,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435093,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435137,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435169,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435212,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435248,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435299,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG63Z4D/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434920,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434962,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434994,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435029,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435077,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435119,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435150,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435192,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435229,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435269,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG6424D/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434928,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434971,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435007,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435043,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435086,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435127,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435163,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435202,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435238,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435290,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG64DHD/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434938,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434987,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435017,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435065,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435110,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435144,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435184,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435224,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435262,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435307,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG64DSD/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434953,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434991,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435026,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435070,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435115,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435146,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435187,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435228,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435263,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435308,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG69W6D/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434937,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434983,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435014,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435054,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435105,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435142,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435179,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435218,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435259,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435304,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "address": {
+        "ip": "192.168.50.202",
+        "port": 9422
+      },
+      "disks": [
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG63RTD/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434924,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434960,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435001,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435042,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435080,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435118,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435161,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435208,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435246,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435277,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG63XUD/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434905,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434944,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434993,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435028,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435060,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435104,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435153,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435190,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435227,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435257,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG640VD/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434909,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434951,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434995,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435032,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435069,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435109,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435155,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435193,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435231,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435267,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG6488D/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434940,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434985,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435024,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435057,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435099,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435143,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435178,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435222,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435254,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435302,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG64BHD/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434939,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434980,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435021,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435051,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435096,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435141,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435174,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435217,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435251,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435286,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG69UED/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434936,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434976,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435012,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435044,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435088,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435129,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435165,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435214,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435249,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435282,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG69WPD/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434913,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434956,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435000,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435036,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435076,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435116,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435159,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435204,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435240,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435274,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "address": {
+        "ip": "192.168.50.203",
+        "port": 9422
+      },
+      "disks": [
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG2G5ND/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434916,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434955,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434998,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435033,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435073,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435107,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435160,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435196,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435235,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435280,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG4XEYD/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434912,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434952,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434988,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435027,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435066,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435101,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435156,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435191,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435234,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435270,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG62PVD/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434907,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434949,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434984,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435025,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435063,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435097,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435152,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435186,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435230,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435266,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG6447D/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434927,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434964,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435004,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435040,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435075,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435124,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435166,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435201,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435236,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435284,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG6A6YD/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434945,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434982,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435023,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435059,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435094,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435140,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435181,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435223,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435261,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435298,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG6AETD/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434942,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434977,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435018,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435056,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435089,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435139,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435177,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435219,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435252,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435293,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG6AHXD/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434933,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434969,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435008,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435045,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435079,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435125,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435171,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435209,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435241,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435287,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "address": {
+        "ip": "192.168.50.204",
+        "port": 9422
+      },
+      "disks": [
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG63TBD/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434906,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434930,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434974,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435022,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435055,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435102,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435130,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435172,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435210,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435256,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG63VPD/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434914,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434954,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434986,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435039,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435085,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435112,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435149,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435194,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435239,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435273,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG642RD/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434917,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434959,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434989,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435047,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435090,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435114,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435158,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435198,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435242,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435278,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG649MD/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434910,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434947,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434981,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435038,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435074,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435111,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435148,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435189,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435225,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435268,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG64BYD/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434921,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434963,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434997,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435048,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435095,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435121,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435164,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435199,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435245,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435283,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG64DLD/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434926,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434968,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435002,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435052,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435098,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435126,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435168,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435205,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435250,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435288,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG6A72D/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434908,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434943,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434975,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435030,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435068,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435103,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435133,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435175,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435220,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435265,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "address": {
+        "ip": "192.168.50.205",
+        "port": 9422
+      },
+      "disks": [
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG62PTD/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434941,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434979,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435019,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435062,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435100,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435138,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435183,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435216,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435264,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435300,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG63HND/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434918,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434950,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434996,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435035,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435071,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435117,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435147,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435188,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435233,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435275,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG63VSD/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434919,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434958,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435005,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435037,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435078,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435120,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435154,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435197,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435237,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435276,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG63W6D/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434925,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434967,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435011,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435058,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435087,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435128,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435176,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435207,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435258,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435292,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG6457D/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434946,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434990,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435020,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435064,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435106,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435145,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435185,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435221,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435271,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435310,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        },
+        {
+          "location": "/mnt/sfschunkservers/data/ata-WDC_WUH722222ALE6L4_2GG6AKRD/",
+          "name": "",
+          "chunks": [
+            {
+              "id": 3434934,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3434970,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435015,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435061,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435092,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435132,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435182,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435211,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435260,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            },
+            {
+              "id": 3435295,
+              "version": 1,
+              "size": 67108864,
+              "type": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

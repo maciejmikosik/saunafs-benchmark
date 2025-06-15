@@ -6,7 +6,7 @@ public class Attribute {
   public final String name;
   public final String value;
 
-  private Attribute(String name, String value) {
+  protected Attribute(String name, String value) {
     this.name = name;
     this.value = value;
   }

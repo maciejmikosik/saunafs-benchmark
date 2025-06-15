@@ -1,8 +1,11 @@
 package com.saunafs.bm;
 
+import static com.saunafs.bm.model.Helpers.filterSuccessful;
 import static com.saunafs.common.html.Element.element;
 import static com.saunafs.common.html.Style.style;
 import static com.saunafs.common.html.Text.text;
+import static com.saunafs.proto.data.Size.bytes;
+import static java.time.Duration.ZERO;
 import static java.util.Arrays.stream;
 
 import java.time.Duration;
@@ -14,6 +17,7 @@ import com.saunafs.bm.model.Description;
 import com.saunafs.bm.model.Disk;
 import com.saunafs.bm.model.Json;
 import com.saunafs.common.html.Element;
+import com.saunafs.common.html.Nestable;
 import com.saunafs.common.html.Serializer;
 import com.saunafs.common.html.Style;
 import com.saunafs.proto.data.Size;
@@ -64,6 +68,7 @@ public class Present {
             .add("text-align", "right"))
         .nest(rowWithHeaders("chunkId", "time", "size", "speed"))
         .nest(rowWithHeaders("", "s", "B", "MiB/s"))
+        .nest(rowWithTotals(filterSuccessful(chunks)))
         .nest(chunks, Present::present);
   }
 
@@ -77,6 +82,34 @@ public class Present {
     return row;
   }
 
+  private static Nestable rowWithTotals(List<Chunk> chunks) {
+    if (chunks.size() > 0) {
+      var totalDuration = chunks.stream()
+          .map(chunk -> chunk.result.time.duration())
+          .reduce(ZERO, Duration::plus);
+      int totalBytes = chunks.stream()
+          .mapToInt(chunk -> chunk.size.inBytes())
+          .sum();
+      return element("div")
+          .add(style()
+              .add("display", "contents")
+              .add("font-weight", "bold"))
+          .nest(cell("total"))
+          .nest(cell(format(totalDuration)))
+          .nest(cell("" + totalBytes))
+          .nest(cell(formatTransfer(transfer(bytes(totalBytes), totalDuration))));
+    } else {
+      return element("div")
+          .add(style()
+              .add("display", "contents")
+              .add("font-weight", "bold"))
+          .nest(cell("total"))
+          .nest(cell("N/A"))
+          .nest(cell("N/A"))
+          .nest(cell("N/A"));
+    }
+  }
+
   private static Element cell(String string) {
     return element("div")
         .add(style()
@@ -87,6 +120,12 @@ public class Present {
   }
 
   private static Element present(Chunk chunk) {
+    return chunk.result.status == 0
+        ? presentSuccessful(chunk)
+        : presentFailed(chunk);
+  }
+
+  private static Element presentSuccessful(Chunk chunk) {
     return element("div")
         .add(style()
             .add("display", "contents"))
@@ -94,6 +133,17 @@ public class Present {
         .nest(cell(format(chunk.result.time.duration())))
         .nest(cell("" + chunk.size.inBytes()))
         .nest(cell(formatTransfer(transfer(chunk.size, chunk.result.time.duration()))));
+  }
+
+  private static Element presentFailed(Chunk chunk) {
+    return element("div")
+        .add(style()
+            .add("display", "contents")
+            .add("color", "red"))
+        .nest(cell(Long.toString(chunk.id)))
+        .nest(cell(format(chunk.result.time.duration())))
+        .nest(cell("" + chunk.size.inBytes()))
+        .nest(cell("N/A"));
   }
 
   private static double transfer(Size size, Duration duration) {

@@ -15,6 +15,7 @@ public class Serializer {
       switch (nestable) {
         case Element element -> append(element);
         case Text text -> append(text);
+        case Unsafe unsafe -> builder.append(unsafe.html);
         default -> throw new RuntimeException();
       }
     });

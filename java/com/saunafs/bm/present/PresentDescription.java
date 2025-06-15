@@ -90,6 +90,9 @@ public class PresentDescription {
   }
 
   private static Nestable rowWithTotals(List<Chunk> chunks) {
+    var rowStyle = style()
+        .add("display", "contents")
+        .add("font-weight", "bold");
     if (chunks.size() > 0) {
       var totalDuration = chunks.stream()
           .map(chunk -> chunk.result.time.duration())
@@ -100,18 +103,14 @@ public class PresentDescription {
           .orElse(bytes(0));
       var totalTransfer = transfer(totalBytes, totalDuration);
       return element("div")
-          .add(style()
-              .add("display", "contents")
-              .add("font-weight", "bold"))
+          .add(rowStyle)
           .nest(cell("total"))
           .nest(cell(durationFormatter.format(totalDuration)))
           .nest(cell(sizeFormatter.format(totalBytes)))
           .nest(cell(transferFormatter.format(totalTransfer)));
     } else {
       return element("div")
-          .add(style()
-              .add("display", "contents")
-              .add("font-weight", "bold"))
+          .add(rowStyle)
           .nest(cell("total"))
           .nest(cell("N/A"))
           .nest(cell("N/A"))

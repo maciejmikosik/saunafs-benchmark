@@ -87,6 +87,12 @@ public class Present {
   }
 
   private static Element present(Chunk chunk) {
+    return chunk.result.status == 0
+        ? presentSuccessful(chunk)
+        : presentFailed(chunk);
+  }
+
+  private static Element presentSuccessful(Chunk chunk) {
     return element("div")
         .add(style()
             .add("display", "contents"))
@@ -94,6 +100,17 @@ public class Present {
         .nest(cell(format(chunk.result.time.duration())))
         .nest(cell("" + chunk.size.inBytes()))
         .nest(cell(formatTransfer(transfer(chunk.size, chunk.result.time.duration()))));
+  }
+
+  private static Element presentFailed(Chunk chunk) {
+    return element("div")
+        .add(style()
+            .add("display", "contents")
+            .add("color", "red"))
+        .nest(cell(Long.toString(chunk.id)))
+        .nest(cell(format(chunk.result.time.duration())))
+        .nest(cell("" + chunk.size.inBytes()))
+        .nest(cell("N/A"));
   }
 
   private static double transfer(Size size, Duration duration) {

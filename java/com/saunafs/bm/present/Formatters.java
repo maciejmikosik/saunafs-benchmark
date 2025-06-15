@@ -42,4 +42,17 @@ public class Formatters {
       }
     };
   }
+
+  public static Formatter<Long> decimalFormatter() {
+    return new Formatter<Long>() {
+      public String format(Long id) {
+        return Long.toString(id);
+      }
+
+      public String unit() {
+        return "DEC";
+      }
+    };
+  }
+
 }

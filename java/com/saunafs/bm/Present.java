@@ -1,6 +1,7 @@
 package com.saunafs.bm;
 
 import static com.saunafs.bm.model.Helpers.filterSuccessful;
+import static com.saunafs.bm.present.Formatters.decimalFormatter;
 import static com.saunafs.bm.present.Formatters.durationInSeconds;
 import static com.saunafs.bm.present.Formatters.mebibytesPerSecond;
 import static com.saunafs.bm.present.Formatters.sizeInBytes;
@@ -39,6 +40,7 @@ public class Present {
   private static final Formatter<Size> sizeFormatter = sizeInBytes();
   private static final Formatter<Duration> durationFormatter = durationInSeconds();
   private static final Formatter<Transfer> transferFormatter = mebibytesPerSecond();
+  private static final Formatter<Long> chunkIdFormatter = decimalFormatter();
 
   private static final Style panelStyle = style()
       .add("border", "1px solid black")
@@ -78,7 +80,7 @@ public class Present {
             .add("text-align", "right"))
         .nest(rowWithHeaders("chunkId", "time", "size", "speed"))
         .nest(rowWithHeaders(
-            "",
+            chunkIdFormatter.unit(),
             durationFormatter.unit(),
             sizeFormatter.unit(),
             transferFormatter.unit()))
@@ -145,7 +147,7 @@ public class Present {
     return element("div")
         .add(style()
             .add("display", "contents"))
-        .nest(cell(Long.toString(chunk.id)))
+        .nest(cell(chunkIdFormatter.format(chunk.id)))
         .nest(cell(durationFormatter.format(chunk.result.time.duration())))
         .nest(cell(sizeFormatter.format(chunk.size)))
         .nest(cell(transferFormatter.format(transfer(

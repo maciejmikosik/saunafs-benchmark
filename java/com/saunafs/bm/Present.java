@@ -1,5 +1,6 @@
 package com.saunafs.bm;
 
+import static com.saunafs.bm.model.Helpers.filterSuccessful;
 import static com.saunafs.common.html.Element.element;
 import static com.saunafs.common.html.Style.style;
 import static com.saunafs.common.html.Text.text;
@@ -67,7 +68,7 @@ public class Present {
             .add("text-align", "right"))
         .nest(rowWithHeaders("chunkId", "time", "size", "speed"))
         .nest(rowWithHeaders("", "s", "B", "MiB/s"))
-        .nest(rowWithTotals(chunks))
+        .nest(rowWithTotals(filterSuccessful(chunks)))
         .nest(chunks, Present::present);
   }
 
@@ -82,16 +83,11 @@ public class Present {
   }
 
   private static Nestable rowWithTotals(List<Chunk> chunks) {
-    var totalCount = chunks.stream()
-        .filter(chunk -> chunk.result.status == 0)
-        .count();
-    if (totalCount > 0) {
+    if (chunks.size() > 0) {
       var totalDuration = chunks.stream()
-          .filter(chunk -> chunk.result.status == 0)
           .map(chunk -> chunk.result.time.duration())
           .reduce(ZERO, Duration::plus);
       int totalBytes = chunks.stream()
-          .filter(chunk -> chunk.result.status == 0)
           .mapToInt(chunk -> chunk.size.inBytes())
           .sum();
       return element("div")

@@ -4,6 +4,7 @@ import static com.saunafs.bm.model.Helpers.filterSuccessful;
 import static com.saunafs.common.html.Element.element;
 import static com.saunafs.common.html.Style.style;
 import static com.saunafs.common.html.Text.text;
+import static com.saunafs.common.quant.Formatters.sizeInBytes;
 import static com.saunafs.common.quant.Size.bytes;
 import static java.time.Duration.ZERO;
 import static java.util.Arrays.stream;
@@ -20,6 +21,7 @@ import com.saunafs.common.html.Element;
 import com.saunafs.common.html.Nestable;
 import com.saunafs.common.html.Serializer;
 import com.saunafs.common.html.Style;
+import com.saunafs.common.quant.Formatter;
 import com.saunafs.common.quant.Size;
 
 public class Present {
@@ -29,6 +31,8 @@ public class Present {
     var html = present(description);
     System.out.println(new Serializer().serialize(html));
   }
+
+  private static final Formatter<Size> sizeFormatter = sizeInBytes();
 
   private static final Style panelStyle = style()
       .add("border", "1px solid black")
@@ -67,7 +71,7 @@ public class Present {
             .add("gap", "0em 0em")
             .add("text-align", "right"))
         .nest(rowWithHeaders("chunkId", "time", "size", "speed"))
-        .nest(rowWithHeaders("", "s", "B", "MiB/s"))
+        .nest(rowWithHeaders("", "s", sizeFormatter.unit(), "MiB/s"))
         .nest(rowWithTotals(filterSuccessful(chunks)))
         .nest(chunks, Present::present);
   }
@@ -131,7 +135,7 @@ public class Present {
             .add("display", "contents"))
         .nest(cell(Long.toString(chunk.id)))
         .nest(cell(format(chunk.result.time.duration())))
-        .nest(cell("" + chunk.size.inBytes()))
+        .nest(cell(sizeFormatter.format(chunk.size)))
         .nest(cell(formatTransfer(transfer(chunk.size, chunk.result.time.duration()))));
   }
 
@@ -142,7 +146,7 @@ public class Present {
             .add("color", "red"))
         .nest(cell(Long.toString(chunk.id)))
         .nest(cell(format(chunk.result.time.duration())))
-        .nest(cell("" + chunk.size.inBytes()))
+        .nest(cell(sizeFormatter.format(chunk.size)))
         .nest(cell("N/A"));
   }
 

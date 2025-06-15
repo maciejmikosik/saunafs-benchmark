@@ -93,7 +93,8 @@ public class PresentDescription {
     if (chunks.size() > 0) {
       var totalDuration = chunks.stream()
           .map(chunk -> chunk.result.time.duration())
-          .reduce(ZERO, Duration::plus);
+          .reduce(Duration::plus)
+          .orElse(ZERO);
       var totalBytes = chunks.stream()
           .map(chunk -> chunk.size)
           .reduce(Size::plus)

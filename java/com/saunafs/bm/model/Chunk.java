@@ -1,7 +1,7 @@
 package com.saunafs.bm.model;
 
 import com.saunafs.common.Interval;
-import com.saunafs.proto.data.Size;
+import com.saunafs.common.quant.Size;
 
 public class Chunk {
   public long id;

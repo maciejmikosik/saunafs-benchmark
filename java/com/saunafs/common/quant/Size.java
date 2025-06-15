@@ -1,4 +1,4 @@
-package com.saunafs.proto.data;
+package com.saunafs.common.quant;
 
 public class Size {
   private final int bytes;
@@ -21,5 +21,9 @@ public class Size {
 
   public int inBytes() {
     return bytes;
+  }
+
+  public Size plus(Size size) {
+    return bytes(bytes + size.bytes);
   }
 }

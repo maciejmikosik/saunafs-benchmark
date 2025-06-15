@@ -1,6 +1,6 @@
 package com.saunafs.bm.model.gson;
 
-import static com.saunafs.proto.data.Size.bytes;
+import static com.saunafs.common.quant.Size.bytes;
 
 import java.lang.reflect.Type;
 
@@ -11,7 +11,7 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import com.saunafs.proto.data.Size;
+import com.saunafs.common.quant.Size;
 
 public class SizeAdapter implements
     JsonSerializer<Size>,

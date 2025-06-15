@@ -6,10 +6,10 @@ import static java.util.stream.Collectors.joining;
 import java.io.PrintStream;
 import java.lang.reflect.Field;
 
+import com.saunafs.common.quant.Size;
 import com.saunafs.proto.Message;
 import com.saunafs.proto.Messenger;
 import com.saunafs.proto.data.Blob;
-import com.saunafs.proto.data.Size;
 
 public class LoggingMessenger implements Messenger {
   private static final PrintStream log = System.out;

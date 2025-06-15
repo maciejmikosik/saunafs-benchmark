@@ -13,7 +13,7 @@ import com.saunafs.bm.model.gson.DurationAdapter;
 import com.saunafs.bm.model.gson.InetSocketAddressAdapter;
 import com.saunafs.bm.model.gson.InstantAdapter;
 import com.saunafs.bm.model.gson.SizeAdapter;
-import com.saunafs.proto.data.Size;
+import com.saunafs.common.quant.Size;
 
 public class Json {
   private final Gson gson = new GsonBuilder()

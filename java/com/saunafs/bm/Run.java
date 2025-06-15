@@ -2,7 +2,7 @@ package com.saunafs.bm;
 
 import com.saunafs.bm.model.Json;
 
-public class Main {
+public class Run {
   public static void main(String... args) {
     var json = new Json();
     var description = json.parse(System.in);

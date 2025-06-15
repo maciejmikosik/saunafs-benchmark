@@ -3,9 +3,9 @@ package com.saunafs.proto.msn;
 import static com.saunafs.common.io.IoFactories.buffered;
 import static com.saunafs.common.io.IoFactories.data;
 import static com.saunafs.common.io.IoFactories.unchecked;
+import static com.saunafs.common.quant.Size.bytes;
 import static com.saunafs.proto.Protocol.messageClass;
 import static com.saunafs.proto.Protocol.packetLengthFor;
-import static com.saunafs.proto.data.Size.bytes;
 import static java.lang.reflect.Modifier.isStatic;
 
 import java.io.DataInputStream;
@@ -14,11 +14,11 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 
 import com.saunafs.common.io.Server;
+import com.saunafs.common.quant.Size;
 import com.saunafs.proto.Message;
 import com.saunafs.proto.Messenger;
 import com.saunafs.proto.anno.Identifier;
 import com.saunafs.proto.data.Blob;
-import com.saunafs.proto.data.Size;
 
 public class StreamingMessenger implements Messenger {
   private final DataOutputStream output;

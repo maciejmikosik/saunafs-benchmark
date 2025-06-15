@@ -5,9 +5,9 @@ import static java.util.Arrays.stream;
 
 import java.util.List;
 
+import com.saunafs.common.quant.Size;
 import com.saunafs.proto.anno.Identifier;
 import com.saunafs.proto.data.Blob;
-import com.saunafs.proto.data.Size;
 import com.saunafs.proto.msg.ReadData;
 import com.saunafs.proto.msg.ReadErasuredChunk;
 import com.saunafs.proto.msg.ReadStatus;

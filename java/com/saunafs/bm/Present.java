@@ -4,7 +4,7 @@ import static com.saunafs.bm.model.Helpers.filterSuccessful;
 import static com.saunafs.common.html.Element.element;
 import static com.saunafs.common.html.Style.style;
 import static com.saunafs.common.html.Text.text;
-import static com.saunafs.proto.data.Size.bytes;
+import static com.saunafs.common.quant.Size.bytes;
 import static java.time.Duration.ZERO;
 import static java.util.Arrays.stream;
 
@@ -20,7 +20,7 @@ import com.saunafs.common.html.Element;
 import com.saunafs.common.html.Nestable;
 import com.saunafs.common.html.Serializer;
 import com.saunafs.common.html.Style;
-import com.saunafs.proto.data.Size;
+import com.saunafs.common.quant.Size;
 
 public class Present {
   public static void main(String... args) {

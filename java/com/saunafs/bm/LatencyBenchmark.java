@@ -4,7 +4,7 @@ import static com.saunafs.bm.model.Helpers.countChunks;
 import static com.saunafs.common.ProgressBar.progressBar;
 import static com.saunafs.common.Timer.timer;
 import static com.saunafs.common.io.InetServer.server;
-import static com.saunafs.proto.data.Size.bytes;
+import static com.saunafs.common.quant.Size.bytes;
 import static com.saunafs.proto.msg.MessageBuilder.message;
 import static com.saunafs.proto.msn.StreamingMessenger.streamingMessenger;
 import static java.time.InstantSource.system;

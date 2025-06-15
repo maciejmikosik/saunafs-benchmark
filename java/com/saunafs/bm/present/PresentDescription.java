@@ -148,7 +148,7 @@ public class PresentDescription {
         .add(style()
             .add("display", "contents")
             .add("color", "red"))
-        .nest(cell(Long.toString(chunk.id)))
+        .nest(cell(chunkIdFormatter.format(chunk.id)))
         .nest(cell(durationFormatter.format(chunk.result.time.duration())))
         .nest(cell(sizeFormatter.format(chunk.size)))
         .nest(cell("N/A"));

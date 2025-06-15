@@ -92,7 +92,8 @@ public class Present {
           .sum();
       return element("div")
           .add(style()
-              .add("display", "contents"))
+              .add("display", "contents")
+              .add("font-weight", "bold"))
           .nest(cell("total"))
           .nest(cell(format(totalDuration)))
           .nest(cell("" + totalBytes))
@@ -100,7 +101,8 @@ public class Present {
     } else {
       return element("div")
           .add(style()
-              .add("display", "contents"))
+              .add("display", "contents")
+              .add("font-weight", "bold"))
           .nest(cell("total"))
           .nest(cell("N/A"))
           .nest(cell("N/A"))

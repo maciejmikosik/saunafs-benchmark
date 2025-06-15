@@ -3,6 +3,8 @@ package com.saunafs.bm;
 import static com.saunafs.common.html.Element.element;
 import static com.saunafs.common.html.Style.style;
 import static com.saunafs.common.html.Text.text;
+import static com.saunafs.proto.data.Size.bytes;
+import static java.time.Duration.ZERO;
 import static java.util.Arrays.stream;
 
 import java.time.Duration;
@@ -14,6 +16,7 @@ import com.saunafs.bm.model.Description;
 import com.saunafs.bm.model.Disk;
 import com.saunafs.bm.model.Json;
 import com.saunafs.common.html.Element;
+import com.saunafs.common.html.Nestable;
 import com.saunafs.common.html.Serializer;
 import com.saunafs.common.html.Style;
 import com.saunafs.proto.data.Size;
@@ -64,6 +67,7 @@ public class Present {
             .add("text-align", "right"))
         .nest(rowWithHeaders("chunkId", "time", "size", "speed"))
         .nest(rowWithHeaders("", "s", "B", "MiB/s"))
+        .nest(rowWithTotals(chunks))
         .nest(chunks, Present::present);
   }
 
@@ -75,6 +79,37 @@ public class Present {
     stream(headers).forEach(header -> row
         .nest(cell(header)));
     return row;
+  }
+
+  private static Nestable rowWithTotals(List<Chunk> chunks) {
+    var totalCount = chunks.stream()
+        .filter(chunk -> chunk.result.status == 0)
+        .count();
+    if (totalCount > 0) {
+      var totalDuration = chunks.stream()
+          .filter(chunk -> chunk.result.status == 0)
+          .map(chunk -> chunk.result.time.duration())
+          .reduce(ZERO, Duration::plus);
+      int totalBytes = chunks.stream()
+          .filter(chunk -> chunk.result.status == 0)
+          .mapToInt(chunk -> chunk.size.inBytes())
+          .sum();
+      return element("div")
+          .add(style()
+              .add("display", "contents"))
+          .nest(cell("total"))
+          .nest(cell(format(totalDuration)))
+          .nest(cell("" + totalBytes))
+          .nest(cell(formatTransfer(transfer(bytes(totalBytes), totalDuration))));
+    } else {
+      return element("div")
+          .add(style()
+              .add("display", "contents"))
+          .nest(cell("total"))
+          .nest(cell("N/A"))
+          .nest(cell("N/A"))
+          .nest(cell("N/A"));
+    }
   }
 
   private static Element cell(String string) {

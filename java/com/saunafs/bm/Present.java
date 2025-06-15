@@ -5,8 +5,10 @@ import static com.saunafs.common.html.Element.element;
 import static com.saunafs.common.html.Style.style;
 import static com.saunafs.common.html.Text.text;
 import static com.saunafs.common.quant.Formatters.durationInSeconds;
+import static com.saunafs.common.quant.Formatters.mebibytesPerSecond;
 import static com.saunafs.common.quant.Formatters.sizeInBytes;
 import static com.saunafs.common.quant.Size.bytes;
+import static com.saunafs.common.quant.Transfer.transfer;
 import static java.time.Duration.ZERO;
 import static java.util.Arrays.stream;
 
@@ -24,6 +26,7 @@ import com.saunafs.common.html.Serializer;
 import com.saunafs.common.html.Style;
 import com.saunafs.common.quant.Formatter;
 import com.saunafs.common.quant.Size;
+import com.saunafs.common.quant.Transfer;
 
 public class Present {
   public static void main(String... args) {
@@ -35,6 +38,7 @@ public class Present {
 
   private static final Formatter<Size> sizeFormatter = sizeInBytes();
   private static final Formatter<Duration> durationFormatter = durationInSeconds();
+  private static final Formatter<Transfer> transferFormatter = mebibytesPerSecond();
 
   private static final Style panelStyle = style()
       .add("border", "1px solid black")
@@ -73,7 +77,11 @@ public class Present {
             .add("gap", "0em 0em")
             .add("text-align", "right"))
         .nest(rowWithHeaders("chunkId", "time", "size", "speed"))
-        .nest(rowWithHeaders("", durationFormatter.unit(), sizeFormatter.unit(), "MiB/s"))
+        .nest(rowWithHeaders(
+            "",
+            durationFormatter.unit(),
+            sizeFormatter.unit(),
+            transferFormatter.unit()))
         .nest(rowWithTotals(filterSuccessful(chunks)))
         .nest(chunks, Present::present);
   }
@@ -97,6 +105,7 @@ public class Present {
           .map(chunk -> chunk.size)
           .reduce(Size::plus)
           .orElse(bytes(0));
+      var totalTransfer = transfer(totalBytes, totalDuration);
       return element("div")
           .add(style()
               .add("display", "contents")
@@ -104,7 +113,7 @@ public class Present {
           .nest(cell("total"))
           .nest(cell(durationFormatter.format(totalDuration)))
           .nest(cell(sizeFormatter.format(totalBytes)))
-          .nest(cell(formatTransfer(transfer(totalBytes, totalDuration))));
+          .nest(cell(transferFormatter.format(totalTransfer)));
     } else {
       return element("div")
           .add(style()
@@ -139,7 +148,9 @@ public class Present {
         .nest(cell(Long.toString(chunk.id)))
         .nest(cell(durationFormatter.format(chunk.result.time.duration())))
         .nest(cell(sizeFormatter.format(chunk.size)))
-        .nest(cell(formatTransfer(transfer(chunk.size, chunk.result.time.duration()))));
+        .nest(cell(transferFormatter.format(transfer(
+            chunk.size,
+            chunk.result.time.duration()))));
   }
 
   private static Element presentFailed(Chunk chunk) {
@@ -151,13 +162,5 @@ public class Present {
         .nest(cell(durationFormatter.format(chunk.result.time.duration())))
         .nest(cell(sizeFormatter.format(chunk.size)))
         .nest(cell("N/A"));
-  }
-
-  private static double transfer(Size size, Duration duration) {
-    return (size.inBytes()) / (duration.toNanos() * 1e-9);
-  }
-
-  private static String formatTransfer(double transfer) {
-    return "%.3f".formatted(transfer / (1 << 20));
   }
 }

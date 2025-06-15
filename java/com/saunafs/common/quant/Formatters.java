@@ -26,4 +26,16 @@ public class Formatters {
       }
     };
   }
+
+  public static Formatter<Transfer> mebibytesPerSecond() {
+    return new Formatter<Transfer>() {
+      public String format(Transfer transfer) {
+        return "%.3f".formatted(transfer.inMebibytesPerSecond());
+      }
+
+      public String unit() {
+        return "MiB/s";
+      }
+    };
+  }
 }

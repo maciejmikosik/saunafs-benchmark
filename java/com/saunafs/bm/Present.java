@@ -91,17 +91,18 @@ public class Present {
       var totalDuration = chunks.stream()
           .map(chunk -> chunk.result.time.duration())
           .reduce(ZERO, Duration::plus);
-      int totalBytes = chunks.stream()
-          .mapToInt(chunk -> chunk.size.inBytes())
-          .sum();
+      var totalBytes = chunks.stream()
+          .map(chunk -> chunk.size)
+          .reduce(Size::plus)
+          .orElse(bytes(0));
       return element("div")
           .add(style()
               .add("display", "contents")
               .add("font-weight", "bold"))
           .nest(cell("total"))
           .nest(cell(format(totalDuration)))
-          .nest(cell("" + totalBytes))
-          .nest(cell(formatTransfer(transfer(bytes(totalBytes), totalDuration))));
+          .nest(cell(sizeFormatter.format(totalBytes)))
+          .nest(cell(formatTransfer(transfer(totalBytes, totalDuration))));
     } else {
       return element("div")
           .add(style()

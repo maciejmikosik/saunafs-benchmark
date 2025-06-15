@@ -22,4 +22,8 @@ public class Size {
   public int inBytes() {
     return bytes;
   }
+
+  public Size plus(Size size) {
+    return bytes(bytes + size.bytes);
+  }
 }

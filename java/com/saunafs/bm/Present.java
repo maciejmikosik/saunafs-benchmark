@@ -1,12 +1,12 @@
 package com.saunafs.bm;
 
 import static com.saunafs.bm.model.Helpers.filterSuccessful;
+import static com.saunafs.bm.present.Formatters.durationInSeconds;
+import static com.saunafs.bm.present.Formatters.mebibytesPerSecond;
+import static com.saunafs.bm.present.Formatters.sizeInBytes;
 import static com.saunafs.common.html.Element.element;
 import static com.saunafs.common.html.Style.style;
 import static com.saunafs.common.html.Text.text;
-import static com.saunafs.common.quant.Formatters.durationInSeconds;
-import static com.saunafs.common.quant.Formatters.mebibytesPerSecond;
-import static com.saunafs.common.quant.Formatters.sizeInBytes;
 import static com.saunafs.common.quant.Size.bytes;
 import static com.saunafs.common.quant.Transfer.transfer;
 import static java.time.Duration.ZERO;

@@ -21,6 +21,7 @@ import java.util.List;
 
 import com.saunafs.bm.model.Chunk;
 import com.saunafs.common.html.Element;
+import com.saunafs.common.html.Nestable;
 import com.saunafs.common.quant.Formatter;
 import com.saunafs.common.quant.Rate;
 import com.saunafs.common.quant.Size;
@@ -87,7 +88,13 @@ public class TransfersPresenter implements Presenter<List<Chunk>> {
                 .nest(cell(sizeFormatter.format(totalBytes)))
                 .nest(cell(durationFormatter.format(totalDuration)))
                 .nest(cell(rateFormatter.format(averageRate)))
-                .nest(cell(""))
+                .nest(element("div")
+                    .add(style()
+                        .add("border", "0.05em solid black"))
+                    .nest(barPresenter
+                        .present(fractionWithThreshold(
+                            averageRate.divideBy(maxRate),
+                            averageRate.divideBy(maxRate)))))
             : none())
         .nest(model, this::present);
   }
@@ -118,11 +125,7 @@ public class TransfersPresenter implements Presenter<List<Chunk>> {
         .nest(element("div")
             .add(style()
                 .add("border", "0.05em solid black"))
-            .nest(barPresenter()
-                .length(em(10))
-                .thickness(em(1.5))
-                .fractionColor("LightBlue")
-                .thresholdColor("red")
+            .nest(barPresenter
                 .present(fractionWithThreshold(
                     rate.divideBy(maxRate),
                     averageRate.divideBy(maxRate)))));
@@ -141,11 +144,15 @@ public class TransfersPresenter implements Presenter<List<Chunk>> {
   }
 
   private Element cell(String string) {
+    return cell(text(string));
+  }
+
+  private Element cell(Nestable nestable) {
     return element("div")
         .add(style()
             .add("border", "0.05em solid black")
             .add("padding", "0.2em 1em"))
-        .nest(text(string));
+        .nest(nestable);
   }
 
   private Element none() {
@@ -153,6 +160,12 @@ public class TransfersPresenter implements Presenter<List<Chunk>> {
         .add(style()
             .add("display", "none"));
   }
+
+  private static final BarPresenter barPresenter = barPresenter()
+      .length(em(10))
+      .thickness(em(1.5))
+      .fractionColor("LightBlue")
+      .thresholdColor("red");
 
   private static final Formatter<Long> chunkIdFormatter = decimalFormatter();
   private static final Formatter<Size> sizeFormatter = sizeInBytes();

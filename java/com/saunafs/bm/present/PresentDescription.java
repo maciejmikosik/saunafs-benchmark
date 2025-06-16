@@ -9,8 +9,8 @@ import static com.saunafs.common.html.Attribute.attribute;
 import static com.saunafs.common.html.Element.element;
 import static com.saunafs.common.html.Style.style;
 import static com.saunafs.common.html.Text.text;
+import static com.saunafs.common.quant.Rate.rate;
 import static com.saunafs.common.quant.Size.bytes;
-import static com.saunafs.common.quant.Transfer.transfer;
 import static java.time.Duration.ZERO;
 import static java.util.Comparator.naturalOrder;
 
@@ -25,13 +25,13 @@ import com.saunafs.common.html.Element;
 import com.saunafs.common.html.Nestable;
 import com.saunafs.common.html.Style;
 import com.saunafs.common.quant.Formatter;
+import com.saunafs.common.quant.Rate;
 import com.saunafs.common.quant.Size;
-import com.saunafs.common.quant.Transfer;
 
 public class PresentDescription {
   private static final Formatter<Size> sizeFormatter = sizeInBytes();
   private static final Formatter<Duration> durationFormatter = durationInSeconds();
-  private static final Formatter<Transfer> transferFormatter = mebibytesPerSecond();
+  private static final Formatter<Rate> rateFormatter = mebibytesPerSecond();
   private static final Formatter<Long> chunkIdFormatter = decimalFormatter();
 
   private static final Style panelStyle = style()
@@ -70,12 +70,12 @@ public class PresentDescription {
         .map(chunk -> chunk.size)
         .reduce(Size::plus)
         .orElse(bytes(0));
-    var totalTransfer = transfer(totalBytes, totalDuration);
+    var averageRate = rate(totalBytes, totalDuration);
 
-    var maxTransfer = chunks.stream()
-        .map(chunk -> transfer(chunk.size, chunk.result.time.duration()))
+    var maxRate = chunks.stream()
+        .map(chunk -> rate(chunk.size, chunk.result.time.duration()))
         .max(naturalOrder())
-        .orElse(Transfer.ZERO);
+        .orElse(Rate.ZERO);
 
     return element("div")
         .add(style()
@@ -85,15 +85,15 @@ public class PresentDescription {
             .add("width", "fit-content")
             .add("gap", "0em 0em")
             .add("text-align", "right"))
-        .nest(rowWithHeaders("chunkId", "time", "size", "transfer", ""))
+        .nest(rowWithHeaders("chunkId", "time", "size", "rate", ""))
         .nest(rowWithHeaders(
             chunkIdFormatter.unit(),
             durationFormatter.unit(),
             sizeFormatter.unit(),
-            transferFormatter.unit(),
+            rateFormatter.unit(),
             ""))
         .nest(rowWithTotals(filterSuccessful(chunks)))
-        .nest(chunks, chunk -> present(chunk, totalTransfer, maxTransfer));
+        .nest(chunks, chunk -> present(chunk, averageRate, maxRate));
   }
 
   private static Element rowWithHeaders(String... headers) {
@@ -117,13 +117,13 @@ public class PresentDescription {
           .map(chunk -> chunk.size)
           .reduce(Size::plus)
           .orElse(bytes(0));
-      var totalTransfer = transfer(totalBytes, totalDuration);
+      var averageRate = rate(totalBytes, totalDuration);
       return element("div")
           .add(rowStyle)
           .nest(cell("total"))
           .nest(cell(durationFormatter.format(totalDuration)))
           .nest(cell(sizeFormatter.format(totalBytes)))
-          .nest(cell(transferFormatter.format(totalTransfer)))
+          .nest(cell(rateFormatter.format(averageRate)))
           .nest(cell(""));
     } else {
       return element("div")
@@ -147,29 +147,29 @@ public class PresentDescription {
 
   private static Element present(
       Chunk chunk,
-      Transfer totalTransfer,
-      Transfer maxTransfer) {
+      Rate averageRate,
+      Rate maxRate) {
     return chunk.result.status == 0
-        ? presentSuccessful(chunk, totalTransfer, maxTransfer)
+        ? presentSuccessful(chunk, averageRate, maxRate)
         : presentFailed(chunk);
   }
 
   private static Element presentSuccessful(
       Chunk chunk,
-      Transfer totalTransfer,
-      Transfer maxTransfer) {
-    Transfer transfer = transfer(
+      Rate averageRate,
+      Rate maxRate) {
+    var rate = rate(
         chunk.size,
         chunk.result.time.duration());
-    var progress = transfer.divideBy(maxTransfer);
-    var threshold = totalTransfer.divideBy(maxTransfer);
+    var progress = rate.divideBy(maxRate);
+    var threshold = averageRate.divideBy(maxRate);
     return element("div")
         .add(style()
             .add("display", "contents"))
         .nest(cell(chunkIdFormatter.format(chunk.id)))
         .nest(cell(durationFormatter.format(chunk.result.time.duration())))
         .nest(cell(sizeFormatter.format(chunk.size)))
-        .nest(cell(transferFormatter.format(transfer)))
+        .nest(cell(rateFormatter.format(rate)))
         .nest(element("div")
             .add(style()
                 .add("border", "0.05em solid black"))

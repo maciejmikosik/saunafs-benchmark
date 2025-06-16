@@ -16,4 +16,10 @@ public class Attribute {
         requireNonNull(name),
         requireNonNull(value));
   }
+
+  public static Attribute attribute(String name, Object value) {
+    return new Attribute(
+        requireNonNull(name),
+        requireNonNull(value.toString()));
+  }
 }

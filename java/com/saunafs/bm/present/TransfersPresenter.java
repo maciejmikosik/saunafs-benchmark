@@ -1,6 +1,7 @@
 package com.saunafs.bm.present;
 
 import static com.saunafs.bm.model.Helpers.filterSuccessful;
+import static com.saunafs.bm.present.Em.em;
 import static com.saunafs.bm.present.Formatters.decimalFormatter;
 import static com.saunafs.bm.present.Formatters.durationInSeconds;
 import static com.saunafs.bm.present.Formatters.mebibytesPerSecond;
@@ -144,28 +145,24 @@ public class TransfersPresenter implements Presenter<List<Chunk>> {
   }
 
   private static Element present(double progress, double threshold) {
-    int width = 10;
+    var width = em(10);
     return element("span")
         .nest(element("svg")
-            .add(attribute("width", width + "em"))
-            .add(attribute("height", "1.5em"))
+            .add(attribute("width", width))
+            .add(attribute("height", em(1.5)))
             .nest(element("rect")
-                .add(attribute("width", normalize(width, progress) + "em"))
-                .add(attribute("height", "1.5em"))
-                .add(attribute("x", "0"))
-                .add(attribute("y", "0"))
+                .add(attribute("width", width.multiply(progress)))
+                .add(attribute("height", em(1.5)))
+                .add(attribute("x", em(0)))
+                .add(attribute("y", em(0)))
                 .add(attribute("fill", "LightBlue")))
             .nest(element("rect")
-                .add(attribute("width", normalize(width, 0.01) + "em"))
-                .add(attribute("height", "1.5em"))
-                .add(attribute("x", normalize(width, threshold) + "em"))
-                .add(attribute("y", "0em"))
+                .add(attribute("width", width.multiply(0.01)))
+                .add(attribute("height", em(1.5)))
+                .add(attribute("x", width.multiply(threshold)))
+                .add(attribute("y", em(0)))
                 .add(attribute("fill", "red"))
-                .add(attribute("stroke-width", "0.1em"))));
-  }
-
-  private static String normalize(int max, double progress) {
-    return "%.2f".formatted(progress * max);
+                .add(attribute("stroke-width", em(0.1)))));
   }
 
   private Element cell(String string) {

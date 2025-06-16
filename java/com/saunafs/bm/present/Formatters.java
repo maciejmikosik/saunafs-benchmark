@@ -4,7 +4,7 @@ import java.time.Duration;
 
 import com.saunafs.common.quant.Formatter;
 import com.saunafs.common.quant.Size;
-import com.saunafs.common.quant.Transfer;
+import com.saunafs.common.quant.Rate;
 
 public class Formatters {
   public static Formatter<Size> sizeInBytes() {
@@ -31,9 +31,9 @@ public class Formatters {
     };
   }
 
-  public static Formatter<Transfer> mebibytesPerSecond() {
-    return new Formatter<Transfer>() {
-      public String format(Transfer transfer) {
+  public static Formatter<Rate> mebibytesPerSecond() {
+    return new Formatter<Rate>() {
+      public String format(Rate transfer) {
         return "%.3f".formatted(transfer.inMebibytesPerSecond());
       }
 

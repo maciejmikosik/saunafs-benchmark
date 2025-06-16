@@ -68,14 +68,14 @@ public class TransfersPresenter implements Presenter<List<Chunk>> {
             .add("white-space", "nowrap"))
         .nest(presentHeaders(
             "chunkId",
-            "time",
             "size",
+            "duration",
             "rate",
             ""))
         .nest(presentHeaders(
             chunkIdFormatter.unit(),
-            durationFormatter.unit(),
             sizeFormatter.unit(),
+            durationFormatter.unit(),
             rateFormatter.unit(),
             ""))
         .nest(hasSuccessfulTransfer
@@ -84,8 +84,8 @@ public class TransfersPresenter implements Presenter<List<Chunk>> {
                     .add("display", "contents")
                     .add("font-weight", "bold"))
                 .nest(cell("total"))
-                .nest(cell(durationFormatter.format(totalDuration)))
                 .nest(cell(sizeFormatter.format(totalBytes)))
+                .nest(cell(durationFormatter.format(totalDuration)))
                 .nest(cell(rateFormatter.format(averageRate)))
                 .nest(cell(""))
             : none())
@@ -112,8 +112,8 @@ public class TransfersPresenter implements Presenter<List<Chunk>> {
         .add(style()
             .add("display", "contents"))
         .nest(cell(chunkIdFormatter.format(chunk.id)))
-        .nest(cell(durationFormatter.format(chunk.result.time.duration())))
         .nest(cell(sizeFormatter.format(chunk.size)))
+        .nest(cell(durationFormatter.format(chunk.result.time.duration())))
         .nest(cell(rateFormatter.format(rate)))
         .nest(element("div")
             .add(style()
@@ -134,8 +134,8 @@ public class TransfersPresenter implements Presenter<List<Chunk>> {
             .add("display", "contents")
             .add("color", "red"))
         .nest(cell(chunkIdFormatter.format(chunk.id)))
-        .nest(cell(""))
         .nest(cell(sizeFormatter.format(chunk.size)))
+        .nest(cell(""))
         .nest(cell(""))
         .nest(cell(""));
   }
@@ -154,8 +154,8 @@ public class TransfersPresenter implements Presenter<List<Chunk>> {
             .add("display", "none"));
   }
 
+  private static final Formatter<Long> chunkIdFormatter = decimalFormatter();
   private static final Formatter<Size> sizeFormatter = sizeInBytes();
   private static final Formatter<Duration> durationFormatter = durationInSeconds();
   private static final Formatter<Rate> rateFormatter = mebibytesPerSecond();
-  private static final Formatter<Long> chunkIdFormatter = decimalFormatter();
 }

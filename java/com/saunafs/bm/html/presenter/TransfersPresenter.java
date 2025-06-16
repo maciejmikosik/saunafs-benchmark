@@ -1,13 +1,13 @@
-package com.saunafs.bm.present;
+package com.saunafs.bm.html.presenter;
 
-import static com.saunafs.bm.present.BarPresenter.barPresenter;
-import static com.saunafs.bm.present.Em.em;
-import static com.saunafs.bm.present.Formatters.decimalFormatter;
-import static com.saunafs.bm.present.Formatters.durationInSeconds;
-import static com.saunafs.bm.present.Formatters.mebibytesPerSecond;
-import static com.saunafs.bm.present.Formatters.sizeInBytes;
-import static com.saunafs.bm.present.FractionWithThreshold.fractionWithThreshold;
+import static com.saunafs.bm.html.model.FractionWithThreshold.fractionWithThreshold;
+import static com.saunafs.bm.html.presenter.BarPresenter.barPresenter;
+import static com.saunafs.bm.html.presenter.Formatters.decimalFormatter;
+import static com.saunafs.bm.html.presenter.Formatters.durationInSeconds;
+import static com.saunafs.bm.html.presenter.Formatters.mebibytesPerSecond;
+import static com.saunafs.bm.html.presenter.Formatters.sizeInBytes;
 import static com.saunafs.common.html.Element.element;
+import static com.saunafs.common.html.Em.em;
 import static com.saunafs.common.html.Style.style;
 import static com.saunafs.common.html.Text.text;
 import static com.saunafs.common.quant.Rate.rate;
@@ -20,7 +20,6 @@ import java.util.List;
 import com.saunafs.bm.model.Chunk;
 import com.saunafs.common.html.Element;
 import com.saunafs.common.html.Nestable;
-import com.saunafs.common.quant.Formatter;
 import com.saunafs.common.quant.Rate;
 import com.saunafs.common.quant.Size;
 

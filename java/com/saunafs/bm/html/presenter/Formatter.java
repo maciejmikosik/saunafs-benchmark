@@ -1,4 +1,4 @@
-package com.saunafs.common.quant;
+package com.saunafs.bm.html.presenter;
 
 public interface Formatter<T> {
   public String format(T value);

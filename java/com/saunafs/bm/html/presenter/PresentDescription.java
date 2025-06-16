@@ -1,4 +1,4 @@
-package com.saunafs.bm.present;
+package com.saunafs.bm.html.presenter;
 
 import static com.saunafs.common.html.Element.element;
 import static com.saunafs.common.html.Style.style;

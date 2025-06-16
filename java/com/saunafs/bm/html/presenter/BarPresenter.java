@@ -1,10 +1,12 @@
-package com.saunafs.bm.present;
+package com.saunafs.bm.html.presenter;
 
-import static com.saunafs.bm.present.Em.em;
 import static com.saunafs.common.html.Attribute.attribute;
 import static com.saunafs.common.html.Element.element;
+import static com.saunafs.common.html.Em.em;
 
+import com.saunafs.bm.html.model.FractionWithThreshold;
 import com.saunafs.common.html.Element;
+import com.saunafs.common.html.Em;
 
 public class BarPresenter implements Presenter<FractionWithThreshold> {
   private Em length = em(10);

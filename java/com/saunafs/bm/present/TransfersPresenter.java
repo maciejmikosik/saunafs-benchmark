@@ -1,12 +1,13 @@
 package com.saunafs.bm.present;
 
 import static com.saunafs.bm.model.Helpers.filterSuccessful;
+import static com.saunafs.bm.present.FractionWithThreshold.fractionWithThreshold;
+import static com.saunafs.bm.present.BarPresenter.barPresenter;
 import static com.saunafs.bm.present.Em.em;
 import static com.saunafs.bm.present.Formatters.decimalFormatter;
 import static com.saunafs.bm.present.Formatters.durationInSeconds;
 import static com.saunafs.bm.present.Formatters.mebibytesPerSecond;
 import static com.saunafs.bm.present.Formatters.sizeInBytes;
-import static com.saunafs.common.html.Attribute.attribute;
 import static com.saunafs.common.html.Element.element;
 import static com.saunafs.common.html.Style.style;
 import static com.saunafs.common.html.Text.text;
@@ -117,8 +118,6 @@ public class TransfersPresenter implements Presenter<List<Chunk>> {
     var rate = rate(
         chunk.size,
         chunk.result.time.duration());
-    var progress = rate.divideBy(maxRate);
-    var threshold = averageRate.divideBy(maxRate);
     return element("div")
         .add(style()
             .add("display", "contents"))
@@ -129,7 +128,14 @@ public class TransfersPresenter implements Presenter<List<Chunk>> {
         .nest(element("div")
             .add(style()
                 .add("border", "0.05em solid black"))
-            .nest(present(progress, threshold)));
+            .nest(barPresenter()
+                .length(em(10))
+                .thickness(em(1.5))
+                .fractionColor("LightBlue")
+                .thresholdColor("red")
+                .present(fractionWithThreshold(
+                    rate.divideBy(maxRate),
+                    averageRate.divideBy(maxRate)))));
   }
 
   private Element presentFailed(Chunk chunk) {
@@ -142,27 +148,6 @@ public class TransfersPresenter implements Presenter<List<Chunk>> {
         .nest(cell(sizeFormatter.format(chunk.size)))
         .nest(cell("N/A"))
         .nest(cell("N/A"));
-  }
-
-  private static Element present(double progress, double threshold) {
-    var width = em(10);
-    return element("span")
-        .nest(element("svg")
-            .add(attribute("width", width))
-            .add(attribute("height", em(1.5)))
-            .nest(element("rect")
-                .add(attribute("width", width.multiply(progress)))
-                .add(attribute("height", em(1.5)))
-                .add(attribute("x", em(0)))
-                .add(attribute("y", em(0)))
-                .add(attribute("fill", "LightBlue")))
-            .nest(element("rect")
-                .add(attribute("width", width.multiply(0.01)))
-                .add(attribute("height", em(1.5)))
-                .add(attribute("x", width.multiply(threshold)))
-                .add(attribute("y", em(0)))
-                .add(attribute("fill", "red"))
-                .add(attribute("stroke-width", em(0.1)))));
   }
 
   private Element cell(String string) {

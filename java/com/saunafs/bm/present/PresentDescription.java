@@ -11,7 +11,6 @@ import static com.saunafs.common.html.Text.text;
 import static com.saunafs.common.quant.Size.bytes;
 import static com.saunafs.common.quant.Transfer.transfer;
 import static java.time.Duration.ZERO;
-import static java.util.Arrays.stream;
 
 import java.time.Duration;
 import java.util.List;
@@ -80,13 +79,11 @@ public class PresentDescription {
   }
 
   private static Element rowWithHeaders(String... headers) {
-    var row = element("div")
+    return element("div")
         .add(style()
             .add("display", "contents")
-            .add("text-align", "center"));
-    stream(headers).forEach(header -> row
-        .nest(cell(header)));
-    return row;
+            .add("text-align", "center"))
+        .nest(headers, PresentDescription::cell);
   }
 
   private static Nestable rowWithTotals(List<Chunk> chunks) {
@@ -96,7 +93,8 @@ public class PresentDescription {
     if (chunks.size() > 0) {
       var totalDuration = chunks.stream()
           .map(chunk -> chunk.result.time.duration())
-          .reduce(ZERO, Duration::plus);
+          .reduce(Duration::plus)
+          .orElse(ZERO);
       var totalBytes = chunks.stream()
           .map(chunk -> chunk.size)
           .reduce(Size::plus)
@@ -150,7 +148,7 @@ public class PresentDescription {
         .add(style()
             .add("display", "contents")
             .add("color", "red"))
-        .nest(cell(Long.toString(chunk.id)))
+        .nest(cell(chunkIdFormatter.format(chunk.id)))
         .nest(cell(durationFormatter.format(chunk.result.time.duration())))
         .nest(cell(sizeFormatter.format(chunk.size)))
         .nest(cell("N/A"));

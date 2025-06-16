@@ -1,5 +1,6 @@
 package com.saunafs.common.html;
 
+import static java.util.Arrays.stream;
 import static java.util.Objects.requireNonNull;
 
 import java.util.LinkedList;
@@ -38,6 +39,14 @@ public class Element implements Nestable {
       List<T> items,
       Function<? super T, ? extends Element> mapping) {
     return nest(items.stream()
+        .map(mapping)
+        .toList());
+  }
+
+  public <T> Element nest(
+      T[] items,
+      Function<? super T, ? extends Element> mapping) {
+    return nest(stream(items)
         .map(mapping)
         .toList());
   }

@@ -72,8 +72,7 @@ scan_disk() {
 	DISK_PATH=$(echo "${ENTRY}" | cut -d: -f3-)
 	LABEL=$(echo "${SERVER}_${PORT}_$(basename "${DISK_PATH}")" | tr '/' '_')
 	OUTFILE="${RESULTS_DIR}/${LABEL}"
-
-	ssh "${SERVER}" 'bash -s' -- "${DISK_PATH}" "${CHUNKS_PER_DISK}" 2>/dev/null <<EOF | {
+	ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "${SERVER}" 'bash -s' -- "${DISK_PATH}" "${CHUNKS_PER_DISK}" 2>/dev/null <<EOF | {
 DISK_TO_SCAN="\$1"
 LIMIT="\$2"
 CURRENT_COUNT=0

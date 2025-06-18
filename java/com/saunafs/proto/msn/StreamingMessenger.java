@@ -56,7 +56,7 @@ public class StreamingMessenger implements Messenger {
       case Short number -> output.writeShort(number);
       case Integer number -> output.writeInt(number);
       case Long number -> output.writeLong(number);
-      case Size size -> output.writeInt(size.inBytes());
+      case Size size -> output.writeInt((int) size.inBytes());
       case Message message -> writeReflectively(message);
       default -> throw new RuntimeException("cannot serialize: " + object);
     }

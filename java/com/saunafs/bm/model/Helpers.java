@@ -9,14 +9,4 @@ public class Helpers {
         .flatMap(disk -> disk.chunks.stream())
         .count();
   }
-
-  public static boolean isSuccessful(Chunk chunk) {
-    return chunk.result.status == 0;
-  }
-
-  public static List<Chunk> filterSuccessful(List<Chunk> chunks) {
-    return chunks.stream()
-        .filter(Helpers::isSuccessful)
-        .toList();
-  }
 }

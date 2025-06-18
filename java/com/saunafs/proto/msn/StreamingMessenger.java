@@ -6,6 +6,7 @@ import static com.saunafs.common.io.IoFactories.unchecked;
 import static com.saunafs.common.quant.Size.bytes;
 import static com.saunafs.proto.Protocol.messageClass;
 import static com.saunafs.proto.Protocol.packetLengthFor;
+import static com.saunafs.proto.data.Status.status;
 import static java.lang.reflect.Modifier.isStatic;
 
 import java.io.DataInputStream;
@@ -19,6 +20,7 @@ import com.saunafs.proto.Message;
 import com.saunafs.proto.Messenger;
 import com.saunafs.proto.anno.Identifier;
 import com.saunafs.proto.data.Blob;
+import com.saunafs.proto.data.Status;
 
 public class StreamingMessenger implements Messenger {
   private final DataOutputStream output;
@@ -56,6 +58,7 @@ public class StreamingMessenger implements Messenger {
       case Short number -> output.writeShort(number);
       case Integer number -> output.writeInt(number);
       case Long number -> output.writeLong(number);
+      case Status status -> output.writeByte(status.code);
       case Size size -> output.writeInt((int) size.inBytes());
       case Message message -> writeReflectively(message);
       default -> throw new RuntimeException("cannot serialize: " + object);
@@ -95,6 +98,8 @@ public class StreamingMessenger implements Messenger {
       return input.readInt();
     } else if (type == long.class) {
       return input.readLong();
+    } else if (type == Status.class) {
+      return status(input.readByte());
     } else if (type == Size.class) {
       return bytes(input.readInt());
     } else if (type == Blob.class) {

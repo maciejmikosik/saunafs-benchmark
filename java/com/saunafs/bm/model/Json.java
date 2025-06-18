@@ -13,13 +13,16 @@ import com.saunafs.bm.model.gson.DurationAdapter;
 import com.saunafs.bm.model.gson.InetSocketAddressAdapter;
 import com.saunafs.bm.model.gson.InstantAdapter;
 import com.saunafs.bm.model.gson.SizeAdapter;
+import com.saunafs.bm.model.gson.StatusAdapter;
 import com.saunafs.common.quant.Size;
+import com.saunafs.proto.data.Status;
 
 public class Json {
   private final Gson gson = new GsonBuilder()
       .registerTypeAdapter(InetSocketAddress.class, new InetSocketAddressAdapter())
       .registerTypeAdapter(Instant.class, new InstantAdapter())
       .registerTypeAdapter(Duration.class, new DurationAdapter())
+      .registerTypeAdapter(Status.class, new StatusAdapter())
       .registerTypeAdapter(Size.class, new SizeAdapter())
       .setPrettyPrinting()
       .create();

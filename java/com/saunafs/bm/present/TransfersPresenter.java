@@ -1,7 +1,5 @@
 package com.saunafs.bm.present;
 
-import static com.saunafs.bm.model.Helpers.filterSuccessful;
-import static com.saunafs.bm.model.Helpers.isSuccessful;
 import static com.saunafs.bm.present.BarPresenter.barPresenter;
 import static com.saunafs.bm.present.Em.em;
 import static com.saunafs.bm.present.Formatters.decimalFormatter;
@@ -34,7 +32,9 @@ public class TransfersPresenter implements Presenter<List<Chunk>> {
   private Rate maxRate;
 
   public Element present(List<Chunk> model) {
-    calculateStatistics(filterSuccessful(model));
+    calculateStatistics(model.stream()
+        .filter(chunk -> chunk.result.status.isOk())
+        .toList());
     return presentModel(model);
   }
 
@@ -108,7 +108,7 @@ public class TransfersPresenter implements Presenter<List<Chunk>> {
   }
 
   private Element present(Chunk chunk) {
-    return isSuccessful(chunk)
+    return chunk.result.status.isOk()
         ? presentSuccessful(chunk)
         : presentFailed(chunk);
   }

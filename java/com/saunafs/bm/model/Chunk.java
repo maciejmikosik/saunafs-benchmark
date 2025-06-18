@@ -2,6 +2,7 @@ package com.saunafs.bm.model;
 
 import com.saunafs.common.Interval;
 import com.saunafs.common.quant.Size;
+import com.saunafs.proto.data.Status;
 
 public class Chunk {
   public long id;
@@ -13,6 +14,6 @@ public class Chunk {
 
   public static class Result {
     public Interval time;
-    public byte status;
+    public Status status;
   }
 }

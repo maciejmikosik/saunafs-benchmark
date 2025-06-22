@@ -25,6 +25,11 @@ public class Element implements Nestable {
     return this;
   }
 
+  public Element add(Style style) {
+    attributes.add(style.toAttribute());
+    return this;
+  }
+
   public Element nest(Nestable nestable) {
     nested.add(nestable);
     return this;

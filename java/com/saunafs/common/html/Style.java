@@ -1,28 +1,39 @@
 package com.saunafs.common.html;
 
-import static java.lang.String.format;
-import static java.util.Objects.requireNonNull;
+import static com.saunafs.common.Collections.addLast;
+import static com.saunafs.common.html.Attribute.attribute;
+import static com.saunafs.common.html.Property.property;
+import static java.util.Collections.EMPTY_LIST;
+import static java.util.stream.Collectors.joining;
 
-/*
- * TODO Defining same property twice makes last one active due to html rules. It would be nice if
- * {@link Style} didn't rely on this behavior and instead replace previous property itself.
- */
-public class Style extends Attribute {
-  protected Style(String name, String value) {
-    super(name, value);
+import java.util.List;
+
+public class Style {
+  public List<Property> properties;
+
+  protected Style(List<Property> properties) {
+    this.properties = properties;
   }
 
   public static Style style() {
-    return new Style("style", "");
+    return new Style(EMPTY_LIST);
   }
 
-  public static Style style(String cssProperty, String cssValue) {
-    return style().add(cssProperty, cssValue);
+  public Style add(Property property) {
+    return new Style(addLast(property, properties));
   }
 
   public Style add(String cssProperty, String cssValue) {
-    requireNonNull(cssProperty);
-    requireNonNull(cssValue);
-    return new Style(name, format("%s%s:%s;", value, cssProperty, cssValue));
+    return add(property(cssProperty, cssValue));
+  }
+
+  public Style add(String cssProperty, Object cssValue) {
+    return add(property(cssProperty, cssValue.toString()));
+  }
+
+  public Attribute toAttribute() {
+    return attribute("style", properties.stream()
+        .map(property -> "%s:%s;".formatted(property.name, property.value))
+        .collect(joining()));
   }
 }

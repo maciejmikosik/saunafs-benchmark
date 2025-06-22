@@ -55,7 +55,7 @@ public class PresentDescription {
         .add(panelStyle)
         .nest(text(disk.location))
         .nest(transfersPresenter()
-            .item("chunkId", "DEC")
+            .item("chunkId", "DEC | HEX")
             .present(disk.chunks.stream()
                 .map(PresentDescription::transfer)
                 .toList()));
@@ -80,7 +80,7 @@ public class PresentDescription {
 
   private static Transfer transfer(Chunk chunk) {
     var transfer = new Transfer();
-    transfer.item = Long.toString(chunk.id);
+    transfer.item = "%d | %016X".formatted(chunk.id, chunk.id);
     transfer.status = chunk.result.status;
     transfer.size = chunk.size;
     transfer.duration = chunk.result.time.duration();

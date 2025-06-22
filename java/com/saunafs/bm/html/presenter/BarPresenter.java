@@ -51,7 +51,7 @@ public class BarPresenter implements Presenter<FractionWithThreshold> {
         .nest(element("rect")
             .add(attribute("width", length.multiply(0.01)))
             .add(attribute("height", thickness))
-            .add(attribute("x", length.multiply(model.threshold)))
+            .add(attribute("x", length.multiply(model.threshold).minus(em(0.1))))
             .add(attribute("y", em(0)))
             .add(attribute("fill", thresholdColor))
             .add(attribute("stroke-width", em(0.1))));

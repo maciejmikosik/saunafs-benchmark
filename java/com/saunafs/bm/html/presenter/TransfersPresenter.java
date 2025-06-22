@@ -11,6 +11,7 @@ import static com.saunafs.common.html.Style.style;
 import static com.saunafs.common.html.Text.text;
 import static com.saunafs.common.quant.Rate.rate;
 import static com.saunafs.common.quant.Size.bytes;
+import static com.saunafs.proto.data.Status.status;
 import static java.util.Comparator.naturalOrder;
 
 import java.time.Duration;
@@ -46,27 +47,31 @@ public class TransfersPresenter implements Presenter<List<Transfer>> {
   }
 
   private boolean hasSuccessfulTransfer;
-  private Duration totalDuration;
-  private Size totalBytes;
-  private Rate averageRate;
+  private final Transfer total = new Transfer();
   private Rate maxRate;
+  private double threshold;
 
   private void calculateStatistics(List<Transfer> model) {
     hasSuccessfulTransfer = !model.isEmpty();
     if (hasSuccessfulTransfer) {
-      totalDuration = model.stream()
-          .map(transfer -> transfer.duration)
-          .reduce(Duration::plus)
-          .orElseThrow();
-      totalBytes = model.stream()
+      total.item = "total";
+      total.status = status((byte) 0);
+      total.size = model.stream()
           .map(transfer -> transfer.size)
           .reduce(Size::plus)
           .orElse(bytes(0));
-      averageRate = rate(totalBytes, totalDuration);
+      total.duration = model.stream()
+          .map(transfer -> transfer.duration)
+          .reduce(Duration::plus)
+          .orElseThrow();
       maxRate = model.stream()
           .map(transfer -> rate(transfer.size, transfer.duration))
           .max(naturalOrder())
           .orElseThrow();
+      var totalRate = rate(total.size, total.duration);
+      threshold = totalRate.divideBy(maxRate);
+    } else {
+      total.status = status((byte) -1);
     }
   }
 
@@ -74,7 +79,7 @@ public class TransfersPresenter implements Presenter<List<Transfer>> {
     return element("div")
         .add(style()
             .add("display", "grid")
-            .add("grid-template-columns", "repeat(5, auto)")
+            .add("grid-template-columns", "repeat(4, auto)")
             .add("border", "0.05em solid black")
             .add("width", "fit-content")
             .add("gap", "0em 0em")
@@ -84,30 +89,18 @@ public class TransfersPresenter implements Presenter<List<Transfer>> {
             itemName,
             "size",
             "duration",
-            "rate",
-            ""))
+            "rate"))
         .nest(presentHeaders(
             itemUnit,
             sizeFormatter.unit(),
             durationFormatter.unit(),
-            rateFormatter.unit(),
-            ""))
+            rateFormatter.unit()))
         .nest(hasSuccessfulTransfer
-            ? element("div")
+            ? element("span")
                 .add(style()
                     .add("display", "contents")
                     .add("font-weight", "bold"))
-                .nest(cell("total"))
-                .nest(cell(sizeFormatter.format(totalBytes)))
-                .nest(cell(durationFormatter.format(totalDuration)))
-                .nest(cell(rateFormatter.format(averageRate)))
-                .nest(element("div")
-                    .add(style()
-                        .add("border", "0.05em solid black"))
-                    .nest(barPresenter
-                        .present(fractionWithThreshold(
-                            averageRate.divideBy(maxRate),
-                            averageRate.divideBy(maxRate)))))
+                .nest(present(total))
             : none())
         .nest(model, this::present);
   }
@@ -134,14 +127,24 @@ public class TransfersPresenter implements Presenter<List<Transfer>> {
         .nest(cell(transfer.item.toString()))
         .nest(cell(sizeFormatter.format(transfer.size)))
         .nest(cell(durationFormatter.format(transfer.duration)))
-        .nest(cell(rateFormatter.format(rate)))
         .nest(element("div")
             .add(style()
-                .add("border", "0.05em solid black"))
-            .nest(barPresenter
-                .present(fractionWithThreshold(
+                .add("border", "0.05em solid black")
+                .add("display", "grid"))
+            .nest(element("span")
+                .add(style()
+                    .add("grid-row", "1")
+                    .add("grid-column", "1"))
+                .nest(barPresenter.present(fractionWithThreshold(
                     rate.divideBy(maxRate),
-                    averageRate.divideBy(maxRate)))));
+                    threshold))))
+            .nest(element("span")
+                .add(style()
+                    .add("grid-row", "1")
+                    .add("grid-column", "1")
+                    .add("text-align", "center")
+                    .add("padding", "0.2em 1em"))
+                .nest(text(rateFormatter.format(rate)))));
   }
 
   private Element presentFailed(Transfer transfer) {

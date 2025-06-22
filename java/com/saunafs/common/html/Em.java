@@ -17,6 +17,10 @@ public class Em {
     return em(value * factor);
   }
 
+  public Em minus(Em that) {
+    return em(this.value - that.value);
+  }
+
   public String toString() {
     return formatter.format(value);
   }

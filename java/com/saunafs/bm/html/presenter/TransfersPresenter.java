@@ -79,7 +79,7 @@ public class TransfersPresenter implements Presenter<List<Transfer>> {
     return element("div")
         .add(style()
             .add("display", "grid")
-            .add("grid-template-columns", "repeat(5, auto)")
+            .add("grid-template-columns", "repeat(4, auto)")
             .add("border", "0.05em solid black")
             .add("width", "fit-content")
             .add("gap", "0em 0em")
@@ -89,14 +89,12 @@ public class TransfersPresenter implements Presenter<List<Transfer>> {
             itemName,
             "size",
             "duration",
-            "rate",
-            ""))
+            "rate"))
         .nest(presentHeaders(
             itemUnit,
             sizeFormatter.unit(),
             durationFormatter.unit(),
-            rateFormatter.unit(),
-            ""))
+            rateFormatter.unit()))
         .nest(hasSuccessfulTransfer
             ? element("span")
                 .add(style()
@@ -129,14 +127,24 @@ public class TransfersPresenter implements Presenter<List<Transfer>> {
         .nest(cell(transfer.item.toString()))
         .nest(cell(sizeFormatter.format(transfer.size)))
         .nest(cell(durationFormatter.format(transfer.duration)))
-        .nest(cell(rateFormatter.format(rate)))
         .nest(element("div")
             .add(style()
-                .add("border", "0.05em solid black"))
-            .nest(barPresenter
-                .present(fractionWithThreshold(
+                .add("border", "0.05em solid black")
+                .add("display", "grid"))
+            .nest(element("span")
+                .add(style()
+                    .add("grid-row", "1")
+                    .add("grid-column", "1"))
+                .nest(barPresenter.present(fractionWithThreshold(
                     rate.divideBy(maxRate),
-                    threshold))));
+                    threshold))))
+            .nest(element("span")
+                .add(style()
+                    .add("grid-row", "1")
+                    .add("grid-column", "1")
+                    .add("text-align", "center")
+                    .add("padding", "0.2em 1em"))
+                .nest(text(rateFormatter.format(rate)))));
   }
 
   private Element presentFailed(Transfer transfer) {

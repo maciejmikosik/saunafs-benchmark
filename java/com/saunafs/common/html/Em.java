@@ -1,4 +1,4 @@
-package com.saunafs.bm.present;
+package com.saunafs.common.html;
 
 import java.text.DecimalFormat;
 

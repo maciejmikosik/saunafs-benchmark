@@ -1,6 +1,6 @@
 package com.saunafs.bm;
 
-import static com.saunafs.bm.present.PresentDescription.present;
+import static com.saunafs.bm.html.presenter.PresentDescription.present;
 
 import com.saunafs.bm.model.Json;
 import com.saunafs.common.html.Serializer;

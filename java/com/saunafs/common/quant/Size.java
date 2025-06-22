@@ -1,25 +1,25 @@
 package com.saunafs.common.quant;
 
 public class Size {
-  private final int bytes;
+  private final long bytes;
 
-  private Size(int bytes) {
+  private Size(long bytes) {
     this.bytes = bytes;
   }
 
-  public static Size bytes(int bytes) {
+  public static Size bytes(long bytes) {
     return new Size(bytes);
   }
 
-  public static Size kibibytes(int kibibytes) {
+  public static Size kibibytes(long kibibytes) {
     return bytes(kibibytes << 10);
   }
 
-  public static Size mebibytes(int mebibytes) {
+  public static Size mebibytes(long mebibytes) {
     return bytes(mebibytes << 20);
   }
 
-  public int inBytes() {
+  public long inBytes() {
     return bytes;
   }
 

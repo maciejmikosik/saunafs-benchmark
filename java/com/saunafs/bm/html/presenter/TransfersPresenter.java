@@ -1,15 +1,12 @@
-package com.saunafs.bm.present;
+package com.saunafs.bm.html.presenter;
 
-import static com.saunafs.bm.model.Helpers.filterSuccessful;
-import static com.saunafs.bm.model.Helpers.isSuccessful;
-import static com.saunafs.bm.present.BarPresenter.barPresenter;
-import static com.saunafs.bm.present.Em.em;
-import static com.saunafs.bm.present.Formatters.decimalFormatter;
-import static com.saunafs.bm.present.Formatters.durationInSeconds;
-import static com.saunafs.bm.present.Formatters.mebibytesPerSecond;
-import static com.saunafs.bm.present.Formatters.sizeInBytes;
-import static com.saunafs.bm.present.FractionWithThreshold.fractionWithThreshold;
+import static com.saunafs.bm.html.model.FractionWithThreshold.fractionWithThreshold;
+import static com.saunafs.bm.html.presenter.BarPresenter.barPresenter;
+import static com.saunafs.bm.html.presenter.Formatters.durationInSeconds;
+import static com.saunafs.bm.html.presenter.Formatters.mebibytesPerSecond;
+import static com.saunafs.bm.html.presenter.Formatters.sizeInBytes;
 import static com.saunafs.common.html.Element.element;
+import static com.saunafs.common.html.Em.em;
 import static com.saunafs.common.html.Style.style;
 import static com.saunafs.common.html.Text.text;
 import static com.saunafs.common.quant.Rate.rate;
@@ -19,45 +16,61 @@ import static java.util.Comparator.naturalOrder;
 import java.time.Duration;
 import java.util.List;
 
-import com.saunafs.bm.model.Chunk;
+import com.saunafs.bm.html.model.Transfer;
 import com.saunafs.common.html.Element;
 import com.saunafs.common.html.Nestable;
-import com.saunafs.common.quant.Formatter;
 import com.saunafs.common.quant.Rate;
 import com.saunafs.common.quant.Size;
 
-public class TransfersPresenter implements Presenter<List<Chunk>> {
+public class TransfersPresenter implements Presenter<List<Transfer>> {
+  private String itemName;
+  private String itemUnit;
+
+  public TransfersPresenter item(String itemName, String itemUnit) {
+    this.itemName = itemName;
+    this.itemUnit = itemUnit;
+    return this;
+  }
+
+  private TransfersPresenter() {}
+
+  public static TransfersPresenter transfersPresenter() {
+    return new TransfersPresenter();
+  }
+
+  public Element present(List<Transfer> model) {
+    calculateStatistics(model.stream()
+        .filter(transfer -> transfer.status.isOk())
+        .toList());
+    return presentModel(model);
+  }
+
   private boolean hasSuccessfulTransfer;
   private Duration totalDuration;
   private Size totalBytes;
   private Rate averageRate;
   private Rate maxRate;
 
-  public Element present(List<Chunk> model) {
-    calculateStatistics(filterSuccessful(model));
-    return presentModel(model);
-  }
-
-  private void calculateStatistics(List<Chunk> model) {
+  private void calculateStatistics(List<Transfer> model) {
     hasSuccessfulTransfer = !model.isEmpty();
     if (hasSuccessfulTransfer) {
       totalDuration = model.stream()
-          .map(chunk -> chunk.result.time.duration())
+          .map(transfer -> transfer.duration)
           .reduce(Duration::plus)
           .orElseThrow();
       totalBytes = model.stream()
-          .map(chunk -> chunk.size)
+          .map(transfer -> transfer.size)
           .reduce(Size::plus)
           .orElse(bytes(0));
       averageRate = rate(totalBytes, totalDuration);
       maxRate = model.stream()
-          .map(chunk -> rate(chunk.size, chunk.result.time.duration()))
+          .map(transfer -> rate(transfer.size, transfer.duration))
           .max(naturalOrder())
           .orElseThrow();
     }
   }
 
-  private Element presentModel(List<Chunk> model) {
+  private Element presentModel(List<Transfer> model) {
     return element("div")
         .add(style()
             .add("display", "grid")
@@ -68,13 +81,13 @@ public class TransfersPresenter implements Presenter<List<Chunk>> {
             .add("text-align", "right")
             .add("white-space", "nowrap"))
         .nest(presentHeaders(
-            "chunkId",
+            itemName,
             "size",
             "duration",
             "rate",
             ""))
         .nest(presentHeaders(
-            chunkIdFormatter.unit(),
+            itemUnit,
             sizeFormatter.unit(),
             durationFormatter.unit(),
             rateFormatter.unit(),
@@ -107,20 +120,20 @@ public class TransfersPresenter implements Presenter<List<Chunk>> {
         .nest(headers, this::cell);
   }
 
-  private Element present(Chunk chunk) {
-    return isSuccessful(chunk)
-        ? presentSuccessful(chunk)
-        : presentFailed(chunk);
+  private Element present(Transfer transfer) {
+    return transfer.status.isOk()
+        ? presentSuccessful(transfer)
+        : presentFailed(transfer);
   }
 
-  private Element presentSuccessful(Chunk chunk) {
-    var rate = rate(chunk.size, chunk.result.time.duration());
+  private Element presentSuccessful(Transfer transfer) {
+    var rate = rate(transfer.size, transfer.duration);
     return element("div")
         .add(style()
             .add("display", "contents"))
-        .nest(cell(chunkIdFormatter.format(chunk.id)))
-        .nest(cell(sizeFormatter.format(chunk.size)))
-        .nest(cell(durationFormatter.format(chunk.result.time.duration())))
+        .nest(cell(transfer.item.toString()))
+        .nest(cell(sizeFormatter.format(transfer.size)))
+        .nest(cell(durationFormatter.format(transfer.duration)))
         .nest(cell(rateFormatter.format(rate)))
         .nest(element("div")
             .add(style()
@@ -131,13 +144,13 @@ public class TransfersPresenter implements Presenter<List<Chunk>> {
                     averageRate.divideBy(maxRate)))));
   }
 
-  private Element presentFailed(Chunk chunk) {
+  private Element presentFailed(Transfer transfer) {
     return element("div")
         .add(style()
             .add("display", "contents")
             .add("color", "red"))
-        .nest(cell(chunkIdFormatter.format(chunk.id)))
-        .nest(cell(sizeFormatter.format(chunk.size)))
+        .nest(cell(transfer.item.toString()))
+        .nest(cell(sizeFormatter.format(transfer.size)))
         .nest(cell(""))
         .nest(cell(""))
         .nest(cell(""));
@@ -167,7 +180,6 @@ public class TransfersPresenter implements Presenter<List<Chunk>> {
       .fractionColor("LightBlue")
       .thresholdColor("red");
 
-  private static final Formatter<Long> chunkIdFormatter = decimalFormatter();
   private static final Formatter<Size> sizeFormatter = sizeInBytes();
   private static final Formatter<Duration> durationFormatter = durationInSeconds();
   private static final Formatter<Rate> rateFormatter = mebibytesPerSecond();

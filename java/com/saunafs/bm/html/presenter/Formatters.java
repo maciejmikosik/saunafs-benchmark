@@ -1,10 +1,9 @@
-package com.saunafs.bm.present;
+package com.saunafs.bm.html.presenter;
 
 import java.time.Duration;
 
-import com.saunafs.common.quant.Formatter;
-import com.saunafs.common.quant.Size;
 import com.saunafs.common.quant.Rate;
+import com.saunafs.common.quant.Size;
 
 public class Formatters {
   public static Formatter<Size> sizeInBytes() {
@@ -54,5 +53,4 @@ public class Formatters {
       }
     };
   }
-
 }

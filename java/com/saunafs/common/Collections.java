@@ -21,4 +21,10 @@ public class Collections {
     newList.add(element);
     return unmodifiableList(newList);
   }
+
+  public static <E> List<E> addLast(List<? extends E> elements, List<E> list) {
+    var newList = new ArrayList<E>(list);
+    newList.addAll(elements);
+    return unmodifiableList(newList);
+  }
 }

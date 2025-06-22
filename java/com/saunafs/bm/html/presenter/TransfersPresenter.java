@@ -9,6 +9,7 @@ import static com.saunafs.common.html.Element.element;
 import static com.saunafs.common.html.Em.em;
 import static com.saunafs.common.html.Style.style;
 import static com.saunafs.common.html.Text.text;
+import static com.saunafs.common.html.Widgets.stacked;
 import static com.saunafs.common.quant.Rate.rate;
 import static com.saunafs.common.quant.Size.bytes;
 import static com.saunafs.proto.data.Status.status;
@@ -129,22 +130,14 @@ public class TransfersPresenter implements Presenter<List<Transfer>> {
         .nest(cell(durationFormatter.format(transfer.duration)))
         .nest(element("div")
             .add(style()
-                .add("border", "0.05em solid black")
-                .add("display", "grid"))
-            .nest(element("span")
-                .add(style()
-                    .add("grid-row", "1")
-                    .add("grid-column", "1"))
-                .nest(barPresenter.present(fractionWithThreshold(
+                .add("border", "0.05em solid black"))
+            .nest(stacked(
+                barPresenter.present(fractionWithThreshold(
                     rate.divideBy(maxRate),
-                    threshold))))
-            .nest(element("span")
-                .add(style()
-                    .add("grid-row", "1")
-                    .add("grid-column", "1")
-                    .add("text-align", "center")
-                    .add("padding", "0.2em 1em"))
-                .nest(text(rateFormatter.format(rate)))));
+                    threshold)),
+                text(rateFormatter.format(rate))))
+
+        );
   }
 
   private Element presentFailed(Transfer transfer) {
@@ -179,7 +172,7 @@ public class TransfersPresenter implements Presenter<List<Transfer>> {
 
   private static final BarPresenter barPresenter = barPresenter()
       .length(em(10))
-      .thickness(em(1.5))
+      .thickness(em(1.6))
       .fractionColor("LightBlue")
       .thresholdColor("red");
 

@@ -2,6 +2,7 @@ package com.saunafs.common.html;
 
 import static com.saunafs.common.html.Element.element;
 import static com.saunafs.common.html.Style.style;
+import static java.util.Arrays.asList;
 import static java.util.Arrays.stream;
 
 public class Widgets {
@@ -34,5 +35,23 @@ public class Widgets {
             .add("align-items", "center")
             .add("justify-content", "center"))
         .nest(nestable);
+  }
+
+  public static Element rightCenter(Nestable nestable) {
+    return element("div")
+        .add(style()
+            .add("width", "100%")
+            .add("height", "100%")
+            .add("display", "inline-flex")
+            .add("align-items", "center")
+            .add("justify-content", "right"))
+        .nest(nestable);
+  }
+
+  public static Element contents(Nestable... nestables) {
+    return element("span")
+        .add(style()
+            .add("display", "contents"))
+        .nest(asList(nestables));
   }
 }

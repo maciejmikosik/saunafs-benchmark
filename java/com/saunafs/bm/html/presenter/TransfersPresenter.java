@@ -10,6 +10,8 @@ import static com.saunafs.common.html.Em.em;
 import static com.saunafs.common.html.Style.style;
 import static com.saunafs.common.html.Text.text;
 import static com.saunafs.common.html.Widgets.center;
+import static com.saunafs.common.html.Widgets.contents;
+import static com.saunafs.common.html.Widgets.rightCenter;
 import static com.saunafs.common.html.Widgets.stacked;
 import static com.saunafs.common.quant.Rate.rate;
 import static com.saunafs.common.quant.Size.bytes;
@@ -27,11 +29,9 @@ import com.saunafs.common.quant.Size;
 
 public class TransfersPresenter implements Presenter<List<Transfer>> {
   private String itemName;
-  private String itemUnit;
 
-  public TransfersPresenter item(String itemName, String itemUnit) {
+  public TransfersPresenter item(String itemName) {
     this.itemName = itemName;
-    this.itemUnit = itemUnit;
     return this;
   }
 
@@ -84,18 +84,12 @@ public class TransfersPresenter implements Presenter<List<Transfer>> {
             .add("grid-template-columns", "repeat(4, auto)")
             .add("width", "fit-content")
             .add("gap", "0em 0em")
-            .add("text-align", "right")
             .add("white-space", "nowrap"))
-        .nest(presentHeaders(
-            itemName,
-            "size",
-            "duration",
-            "rate"))
-        .nest(presentHeaders(
-            itemUnit,
-            sizeFormatter.unit(),
-            durationFormatter.unit(),
-            rateFormatter.unit()))
+        .nest(contents(
+            header(itemName),
+            header("size [%s]".formatted(sizeFormatter.unit())),
+            header("duration [%s]".formatted(durationFormatter.unit())),
+            header("rate [%s]".formatted(rateFormatter.unit()))))
         .nest(hasSuccessfulTransfer
             ? element("span")
                 .add(style()
@@ -106,12 +100,8 @@ public class TransfersPresenter implements Presenter<List<Transfer>> {
         .nest(model, this::present);
   }
 
-  private Element presentHeaders(String... headers) {
-    return element("div")
-        .add(style()
-            .add("display", "contents")
-            .add("text-align", "center"))
-        .nest(headers, this::cell);
+  private static Element header(String label) {
+    return border(center(padding(text(label))));
   }
 
   private Element present(Transfer transfer) {
@@ -154,7 +144,7 @@ public class TransfersPresenter implements Presenter<List<Transfer>> {
   }
 
   private Element cell(Nestable nestable) {
-    return border(center(padding(nestable)));
+    return border(rightCenter(padding(nestable)));
   }
 
   private Element none() {

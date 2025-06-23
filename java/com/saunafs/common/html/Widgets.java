@@ -48,6 +48,14 @@ public class Widgets {
         .nest(nestable);
   }
 
+  public static Element bold(Nestable nestable) {
+    return element("span")
+        .add(style()
+            .add("font-weight", "bold")
+            .add("display", "contents"))
+        .nest(nestable);
+  }
+
   public static Element contents(Nestable... nestables) {
     return element("span")
         .add(style()

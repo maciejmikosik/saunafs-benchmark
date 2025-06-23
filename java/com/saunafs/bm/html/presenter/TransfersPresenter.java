@@ -9,6 +9,7 @@ import static com.saunafs.common.html.Element.element;
 import static com.saunafs.common.html.Em.em;
 import static com.saunafs.common.html.Style.style;
 import static com.saunafs.common.html.Text.text;
+import static com.saunafs.common.html.Widgets.bold;
 import static com.saunafs.common.html.Widgets.center;
 import static com.saunafs.common.html.Widgets.contents;
 import static com.saunafs.common.html.Widgets.rightCenter;
@@ -91,11 +92,7 @@ public class TransfersPresenter implements Presenter<List<Transfer>> {
             header("duration [%s]".formatted(durationFormatter.unit())),
             header("rate [%s]".formatted(rateFormatter.unit()))))
         .nest(hasSuccessfulTransfer
-            ? element("span")
-                .add(style()
-                    .add("display", "contents")
-                    .add("font-weight", "bold"))
-                .nest(present(total))
+            ? bold(present(total))
             : none())
         .nest(model, this::present);
   }

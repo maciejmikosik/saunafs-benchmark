@@ -9,6 +9,7 @@ import static com.saunafs.common.html.Element.element;
 import static com.saunafs.common.html.Em.em;
 import static com.saunafs.common.html.Style.style;
 import static com.saunafs.common.html.Text.text;
+import static com.saunafs.common.html.Widgets.center;
 import static com.saunafs.common.html.Widgets.stacked;
 import static com.saunafs.common.quant.Rate.rate;
 import static com.saunafs.common.quant.Size.bytes;
@@ -81,7 +82,6 @@ public class TransfersPresenter implements Presenter<List<Transfer>> {
         .add(style()
             .add("display", "grid")
             .add("grid-template-columns", "repeat(4, auto)")
-            .add("border", "0.05em solid black")
             .add("width", "fit-content")
             .add("gap", "0em 0em")
             .add("text-align", "right")
@@ -128,14 +128,11 @@ public class TransfersPresenter implements Presenter<List<Transfer>> {
         .nest(cell(transfer.item.toString()))
         .nest(cell(sizeFormatter.format(transfer.size)))
         .nest(cell(durationFormatter.format(transfer.duration)))
-        .nest(element("div")
-            .add(style()
-                .add("border", "0.05em solid black"))
-            .nest(stacked(
-                barPresenter.present(fractionWithThreshold(
-                    rate.divideBy(maxRate),
-                    threshold)),
-                text(rateFormatter.format(rate))))
+        .nest(border(center(stacked(
+            barPresenter.present(fractionWithThreshold(
+                rate.divideBy(maxRate),
+                threshold)),
+            text(rateFormatter.format(rate)))))
 
         );
   }
@@ -157,17 +154,27 @@ public class TransfersPresenter implements Presenter<List<Transfer>> {
   }
 
   private Element cell(Nestable nestable) {
-    return element("div")
-        .add(style()
-            .add("border", "0.05em solid black")
-            .add("padding", "0.2em 1em"))
-        .nest(nestable);
+    return border(center(padding(nestable)));
   }
 
   private Element none() {
     return element("div")
         .add(style()
             .add("display", "none"));
+  }
+
+  private static Element padding(Nestable nestable) {
+    return element("span")
+        .add(style()
+            .add("padding", "0.2em 1em"))
+        .nest(nestable);
+  }
+
+  private static Element border(Nestable nestable) {
+    return element("span")
+        .add(style()
+            .add("border", "0.05em solid black"))
+        .nest(nestable);
   }
 
   private static final BarPresenter barPresenter = barPresenter()

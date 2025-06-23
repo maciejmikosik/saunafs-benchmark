@@ -24,4 +24,15 @@ public class Widgets {
             .add("justify-content", "center"))
         .nest(nestable);
   }
+
+  public static Element center(Nestable nestable) {
+    return element("div")
+        .add(style()
+            .add("width", "100%")
+            .add("height", "100%")
+            .add("display", "inline-flex")
+            .add("align-items", "center")
+            .add("justify-content", "center"))
+        .nest(nestable);
+  }
 }

@@ -12,6 +12,7 @@ import static com.saunafs.common.html.Text.text;
 import static com.saunafs.common.html.Widgets.bold;
 import static com.saunafs.common.html.Widgets.center;
 import static com.saunafs.common.html.Widgets.contents;
+import static com.saunafs.common.html.Widgets.displayIf;
 import static com.saunafs.common.html.Widgets.rightCenter;
 import static com.saunafs.common.html.Widgets.stacked;
 import static com.saunafs.common.quant.Rate.rate;
@@ -91,9 +92,7 @@ public class TransfersPresenter implements Presenter<List<Transfer>> {
             header("size [%s]".formatted(sizeFormatter.unit())),
             header("duration [%s]".formatted(durationFormatter.unit())),
             header("rate [%s]".formatted(rateFormatter.unit()))))
-        .nest(hasSuccessfulTransfer
-            ? bold(present(total))
-            : none())
+        .nest(displayIf(hasSuccessfulTransfer, bold(present(total))))
         .nest(model, this::present);
   }
 
@@ -142,12 +141,6 @@ public class TransfersPresenter implements Presenter<List<Transfer>> {
 
   private Element cell(Nestable nestable) {
     return border(rightCenter(padding(nestable)));
-  }
-
-  private Element none() {
-    return element("div")
-        .add(style()
-            .add("display", "none"));
   }
 
   private static Element padding(Nestable nestable) {

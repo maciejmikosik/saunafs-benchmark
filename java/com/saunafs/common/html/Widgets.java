@@ -48,6 +48,18 @@ public class Widgets {
         .nest(nestable);
   }
 
+  public static Nestable displayIf(boolean condition, Nestable nestable) {
+    return condition
+        ? nestable
+        : none();
+  }
+
+  public static Element none() {
+    return element("div")
+        .add(style()
+            .add("display", "none"));
+  }
+
   public static Element bold(Nestable nestable) {
     return element("span")
         .add(style()

@@ -1,7 +1,5 @@
 package com.saunafs.common.html;
 
-import static java.util.Objects.requireNonNull;
-
 public class Attribute {
   public final String name;
   public final String value;
@@ -12,14 +10,10 @@ public class Attribute {
   }
 
   public static Attribute attribute(String name, String value) {
-    return new Attribute(
-        requireNonNull(name),
-        requireNonNull(value));
+    return new Attribute(name, value);
   }
 
   public static Attribute attribute(String name, Object value) {
-    return new Attribute(
-        requireNonNull(name),
-        requireNonNull(value.toString()));
+    return new Attribute(name, value.toString());
   }
 }

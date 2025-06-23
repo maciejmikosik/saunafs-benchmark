@@ -9,6 +9,12 @@ import static com.saunafs.common.html.Element.element;
 import static com.saunafs.common.html.Em.em;
 import static com.saunafs.common.html.Style.style;
 import static com.saunafs.common.html.Text.text;
+import static com.saunafs.common.html.Widgets.bold;
+import static com.saunafs.common.html.Widgets.center;
+import static com.saunafs.common.html.Widgets.contents;
+import static com.saunafs.common.html.Widgets.displayIf;
+import static com.saunafs.common.html.Widgets.rightCenter;
+import static com.saunafs.common.html.Widgets.stacked;
 import static com.saunafs.common.quant.Rate.rate;
 import static com.saunafs.common.quant.Size.bytes;
 import static com.saunafs.proto.data.Status.status;
@@ -25,11 +31,9 @@ import com.saunafs.common.quant.Size;
 
 public class TransfersPresenter implements Presenter<List<Transfer>> {
   private String itemName;
-  private String itemUnit;
 
-  public TransfersPresenter item(String itemName, String itemUnit) {
+  public TransfersPresenter item(String itemName) {
     this.itemName = itemName;
-    this.itemUnit = itemUnit;
     return this;
   }
 
@@ -80,37 +84,20 @@ public class TransfersPresenter implements Presenter<List<Transfer>> {
         .add(style()
             .add("display", "grid")
             .add("grid-template-columns", "repeat(4, auto)")
-            .add("border", "0.05em solid black")
             .add("width", "fit-content")
             .add("gap", "0em 0em")
-            .add("text-align", "right")
             .add("white-space", "nowrap"))
-        .nest(presentHeaders(
-            itemName,
-            "size",
-            "duration",
-            "rate"))
-        .nest(presentHeaders(
-            itemUnit,
-            sizeFormatter.unit(),
-            durationFormatter.unit(),
-            rateFormatter.unit()))
-        .nest(hasSuccessfulTransfer
-            ? element("span")
-                .add(style()
-                    .add("display", "contents")
-                    .add("font-weight", "bold"))
-                .nest(present(total))
-            : none())
+        .nest(contents(
+            header(itemName),
+            header("size [%s]".formatted(sizeFormatter.unit())),
+            header("duration [%s]".formatted(durationFormatter.unit())),
+            header("rate [%s]".formatted(rateFormatter.unit()))))
+        .nest(displayIf(hasSuccessfulTransfer, bold(present(total))))
         .nest(model, this::present);
   }
 
-  private Element presentHeaders(String... headers) {
-    return element("div")
-        .add(style()
-            .add("display", "contents")
-            .add("text-align", "center"))
-        .nest(headers, this::cell);
+  private static Element header(String label) {
+    return border(center(padding(text(label))));
   }
 
   private Element present(Transfer transfer) {
@@ -121,42 +108,31 @@ public class TransfersPresenter implements Presenter<List<Transfer>> {
 
   private Element presentSuccessful(Transfer transfer) {
     var rate = rate(transfer.size, transfer.duration);
-    return element("div")
-        .add(style()
-            .add("display", "contents"))
-        .nest(cell(transfer.item.toString()))
-        .nest(cell(sizeFormatter.format(transfer.size)))
-        .nest(cell(durationFormatter.format(transfer.duration)))
-        .nest(element("div")
-            .add(style()
-                .add("border", "0.05em solid black")
-                .add("display", "grid"))
-            .nest(element("span")
-                .add(style()
-                    .add("grid-row", "1")
-                    .add("grid-column", "1"))
-                .nest(barPresenter.present(fractionWithThreshold(
-                    rate.divideBy(maxRate),
-                    threshold))))
-            .nest(element("span")
-                .add(style()
-                    .add("grid-row", "1")
-                    .add("grid-column", "1")
-                    .add("text-align", "center")
-                    .add("padding", "0.2em 1em"))
-                .nest(text(rateFormatter.format(rate)))));
+    return contents(
+        cell(transfer.item.toString()),
+        cell(sizeFormatter.format(transfer.size)),
+        cell(durationFormatter.format(transfer.duration)),
+        border(center(stacked(
+            barPresenter.present(fractionWithThreshold(
+                rate.divideBy(maxRate),
+                threshold)),
+            text(rateFormatter.format(rate))))));
   }
 
   private Element presentFailed(Transfer transfer) {
-    return element("div")
+    return red(contents(
+        cell(transfer.item.toString()),
+        cell(sizeFormatter.format(transfer.size)),
+        cell(""),
+        cell("")));
+  }
+
+  private static Element red(Nestable nestable) {
+    return element("span")
         .add(style()
             .add("display", "contents")
             .add("color", "red"))
-        .nest(cell(transfer.item.toString()))
-        .nest(cell(sizeFormatter.format(transfer.size)))
-        .nest(cell(""))
-        .nest(cell(""))
-        .nest(cell(""));
+        .nest(nestable);
   }
 
   private Element cell(String string) {
@@ -164,22 +140,26 @@ public class TransfersPresenter implements Presenter<List<Transfer>> {
   }
 
   private Element cell(Nestable nestable) {
-    return element("div")
+    return border(rightCenter(padding(nestable)));
+  }
+
+  private static Element padding(Nestable nestable) {
+    return element("span")
         .add(style()
-            .add("border", "0.05em solid black")
             .add("padding", "0.2em 1em"))
         .nest(nestable);
   }
 
-  private Element none() {
-    return element("div")
+  private static Element border(Nestable nestable) {
+    return element("span")
         .add(style()
-            .add("display", "none"));
+            .add("border", "0.05em solid black"))
+        .nest(nestable);
   }
 
   private static final BarPresenter barPresenter = barPresenter()
       .length(em(10))
-      .thickness(em(1.5))
+      .thickness(em(1.6))
       .fractionColor("LightBlue")
       .thresholdColor("red");
 

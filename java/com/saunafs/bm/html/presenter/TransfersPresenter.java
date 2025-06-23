@@ -135,7 +135,6 @@ public class TransfersPresenter implements Presenter<List<Transfer>> {
         .nest(cell(transfer.item.toString()))
         .nest(cell(sizeFormatter.format(transfer.size)))
         .nest(cell(""))
-        .nest(cell(""))
         .nest(cell(""));
   }
 

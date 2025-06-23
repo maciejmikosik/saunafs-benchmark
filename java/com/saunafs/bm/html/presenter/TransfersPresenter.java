@@ -112,30 +112,31 @@ public class TransfersPresenter implements Presenter<List<Transfer>> {
 
   private Element presentSuccessful(Transfer transfer) {
     var rate = rate(transfer.size, transfer.duration);
-    return element("div")
-        .add(style()
-            .add("display", "contents"))
-        .nest(cell(transfer.item.toString()))
-        .nest(cell(sizeFormatter.format(transfer.size)))
-        .nest(cell(durationFormatter.format(transfer.duration)))
-        .nest(border(center(stacked(
+    return contents(
+        cell(transfer.item.toString()),
+        cell(sizeFormatter.format(transfer.size)),
+        cell(durationFormatter.format(transfer.duration)),
+        border(center(stacked(
             barPresenter.present(fractionWithThreshold(
                 rate.divideBy(maxRate),
                 threshold)),
-            text(rateFormatter.format(rate)))))
-
-        );
+            text(rateFormatter.format(rate))))));
   }
 
   private Element presentFailed(Transfer transfer) {
-    return element("div")
+    return red(contents(
+        cell(transfer.item.toString()),
+        cell(sizeFormatter.format(transfer.size)),
+        cell(""),
+        cell("")));
+  }
+
+  private static Element red(Nestable nestable) {
+    return element("span")
         .add(style()
             .add("display", "contents")
             .add("color", "red"))
-        .nest(cell(transfer.item.toString()))
-        .nest(cell(sizeFormatter.format(transfer.size)))
-        .nest(cell(""))
-        .nest(cell(""));
+        .nest(nestable);
   }
 
   private Element cell(String string) {
